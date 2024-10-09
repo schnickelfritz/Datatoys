@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{{ app_title }}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body data-turbo-prefetch="false" data-turbo="false"> {# turn off turbo: data-turbo="false" #}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {#
+        <aside class="app-side col-2 col-md-2 col-xl-2 col-xxl-2 px-sm-0 px-0">
+            {{ include('main_menu.html.twig') }}
+        </aside>
+        #}
+        <main class="col-10 col-md-10 col-xl-10 col-xxl-10 app-main">
+            {% block body %}{% endblock %}
+        </main>
+    </div>
+{#
+    {{ include('flash.html.twig') }}
+#}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+</div>
+</body>
 </html>
