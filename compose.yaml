@@ -1,0 +1,13 @@
+services:
+  db:
+    image: mysql:8
+    container_name: mysql_container_datatoys
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: geheim123
+    volumes:
+      - database_data:/var/lib/mysql:rw
+
+volumes:
+  database_data:

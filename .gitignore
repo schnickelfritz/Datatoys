@@ -9,3 +9,17 @@
 /vendor/
 /.idea
 ###< symfony/framework-bundle ###
+
+###> php-cs-fixer/shim ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< php-cs-fixer/shim ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
