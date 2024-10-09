@@ -1,0 +1,10 @@
+.btn {
+    border-radius: 5px;
+    white-space:nowrap;
+}
+.btn-primary {
+    --bs-btn-bg: var(--cc-1-lighter-1);
+    --bs-btn-border-color: var(--cc-1-lighter-2);
+    --bs-btn-hover-bg: var(--cc-1-lighter-3);
+    --bs-btn-hover-border-color: var(--cc-1-lighter-3);
+}
