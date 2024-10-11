@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} :: Home {% endblock %}
 {% block body %}
-    Home
+    <div class="row">
+        <div class="col">
+            <h1>Home</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('app_login') }}">Login</a>
+        </div>
+    </div>
 {% endblock %}

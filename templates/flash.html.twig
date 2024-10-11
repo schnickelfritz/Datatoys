@@ -1,0 +1,25 @@
+{% set flashes = app.session.flashBag.all() %}
+{% if flashes is not empty %}
+    <div {{ stimulus_controller('flash') }} {{ stimulus_target('flash', 'flash')}} id="flash" class="app-flash">
+        <div {{ stimulus_target('flash', 'inner')}} id="flash_inner">
+            {% for flashesByType in flashes %}
+                {%for flash in flashesByType %}
+                    <div class="">
+                        {{ flash|raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <div {{ stimulus_action('flash', 'minimize', 'click')}} class="text-end">
+                <span class="bi-box-arrow-down-right app-pointer" title="Minimieren"></span>
+            </div>
+        </div>
+        <div
+                {{ stimulus_action('flash', 'reshow', 'click')}}
+                {{ stimulus_target('flash', 'reshow')}}
+                id="flash_reshow"
+                class="text-end d-none"
+        >
+            <span class="bi-arrow-up-left-square app-pointer" title="Zeigen"></span>
+        </div>
+    </div>
+{% endif %}

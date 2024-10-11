@@ -12,18 +12,17 @@
 <body data-turbo-prefetch="false" data-turbo="false"> {# turn off turbo: data-turbo="false" #}
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        {#
-        <aside class="app-side col-2 col-md-2 col-xl-2 col-xxl-2 px-sm-0 px-0">
-            {{ include('main_menu.html.twig') }}
-        </aside>
-        #}
-        <main class="col-10 col-md-10 col-xl-10 col-xxl-10 app-main">
+
+    </div>
+
+    <div class="row flex-nowrap">
+        <main class="col-12 col-md-12 col-xl-12 col-xxl-12 app-main">
             {% block body %}{% endblock %}
         </main>
     </div>
-{#
+
     {{ include('flash.html.twig') }}
-#}
+
 
 </div>
 </body>

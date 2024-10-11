@@ -1,0 +1,43 @@
+{% set labelClass = labelClass|default() %}
+{% set gridThreshold = gridThreshold|default('lg') %}
+
+{% set contentWidth = 12-labelWidth %}
+{% if append != '' %}
+    {% set appendWidth = (appendWidth == 0) ? labelWidth : appendWidth %}
+    {% set contentWidth = contentWidth - appendWidth %}
+{% endif %}
+{% if prepend != '' %}
+    {% set prependWidth = (prependWidth == 0) ? labelWidth : prependWidth %}
+    {% set contentWidth = contentWidth - prependWidth %}
+{% endif %}
+
+<div class="row {{ rowClass|default }}">
+    <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end {{ labelClass }}">
+        {% if labelIcon != '' %}
+            <span class="bi-{{ labelIcon }} pe-2"></span>
+        {% endif %}
+        {% if labelId != '' %}
+            <label for="{{ labelId }}" class="label">{{ label }}</label>
+        {% else %}
+            {{ label }}
+        {% endif %}
+        {% if labelAdditional != '' %}
+            <div class="small">{{ labelAdditional|raw }}</div>
+        {% endif %}
+    </div>
+    {% if prepend != '' %}
+        <div class="col-12 col-{{ gridThreshold }}-{{ prependWidth }} {{ prependClass|default }}">{{ prepend }}</div>
+    {% endif %}
+    {% if makePrependSpace %}
+        {% set contentWidth = 12-labelWidth-labelWidth %}
+        <div class="col-auto" style="width:50px"></div>
+        <div class="col-auto" style="width:75px"></div>
+    {% endif %}
+    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% if append != '' %}
+        <div class="col-12 col-{{ gridThreshold }}-{{ appendWidth }}  {{ appendClass|default }}">{{ append }}</div>
+    {% endif %}
+</div>

@@ -1,0 +1,10 @@
+{% set contentWidth = 12-labelWidth %}
+{% dump(field) %}
+<div class="row {{ rowClass }}">
+    <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end">
+        <label for="{{ field.vars.id }}" class="label">{{ field.vars.label }}</label>
+    </div>
+    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
+        <p>Block Prefixes: {{ field.vars.block_prefixes|join(', ') }}</p>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: Your Message{% endblock %}
+{% block body %}
+    <twig:Primarybox>
+        <twig:Row labelWidth="2">
+            <h1 class="h3 mb-4 font-weight-normal"><twig:Icon name="chat-right-heart-fill" />Your Message</h1>
+        </twig:Row>
+        {{ form_start(form_contact) }}
+        <twig:FormRow labelWidth="2" field="{{ form_contact.message }}" />
+        <twig:FormRow labelWidth="2" field="{{ form_contact.contactEmail }}" />
+        <twig:FormRow labelWidth="2" field="{{ form_contact.about }}" />
+        <twig:ButtonsRow offset="2" icon="chat-right-heart-fill" field="{{ form_contact.submit }}" />
+        {{ form_end(form_contact) }}
+    </twig:Primarybox>
+{% endblock %}

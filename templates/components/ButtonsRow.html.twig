@@ -1,0 +1,72 @@
+{% set width = 12-offset %}
+<div class="row">
+    <div class="col-sm-{{ width }} offset-sm-{{ offset }} app-col-form-content">
+        <button
+                id="{{ field.vars.id }}"
+                name="{{ field_name(field) }}"
+                type="submit"
+                class="btn btn-primary"
+        >
+            {% if icon|default('') != '' %}
+
+                {% if field2 is null and icon2|default('') != '' %}
+                    <span class="bi-{{ icon2 }}"></span>
+                {% endif %}
+
+                <span class="bi-{{ icon }} pe-2"></span>
+            {% endif %}
+            {{ field_label(field) }}
+        </button>
+
+        {% if field2 is not null %}
+            <button
+                    id="{{ field2.vars.id }}"
+                    name="{{ field_name(field2) }}"
+                    type="submit"
+                    class="btn btn-primary"
+            >
+                {% if icon2|default('') != '' %}
+                    <span class="bi-{{ icon2 }} pe-2"></span>
+                {% endif %}
+                {{ field_label(field2) }}
+            </button>
+        {% endif %}
+
+        {% if field3 is defined %}
+            <button
+                    id="{{ field3.vars.id }}"
+                    name="{{ field_name(field3) }}"
+                    type="submit"
+                    class="btn btn-primary"
+            >
+                {% if icon3|default('') != '' %}
+                    <span class="bi-{{ icon3 }} pe-2"></span>
+                {% endif %}
+                {{ field_label(field3) }}
+            </button>
+        {% endif %}
+
+        {% if modalId != '' %}
+            <button
+                    type="button"
+                    class="btn btn-{{ modalType|default('primary') }}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal{{ modalId }}"
+            >
+                {% if modalIcon != '' %}
+                    <span class="bi-{{ modalIcon }} pe-2"></span>
+                {% endif %}
+                {{ modalLabel }}
+                <span class="bi-menu-up ps-2 {{ (modalType|default('primary') == 'danger') ? 'text-light' : 'text-dark' }}"></span>
+            </button>
+        {% endif %}
+
+        {% if cancelPath|default('') != '' %}
+            <a href="{{ path(cancelPath) }}" class="btn btn-secondary">
+                <span class="bi-x pe-2"></span>{{ cancelLabel|default('Abbrechen') }}
+            </a>
+        {% endif %}
+
+    </div>
+
+</div>
