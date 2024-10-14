@@ -11,6 +11,7 @@ class ButtonsRow
 {
     public int $offset = 3;
 
+    public string $rowClass = '';
     public mixed $field;
     public string $icon = '';
     public mixed $field2 = null;

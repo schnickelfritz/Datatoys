@@ -4,10 +4,12 @@
 
 .label {
     font-size:0.8em;
+    opacity: 0.8;
 }
 .btn {
     border-radius: 5px;
     white-space:nowrap;
+    margin-bottom: 2px;
 }
 
 .btn-primary {
@@ -100,4 +102,8 @@ textarea.app-textarea-small {
 }
 .table-active {
     --bs-table-active-bg: var(--cc-2-lighter-2);
+}
+.nav-link {
+    --bs-nav-link-color: var(--cc-gray);
+    --bs-nav-link-hover-color: var(--cc-white);
 }

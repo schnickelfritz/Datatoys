@@ -2,14 +2,23 @@
 {% block title %}{{ parent() }} :: Your Message{% endblock %}
 {% block body %}
     <twig:Primarybox>
-        <twig:Row labelWidth="2">
-            <h1 class="h3 mb-4 font-weight-normal"><twig:Icon name="chat-right-heart-fill" />Your Message</h1>
+        <twig:Row>
+            <h1 class="h3 mb-4"><twig:Icon name="chat-heart-fill" />Your Message</h1>
         </twig:Row>
+        <twig:Row rowClass="mb-4">Use this place to get in touch with the people who run this website.</twig:Row>
         {{ form_start(form_contact) }}
-        <twig:FormRow labelWidth="2" field="{{ form_contact.message }}" />
-        <twig:FormRow labelWidth="2" field="{{ form_contact.contactEmail }}" />
-        <twig:FormRow labelWidth="2" field="{{ form_contact.about }}" />
-        <twig:ButtonsRow offset="2" icon="chat-right-heart-fill" field="{{ form_contact.submit }}" />
+        <twig:FormRow field="{{ form_contact.about }}" toggle="true" />
+        <twig:FormRow field="{{ form_contact.message }}" />
+        <twig:FormRow field="{{ form_contact.contactEmail }}" />
+        <twig:Row labelClass="label" label="About privacy">
+            <div class="small">
+                Generally, your message will be processed <b>without revealing your identity, even if you are logged in</b>.
+                If you provide your email address &ndash; which is optional &ndash;, your identity will be revealed, of course.<br>
+                If you expect feedback from us, you should provide your email address. Otherwise, we could not get back to you.
+            </div>
+        </twig:Row>
+        <twig:ButtonsRow rowClass="pt-3" icon="chat-heart-fill" field="{{ form_contact.submit }}" />
+        {# {{ form_end(form_contact, {render_rest: false}) }} #}
         {{ form_end(form_contact) }}
     </twig:Primarybox>
 {% endblock %}

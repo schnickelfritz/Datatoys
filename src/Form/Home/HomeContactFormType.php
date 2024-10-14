@@ -20,15 +20,17 @@ class HomeContactFormType extends AbstractType
             'Contact' => 'contact',
             'Praise' => 'praise',
             'Suggestion for Improvement' => 'improve',
-            'Found an Error' => 'error_found',
+            'Found an Error' => 'error',
             'Greeting' => 'greeting',
-            'Misc' => 'misc',
         ];
         $firstChoice = end($choices);
 
         $builder
             ->add('message', TextareaType::class, [
                 'label' => 'Your Message',
+                'attr' => [
+                    'focus' => true,
+                ],
                 'constraints' => [
                     new NotBlank(['message' => 'Your Message must not be empty!']),
                 ]
@@ -36,6 +38,9 @@ class HomeContactFormType extends AbstractType
             ->add('contactEmail', EmailType::class, [
                 'label' => 'Your Email Address',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'optional',
+                ]
             ])
             ->add('about', ChoiceType::class, [
                 'label' => 'About',
@@ -45,6 +50,8 @@ class HomeContactFormType extends AbstractType
                 'required' => false,
                 'placeholder' => false,
                 'data' => $firstChoice,
+                'attr' => [
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Send Message',

@@ -1,0 +1,12 @@
+{% set show = true %}
+{% set href = path(path) %}
+{% if show == true %}
+    <li class="nav-item">
+        <a
+                href="{{ href }}"
+                class="nav-link{{ ( app.request.attributes.get('_route') is same as path ? ' active' : '') }}"
+        >
+            {% if icon != '' %}<i class="bi-{{ icon }} pe-2"></i>{% endif %}<span>{{ label }}</span>
+        </a>
+    </li>
+{% endif %}

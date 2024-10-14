@@ -43,6 +43,33 @@ body {
     color: var(--cc-lighter);
     padding: 0;
 }
+.app-link {
+    color: var(--cc-1);
+    text-decoration: none;
+}
+.app-link:hover {
+    text-decoration: underline;
+}
+.app-titlebox {
+    text-align: center;
+    background-color: var(--cc-dark);
+    padding:0.5em;
+    margin: 1em auto 1em auto;
+}
+.app-topnav-box {
+    text-align: center;
+    background-color: var(--cc-dark);
+    padding:0.5em;
+    margin: 1em auto 1em auto;
+}
+.app-footer-box {
+    background-color: var(--cc-dark);
+    padding:0.5em;
+    margin: 1em auto 1em auto;
+}
+.app-footer-box .nav-link.active {
+    color: var(--cc-1);
+}
 .app-primarybox {
     background-color: var(--cc-darkest);
     max-width: var(--readable);

@@ -12,4 +12,5 @@ class FormRow
     public string $rowClass = "app-row";
     public string $gridThreshold = 'lg';
     public int $labelWidth = 3;
+    public bool $toggle = false;
 }

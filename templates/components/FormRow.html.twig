@@ -1,10 +1,32 @@
 {% set contentWidth = 12-labelWidth %}
-{% dump(field) %}
+
 <div class="row {{ rowClass }}">
     <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end">
         <label for="{{ field.vars.id }}" class="label">{{ field.vars.label }}</label>
     </div>
     <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
-        <p>Block Prefixes: {{ field.vars.block_prefixes|join(', ') }}</p>
+        {% if toggle and ('choice' in field.vars.block_prefixes) %}
+            {% set type = 'radio' %}
+            {% dump(field) %}
+            {% for choice in field %}
+                <input
+                        type="{{ type }}"
+                        class="btn-check" id="{{ choice.vars.id }}"
+                        name="{{ choice.vars.full_name }}"
+                        value="{{ choice.vars.value }}"
+                        {% if field.vars.value == choice.vars.value %}
+                            checked="checked"
+                        {% endif %}
+                >
+                <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
+                    {{ choice.vars.label }}
+                </label>
+            {% endfor %}
+        {% else %}
+            {# TODO 2024-10-14 every textarea or text input should submit on ctrl+enter #}
+            {# 'text' in field.vars.block_prefixes #}
+            {# {{ form_widget(form.name, {'attr': {'class': 'foo'}}) }} #}
+            {{ form_widget(field) }}
+        {% endif %}
     </div>
 </div>

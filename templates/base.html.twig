@@ -16,8 +16,18 @@
     </div>
 
     <div class="row flex-nowrap">
-        <main class="col-12 col-md-12 col-xl-12 col-xxl-12 app-main">
-            {% block body %}{% endblock %}
+        <main class="">
+            {% block titlebar %}
+                {{ include('titlebar.html.twig') }}
+            {% endblock %}
+            {% block topnav %}
+                {{ include('topnav.html.twig') }}
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+            {% block footer %}
+                {{ include('footer.html.twig') }}
+            {% endblock %}
         </main>
     </div>
 

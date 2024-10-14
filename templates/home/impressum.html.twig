@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: Impressum{% endblock %}
+{% block body %}
+    <twig:Primarybox>
+        <twig:Row>
+            <h1 class="h3 mb-4 font-weight-normal">Impressum</h1>
+        </twig:Row>
+        <twig:Row labelClass="label" label="Responsible for this website">
+            <div class="fw-bold">Martin Neumann</div>
+            <div>on behalf of <a href="https://hmmh.de/impressum" class="app-link">hmmh multimediahaus AG</a></div>
+            <div class="small py-3">
+                martin.neumann@hmmh.de<br>
+
+            </div>
+
+
+        </twig:Row>
+        <twig:Row labelClass="label" label="Contact concerning privacy issues">
+
+        </twig:Row>
+    </twig:Primarybox>
+{% endblock %}

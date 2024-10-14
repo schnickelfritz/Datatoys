@@ -14,9 +14,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 #[AsController]
-#[Route('/contact', name: 'app_comment', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+#[Route('/contact', name: 'app_contact', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class HomeContactController
 {
+
+    /*
+     *
+     * More or less a controller for trying out things, we don't really need a contact form
+     * at least not in the first couple of sprints
+     *
+     */
+
     use FlashMessageTrait;
 
     public function __construct(

@@ -2,46 +2,48 @@
 {% block title %}{{ parent() }} :: Login{% endblock %}
 {% block body %}
     {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
+        <twig:Primarybox>
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        </twig:Primarybox>
     {% else %}
-    {% endif %}
-    <twig:Primarybox>
-        <form method="post">
-            <twig:Row><h1 class="h3 mb-4 font-weight-normal"><twig:Icon name="lamp" />Login</h1></twig:Row>
-            {% if error %}
-                <twig:Row>
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <twig:Primarybox>
+            <form method="post">
+                <twig:Row><h1 class="h3 mb-4 font-weight-normal"><twig:Icon name="lamp" />Login</h1></twig:Row>
+                {% if error %}
+                    <twig:Row>
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    </twig:Row>
+                {% endif %}
+                <twig:Row label="Email Address" labelId="username">
+                    <input
+                            type="email"
+                            value="{{ last_username }}"
+                            name="_username"
+                            id="username"
+                            class="form-control"
+                            autocomplete="email"
+                            required autofocus
+                    >
                 </twig:Row>
-            {% endif %}
-            <twig:Row label="Email Address" labelId="username">
-                <input
-                        type="email"
-                        value="{{ last_username }}"
-                        name="_username"
-                        id="username"
-                        class="form-control"
-                        autocomplete="email"
-                        required autofocus
-                >
-            </twig:Row>
-            <twig:Row label="Password" labelId="password">
-                <input
-                        type="password"
-                        name="_password"
-                        id="password"
-                        class="form-control"
-                        autocomplete="current-password"
-                        required
-                >
-            </twig:Row>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <twig:Row rowClass="pt-3">
-                <button class="btn btn-primary" type="submit">
-                    <twig:Icon name="lamp" />Login
-                </button>
-            </twig:Row>
-        </form>
-    </twig:Primarybox>
+                <twig:Row label="Password" labelId="password">
+                    <input
+                            type="password"
+                            name="_password"
+                            id="password"
+                            class="form-control"
+                            autocomplete="current-password"
+                            required
+                    >
+                </twig:Row>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <twig:Row rowClass="pt-3">
+                    <button class="btn btn-primary" type="submit">
+                        <twig:Icon name="lamp" />Login
+                    </button>
+                </twig:Row>
+            </form>
+        </twig:Primarybox>
+    {% endif %}
 {% endblock %}

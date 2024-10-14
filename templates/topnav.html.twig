@@ -1,0 +1,12 @@
+<div class="app-topnav-box">
+    <nav>
+        <ul class="nav nav-pills justify-content-center">
+            <twig:NavItem path="app_home" label="Home"/>
+            {% if app.user %}
+                <twig:NavItem path="app_logout" label="Logout" icon="power" />
+            {% else %}
+                <twig:NavItem path="app_login" label="Login" icon="lamp" />
+            {% endif %}
+        </ul>
+    </nav>
+</div>
