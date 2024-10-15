@@ -46,4 +46,10 @@ return [
         'version' => '1.11.3',
         'type' => 'css',
     ],
+    'typescript' => [
+        'version' => '5.6.3',
+    ],
+    'autosize' => [
+        'version' => '6.0.1',
+    ],
 ];

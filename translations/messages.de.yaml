@@ -1,0 +1,18 @@
+optional: optional
+contact:
+  title: Deine Botschaft
+  subtitle: Nutze diese Stelle, um mit den Betreibern dieser Webseite Kontakt aufzunehmen.
+  submitbutton: Sende deine Botschaft
+  privacy_hint: 'Normalerweise wird deine Botschaft verarbeitet, ohne dass deine Identität preisgegeben wird &ndash; <b>auch wenn du angemeldet bist</b>. Wenn du deine <u>E-Mail-Adresse</u> angibst (freiwillig), gibst du damit natürlich auch deine Identität preis.<br>Wenn du Rückmeldung von uns erwartest, müsstest du deine <u>E-Mail-Adresse</u> angeben, sonst wissen wir nicht, an wen wir uns wenden sollen.'
+  label:
+    about: Betrifft
+    message: Deine Botschaft
+    email: Deine E-Mail-Adresse
+    copy: Eine Kopie deiner Botschaft an dein Postfach senden
+  abouts:
+    help: Hilfe gesucht
+    contact: Kontaktaufnahme
+    praise: Lob
+    improvement_suggestion: Verbesserungsvorschlag
+    error_found: Fehler gefunden
+    greeting: Gruß

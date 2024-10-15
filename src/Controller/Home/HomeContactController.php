@@ -3,7 +3,9 @@
 namespace App\Controller\Home;
 
 use App\Form\Home\HomeContactFormType;
+use App\Service\Email\SendContactEmail;
 use App\Trait\FlashMessageTrait;
+use App\Trait\FormStringValueTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,20 +21,18 @@ final readonly class HomeContactController
 {
 
     /*
-     *
-     * More or less a controller for trying out things, we don't really need a contact form
-     * at least not in the first couple of sprints
-     *
+     * Let any user send an email message to the app admin email address
      */
 
     use FlashMessageTrait;
+    use FormStringValueTrait;
 
     public function __construct(
         private FormFactoryInterface $formFactory,
         private UrlGeneratorInterface $urlGenerator,
+        private SendContactEmail $contactEmail,
         private Environment $twig,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): Response
@@ -40,9 +40,16 @@ final readonly class HomeContactController
         $form = $this->formFactory->create(HomeContactFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->contactEmail->send(
+                $this->formStringValue($form, 'message'),
+                $this->formStringValue($form, 'contactEmail'),
+                $this->formStringValue($form, 'about'),
+            );
+            //if ($form->sendcopy) { $this->contactEmailCopy->send(message, contactEmail) }
             $this->addFlash($request, 'success', 'Your message was received.');
-            return new RedirectResponse($this->urlGenerator->generate('app_comment'));
+            return new RedirectResponse($this->urlGenerator->generate('app_contact'));
         }
+
         return new Response($this->twig->render('home/contact.html.twig', [
             'form_contact' => $form->createView(),
         ]));

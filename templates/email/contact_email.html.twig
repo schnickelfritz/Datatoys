@@ -1,0 +1,23 @@
+{% extends 'email/email_base.html.twig' %}
+{% block title %}{{ email.subject }}{% endblock %}
+{% block content%}
+    <div>
+        <p><b>The Message:</b></p>
+        {{ text }}
+        <br><br>
+    </div>
+
+    {% if about|length %}
+        <div>
+            <b>About:</b> {{ about }}
+        </div>
+    {% endif %}
+
+    {% if user_email_address|length %}
+        <div>
+            <b>Email address of user</b> {{ user_email_address }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}

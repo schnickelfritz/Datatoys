@@ -1,0 +1,60 @@
+{% apply inky_to_html|inline_css(source('@styles/foundation-emails.css'), source('@styles/email.css')) %}
+    <container>
+        <row class="top">
+            <columns>
+                <spacer size="10"></spacer>
+            </columns>
+        </row>
+        <row class="header">
+            <columns small="3">
+                <spacer size="10"></spacer>
+                <img src="{{ email.image('@images/logo.png') }}" class="logo" alt="{{ app_title }}">
+            </columns>
+            <columns small="9">
+                <spacer size="10"></spacer>
+                <h4>{{ app_title }}</h4>
+            </columns>
+        </row>
+        <row class="content">
+            <columns>
+                <spacer size="20"></spacer>
+                {% block content %}
+                    Hallo Welt!
+                {% endblock %}
+                <spacer size="10"></spacer>
+            </columns>
+        </row>
+        <row class="footer">
+            <columns>
+                <spacer size="10"></spacer>
+                <p>
+                    Schöne Grüße von der Webseite <strong>{{ app_title }}!</strong><br>
+                </p>
+            </columns>
+        </row>
+        <row class="smallprint">
+            <columns>
+                <spacer size="10"></spacer>
+                <p><small>
+                        <b>Bei dieser E-Mail handelt es sich um eine Benachrichtigung.</b><br>
+                        Antworte nicht auf diese E-Mail. Antworten werden nicht gelesen!
+                        Um Nachrichten an die Betreiber von {{ app_title }} zu senden,
+                        verwende bitte das
+                        <a href="{{ url('app_contact') }}">
+                            Kontaktformular
+                        </a>
+                        der Webseite {{ app_title }}.
+                    </small></p>
+                <p><small>
+                        Falls du unerwartet diese Nachricht bekommst, hat ein Spaßvogel deine E-Mail-Adresse verwendet,
+                        oder jemand hat sich vertippt.
+                        Bitte ignorier diese Nachricht, wenn du keinen Bezug zur Webseite <b>{{ app_title }}</b> hast.
+                    </small></p>
+                <p><small>
+                        Verantwortlich für diese E-Mail:
+                        siehe <a href="{{ url('app_privacy') }}">{{ app_title }} Impressum</a><br>
+                    </small></p>
+            </columns>
+        </row>
+    </container>
+{% endapply %}

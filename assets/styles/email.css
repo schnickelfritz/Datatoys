@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #dddddd;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.top {
+    background-color: #dddddd;
+}
+.header {
+    background-color: #fafafa;
+    border-bottom: 1px solid #efefee;
+}
+.logo {
+    width: 32px;
+}
+.footer {
+    background-color: #fafafa;
+    border-top: 1px solid #efefee;
+}
+.smallprint {
+    background-color: #ffffff;
+}

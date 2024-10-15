@@ -1,32 +1,52 @@
 {% set contentWidth = 12-labelWidth %}
 
+
+            {% dump(field) %}
+
+
 <div class="row {{ rowClass }}">
     <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end">
-        <label for="{{ field.vars.id }}" class="label">{{ field.vars.label }}</label>
+        {% set label = field.vars.label|trans %}
+        {% if 'choice' in field.vars.block_prefixes %}
+            <legend class="label">{{ label }}</legend>
+        {% else %}
+            <label for="{{ field.vars.id }}" class="label">{{ label }}</label>
+        {% endif %}
     </div>
     <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
         {% if toggle and ('choice' in field.vars.block_prefixes) %}
             {% set type = 'radio' %}
-            {% dump(field) %}
-            {% for choice in field %}
-                <input
-                        type="{{ type }}"
-                        class="btn-check" id="{{ choice.vars.id }}"
-                        name="{{ choice.vars.full_name }}"
-                        value="{{ choice.vars.value }}"
-                        {% if field.vars.value == choice.vars.value %}
-                            checked="checked"
-                        {% endif %}
-                >
-                <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
-                    {{ choice.vars.label }}
-                </label>
-            {% endfor %}
+            {# TODO 2024-10-15 form_end() will not recognize the solution below and adds a row for field, so the solution is deactivated by impossible if for now  #}
+            <div id="{{ field.vars.id }}">
+                {% for choice in field %}
+                    <input
+                            type="{{ type }}"
+                            class="btn-check"
+                            id="{{ choice.vars.id }}"
+                            name="{{ choice.vars.full_name }}"
+                            value="{{ choice.vars.value }}"
+                            {% if field.vars.value == choice.vars.value %}
+                                checked="checked"
+                            {% endif %}
+                    >
+                    <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
+                        {{ choice.vars.label|trans }}
+                    </label>
+                {% endfor %}
+            </div>
         {% else %}
-            {# TODO 2024-10-14 every textarea or text input should submit on ctrl+enter #}
-            {# 'text' in field.vars.block_prefixes #}
-            {# {{ form_widget(form.name, {'attr': {'class': 'foo'}}) }} #}
-            {{ form_widget(field) }}
+            {% if 'text' in field.vars.block_prefixes %}
+                {% if 'textarea' in field.vars.block_prefixes %}
+                    {{ form_widget(field, {
+                        'attr': stimulus_action('submitform', 'submit', 'keydown.ctrl+enter').toArray() |
+                        merge( stimulus_controller('textarea_autosize').toArray() )
+                    }) }}
+                {% else %}
+                    {{ form_widget(field, {'attr': stimulus_action('submitform', 'submit', 'keydown.ctrl+enter').toArray()}) }}
+                {% endif %}
+            {% else %}
+                {{ form_widget(field) }}
+            {% endif %}
         {% endif %}
     </div>
 </div>

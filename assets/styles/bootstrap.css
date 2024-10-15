@@ -47,7 +47,7 @@
 }
 .form-control:focus {
     --bs-border-color: var(--cc-dark-gray);
-    --bs-body-color: var(--cc-lgt-gray);
+    --bs-body-color: var(--cc-black);
 }
 textarea.app-textarea-nowrap {
     white-space: pre;

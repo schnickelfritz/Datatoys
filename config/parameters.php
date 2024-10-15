@@ -4,7 +4,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return static function (ContainerConfigurator $container): void {
     $container->parameters()
-        ->set('app.version', '2024-10-04')
+        ->set('app.version', '2024-10-15')
         ->set('app.title', 'Data-Toys')
         ->set('app.noreply_email', 'no-reply@hmmh.io')
         ->set('app.admin_email', 'martin.neumann@hmmh.de')

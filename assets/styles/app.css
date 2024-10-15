@@ -43,6 +43,10 @@ body {
     color: var(--cc-lighter);
     padding: 0;
 }
+u {
+    text-decoration: none;
+    color: var(--cc-1);
+}
 .app-link {
     color: var(--cc-1);
     text-decoration: none;
@@ -106,4 +110,8 @@ body {
 }
 .app-flash-minimize {
     padding:0 5px !important;
+}
+.app-less-important {
+    font-size: 0.8em;
+    opacity: 0.8;
 }

@@ -3,6 +3,7 @@
 namespace App\Form\Home;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,18 +17,18 @@ class HomeContactFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $choices = [
-            'Help' => 'help',
-            'Contact' => 'contact',
-            'Praise' => 'praise',
-            'Suggestion for Improvement' => 'improve',
-            'Found an Error' => 'error',
-            'Greeting' => 'greeting',
+            'contact.abouts.contact' => 'Contact',
+            'contact.abouts.help' => 'Help',
+            'contact.abouts.praise' => 'Praise',
+            'contact.abouts.improvement_suggestion' => 'Improvement_Suggestion',
+            'contact.abouts.error_found' => 'Error_Found',
+            'contact.abouts.greeting' => 'Greeting',
         ];
-        $firstChoice = end($choices);
+        $firstChoice = current($choices);
 
         $builder
             ->add('message', TextareaType::class, [
-                'label' => 'Your Message',
+                'label' => 'contact.label.message',
                 'attr' => [
                     'focus' => true,
                 ],
@@ -36,14 +37,14 @@ class HomeContactFormType extends AbstractType
                 ]
             ])
             ->add('contactEmail', EmailType::class, [
-                'label' => 'Your Email Address',
+                'label' => 'contact.label.email',
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'optional',
                 ]
             ])
             ->add('about', ChoiceType::class, [
-                'label' => 'About',
+                'label' => 'contact.label.about',
                 'choices' => $choices,
                 'multiple' => false,
                 'expanded' => true,
@@ -53,8 +54,12 @@ class HomeContactFormType extends AbstractType
                 'attr' => [
                 ],
             ])
+            ->add('sendcopy', CheckboxType::class, [
+                'label' => 'contact.label.copy',
+                'required' => false,
+            ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Send Message',
+                'label' => 'contact.submitbutton',
             ])
             ;
     }
