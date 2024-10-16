@@ -1,6 +1,8 @@
 security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USERMANAGER, ROLE_WORKTIME_PLANNER]
     providers:
         app_user_provider:
             entity:
@@ -19,8 +21,12 @@ security:
                 enable_csrf: true
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+            switch_user: true
+            login_throttling: true
+            remember_me:
+                secret: '%kernel.secret%' #https://symfony.com/doc/current/security/remember_me.html
+                lifetime: 2592000
+                always_remember_me: true
 
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }

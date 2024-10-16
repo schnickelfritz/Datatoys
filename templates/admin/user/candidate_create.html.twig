@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'admin.candidate.create.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Primarybox>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="chat-heart-fill" />{{ 'admin.candidate.create.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_candidate_create }}"/>
+        <twig:FormRow field="{{ form_candidate_create.name }}" />
+        <twig:FormRow field="{{ form_candidate_create.email }}" />
+        <twig:FormRow field="{{ form_candidate_create.roles }}" />
+        <twig:ButtonsRow rowClass="pt-3" icon="chat-heart-fill" field="{{ form_candidate_create.submit }}" />
+        {{ form_end(form_candidate_create) }}
+    </twig:Primarybox>
+{% endblock %}

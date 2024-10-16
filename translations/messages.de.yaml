@@ -1,4 +1,25 @@
+admin:
+  candidate:
+    label:
+      name: Name
+      email: E-Mail-Adresse
+      roles: Rollen
+    create:
+      title: 'User-Anwärter/in erstellen'
+      submitbutton: 'Anwärter/in erstellen'
+menu:
+  Admin: Admin
+  Home: Anfang
+  Login: Anmelden
+  Logout: Abmelden
+  Impressum: Impressum
+  Privacy: Datenschutz
+  Contact: Kontakt
 optional: optional
+roles:
+  admin: 'Administrator'
+  user_manager: 'User Manager'
+  worktime_planner_user: 'Zeitplan-Benutzer/in'
 contact:
   title: Deine Botschaft
   subtitle: Nutze diese Stelle, um mit den Betreibern dieser Webseite Kontakt aufzunehmen.
@@ -16,3 +37,4 @@ contact:
     improvement_suggestion: Verbesserungsvorschlag
     error_found: Fehler gefunden
     greeting: Gruß
+

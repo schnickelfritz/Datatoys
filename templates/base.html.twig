@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}{{ app_title }}{% endblock %}</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
-    {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
-    {% endblock %}
-</head>
-<body data-turbo-prefetch="false" data-turbo="false"> {# turn off turbo: data-turbo="false" #}
-<div class="container-fluid">
-    <div class="row flex-nowrap">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{{ app_title }}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('images/logo.png') }}">
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body data-turbo-prefetch="false" data-turbo="false"> {# turn off turbo: data-turbo="false" #}
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div>
+                    {% block titlebar %}
+                        {{ include('titlebar.html.twig') }}
+                    {% endblock %}
+                    {% block topnav %}
+                        {{ include('topnav.html.twig') }}
+                    {% endblock %}
 
-    </div>
+                    <div class="container-fluid">
+                        <div class="row flex-nowrap">
+                            <main>
+                                {% block body %}{% endblock %}
+                            </main>
+                        </div>
+                    </div>
 
-    <div class="row flex-nowrap">
-        <main class="">
-            {% block titlebar %}
-                {{ include('titlebar.html.twig') }}
-            {% endblock %}
-            {% block topnav %}
-                {{ include('topnav.html.twig') }}
-            {% endblock %}
-            {% block body %}
-            {% endblock %}
-            {% block footer %}
-                {{ include('footer.html.twig') }}
-            {% endblock %}
-        </main>
-    </div>
-
-    {{ include('flash.html.twig') }}
-
-
-</div>
-</body>
+                    {% block footer %}
+                        {{ include('footer.html.twig') }}
+                    {% endblock %}
+                </div>
+            </div>
+            {{ include('flash.html.twig') }}
+        </div>
+    </body>
 </html>

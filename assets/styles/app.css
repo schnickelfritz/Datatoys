@@ -75,10 +75,14 @@ u {
     color: var(--cc-1);
 }
 .app-primarybox {
-    background-color: var(--cc-darkest);
     max-width: var(--readable);
-    padding:2em;
-    margin: 1em auto 1em auto;
+    margin: 0 auto 0 auto;
+}
+.app-box {
+    background-color: var(--cc-darkest);
+    overflow-x: scroll;
+    padding:1em;
+    margin: 1em;
 }
 .app-row {
     padding-bottom:0.25em;

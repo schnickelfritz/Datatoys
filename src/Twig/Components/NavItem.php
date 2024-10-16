@@ -7,7 +7,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent]
 class NavItem
 {
-    public string $path;
+    public string $route = '';
+    public string $routePrefix = '';
     public string $icon = '';
     public string $label;
 

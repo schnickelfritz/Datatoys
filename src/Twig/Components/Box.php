@@ -5,9 +5,8 @@ namespace App\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
-class Primarybox
+class Box
 {
-    public string $class = "app-primarybox";
-    public string $parentClass = "app-box";
+    public string $class = "app-box";
     public string $content;
 }
