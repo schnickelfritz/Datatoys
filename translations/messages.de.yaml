@@ -4,11 +4,25 @@ admin:
       name: Name
       email: E-Mail-Adresse
       roles: Rollen
+      actions: Aktionen
+      created_at: Angelegt am
+      update: 'Ändern'
+      invite_sent_at: Einladung gesendet am
+      invite: Senden
     create:
-      title: 'User-Anwärter/in erstellen'
-      submitbutton: 'Anwärter/in erstellen'
+      title: 'User erstellen'
+      submitbutton: 'User erstellen'
+      link: User erstellen
+    update:
+      title: 'Kandidaten ändern'
+      submitbutton: 'Ändern'
+      flash:
+        success:
+    list:
+      title: Kandidaten
 menu:
   Admin: Admin
+  Candidates: Kandidaten
   Home: Anfang
   Login: Anmelden
   Logout: Abmelden
@@ -37,4 +51,9 @@ contact:
     improvement_suggestion: Verbesserungsvorschlag
     error_found: Fehler gefunden
     greeting: Gruß
-
+flash:
+  fail:
+    invalid_inputs: 'Ungültige Eingaben'
+  success:
+    create: 'Eintrag gespeichert'
+    update: 'Änderung gespeichert'

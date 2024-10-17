@@ -15,7 +15,11 @@
 
                 <span class="bi-{{ icon }} pe-2"></span>
             {% endif %}
-            {{ field_label(field) }}
+            {% if label == '' %}
+                {{ field_label(field) }}
+            {% else %}
+                {{ label|trans }}
+            {% endif %}
         </button>
 
         {% if field2 is not null %}

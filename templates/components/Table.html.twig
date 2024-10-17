@@ -1,0 +1,12 @@
+<table class="table table-dark table-striped table-hover">
+    <thead>
+    <tr>
+        {% for th in headers %}
+            <th scope="col">{{ th|trans }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    {% block content %}{% endblock %}
+    </tbody>
+</table>

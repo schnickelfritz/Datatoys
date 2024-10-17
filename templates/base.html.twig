@@ -19,15 +19,9 @@
                     {% block topnav %}
                         {{ include('topnav.html.twig') }}
                     {% endblock %}
-
-                    <div class="container-fluid">
-                        <div class="row flex-nowrap">
-                            <main>
-                                {% block body %}{% endblock %}
-                            </main>
-                        </div>
-                    </div>
-
+                    <main>
+                        {% block body %}{% endblock %}
+                    </main>
                     {% block footer %}
                         {{ include('footer.html.twig') }}
                     {% endblock %}

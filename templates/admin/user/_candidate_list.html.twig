@@ -1,0 +1,31 @@
+<twig:Table headers="{{ [
+    'admin.candidate.label.update',
+    'admin.candidate.label.name',
+    'admin.candidate.label.email',
+    'admin.candidate.label.roles',
+    'admin.candidate.label.created_at',
+    'admin.candidate.label.invite_sent_at',
+    'admin.candidate.label.invite',
+] }}">
+    {% for user in users %}
+        <tr
+            class="{% if selected|default() and selected.id == user.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_admin_user_candidate_update', {'id': user.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <th scope="row">{{ user.name }}</th>
+            <td>{{ user.email }}</td>
+            <td>{{ user.roles|join(' | ') }}</td>
+            <td>{{ user.createdAt ? user.createdAt|date('d.m.y H:i') : '?' }}</td>
+            <td>{{ user.inviteSentAt ? user.inviteSentAt|date('d.m.y H:i') : '-' }}</td>
+            <td>
+                <a href="{{ path('app_admin_user_candidate_update', {'id': user.id}) }}" class="btn btn-primary">
+                    <span class="bi-send-fill"></span>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</twig:Table>

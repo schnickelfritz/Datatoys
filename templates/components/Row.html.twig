@@ -19,7 +19,7 @@
         {% if labelId != '' %}
             <label for="{{ labelId }}" class="label">{{ label }}</label>
         {% else %}
-            {{ label }}
+            {{ label|trans }}
         {% endif %}
         {% if labelAdditional != '' %}
             <div class="small">{{ labelAdditional|raw }}</div>

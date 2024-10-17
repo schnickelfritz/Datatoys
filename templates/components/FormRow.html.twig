@@ -1,9 +1,4 @@
 {% set contentWidth = 12-labelWidth %}
-
-
-            {% dump(field) %}
-
-
 <div class="row {{ rowClass }}">
     <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end">
         {% set label = field.vars.label|trans %}
@@ -15,25 +10,26 @@
     </div>
     <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
         {% if toggle and ('choice' in field.vars.block_prefixes) %}
-            {% set type = 'radio' %}
-            {# TODO 2024-10-15 form_end() will not recognize the solution below and adds a row for field, so the solution is deactivated by impossible if for now  #}
+
+            {% set type = field.vars.multiple == true ? 'checkbox' : 'radio' %}
+
             <div id="{{ field.vars.id }}">
                 {% for choice in field %}
                     <input
                             type="{{ type }}"
-                            class="btn-check"
                             id="{{ choice.vars.id }}"
                             name="{{ choice.vars.full_name }}"
-                            value="{{ choice.vars.value }}"
-                            {% if field.vars.value == choice.vars.value %}
+                            class="btn-check" value="{{ choice.vars.value }}"
+                            {% if (field.vars.multiple and choice.vars.value in field.vars.value) or (not field.vars.multiple and field.vars.value == choice.vars.value) %}
                                 checked="checked"
                             {% endif %}
                     >
-                    <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
-                        {{ choice.vars.label|trans }}
-                    </label>
+                    <label class="btn btn-outline-info" for="{{ choice.vars.id }}">{{ choice.vars.label|trans }}</label>
                 {% endfor %}
             </div>
+
+            {% do field.setRendered() %}
+
         {% else %}
             {% if 'text' in field.vars.block_prefixes %}
                 {% if 'textarea' in field.vars.block_prefixes %}

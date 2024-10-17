@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} :: {{ 'admin.candidate.create.title'|trans }}{% endblock %}
 {% block body %}
-    <twig:Primarybox>
+    <twig:Box>
         <twig:Row rowClass="mb-4">
-            <h1 class="h3"><twig:Icon name="chat-heart-fill" />{{ 'admin.candidate.create.title'|trans }}</h1>
+            <h1 class="h3"><twig:Icon name="person-rolodex" />{{ 'admin.candidate.create.title'|trans }}</h1>
         </twig:Row>
-        <twig:FormStart form="{{ form_candidate_create }}"/>
-        <twig:FormRow field="{{ form_candidate_create.name }}" />
-        <twig:FormRow field="{{ form_candidate_create.email }}" />
-        <twig:FormRow field="{{ form_candidate_create.roles }}" />
-        <twig:ButtonsRow rowClass="pt-3" icon="chat-heart-fill" field="{{ form_candidate_create.submit }}" />
-        {{ form_end(form_candidate_create) }}
-    </twig:Primarybox>
+        <twig:FormStart form="{{ form_candidate }}"/>
+        <twig:FormRow field="{{ form_candidate.name }}" />
+        <twig:FormRow field="{{ form_candidate.email }}" />
+        <twig:FormRow field="{{ form_candidate.roles }}" toggle="true" />
+        <twig:ButtonsRow rowClass="pt-3" icon="plus-circle" field="{{ form_candidate.submit }}" />
+        {{ form_end(form_candidate) }}
+        <twig:Row rowClass="mt-5" label="admin.candidate.list.title">
+            {{ include('admin/user/_candidate_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
 {% endblock %}

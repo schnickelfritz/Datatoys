@@ -5,7 +5,7 @@
             {% for flashesByType in flashes %}
                 {%for flash in flashesByType %}
                     <div class="">
-                        {{ flash|raw }}
+                        {{ flash|raw|trans }}
                     </div>
                 {% endfor %}
             {% endfor %}

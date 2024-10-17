@@ -14,6 +14,7 @@ class ButtonsRow
     public string $rowClass = '';
     public mixed $field;
     public string $icon = '';
+    public string $label = '';
     public mixed $field2 = null;
     public string $icon2 = '';
 

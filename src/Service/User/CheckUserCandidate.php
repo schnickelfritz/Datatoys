@@ -5,29 +5,28 @@ namespace App\Service\User;
 use App\Entity\User;
 use App\Entity\UserCandidate;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
-final readonly class CreateUserCandidate
+final readonly class CheckUserCandidate
 {
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
         private UserRepository $userRepository,
-    )
-    {
+    ) {
     }
 
-    public function create(UserCandidate $userCandidate): bool|string
+    public function isCredentialsAvailable(UserCandidate $userCandidate): bool|string
     {
-        if ($this->userByEmail($userCandidate->getEmail()) !== null) {
-            return 'email';
+        $userByName = $this->userByName($userCandidate->getName());
+        $userByEmail = $this->userByEmail($userCandidate->getEmail());
+        if ($userByName !== null && $userByEmail !== null) {
+            return 'user and email taken';
         }
-        if ($this->userByName($userCandidate->getName()) !== null) {
-            return 'name';
+        if ($userByName !== null) {
+            return 'name taken';
         }
-
-        $this->entityManager->persist($userCandidate);
-        $this->entityManager->flush();
+        if ($userByEmail !== null) {
+            return 'email taken';
+        }
 
         return true;
     }

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'admin.candidate.update.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="person-rolodex" />{{ 'admin.candidate.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_candidate }}"/>
+        <twig:FormRow field="{{ form_candidate.name }}" />
+        <twig:FormRow field="{{ form_candidate.email }}" />
+        <twig:FormRow field="{{ form_candidate.roles }}" toggle="true" />
+        <twig:ButtonsRow rowClass="pt-3" icon="pencil" field="{{ form_candidate.submit }}" label="admin.candidate.update.submitbutton" />
+        {{ form_end(form_candidate) }}
+        <twig:Row rowClass="mt-5" label="admin.candidate.list.title">
+            {{ include('admin/user/_candidate_list.html.twig') }}
+        </twig:Row>
+        <twig:Row rowClass="mt-5">
+            <a href="{{ path('app_admin_user_candidate_create') }}" class="btn btn-primary">
+                <twig:Icon name="plus-circle" />{{ 'admin.candidate.create.link'|trans }}
+            </a>
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

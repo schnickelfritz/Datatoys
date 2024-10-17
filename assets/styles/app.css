@@ -21,6 +21,7 @@
     --cc-2: #00a0af;
     --cc-2-lighter-1: #48ccd8;
     --cc-2-lighter-2: #6ae6f1;
+    --cc-2-darker-1: #014a52;
 
     --cc-3: #48a114;
     --cc-3-lighter-1: #a5e87f;
@@ -80,7 +81,6 @@ u {
 }
 .app-box {
     background-color: var(--cc-darkest);
-    overflow-x: scroll;
     padding:1em;
     margin: 1em;
 }

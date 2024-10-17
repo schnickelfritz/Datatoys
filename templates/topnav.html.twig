@@ -3,7 +3,12 @@
         <ul class="nav nav-pills justify-content-center">
             <twig:NavItem route="app_home" label="Home"/>
             {% if is_granted('ROLE_USERMANAGER') or is_granted('ROLE_ADMIN') %}
-                <twig:NavItem routePrefix="app_admin" label="Admin" icon="gear-wide-connected" />
+                <twig:NavItem
+                        route="app_admin_user_candidate_list"
+                        routePrefix="app_admin_user_candidate"
+                        label="Candidates"
+                        icon="gear-wide-connected"
+                />
             {% endif %}
             {% if app.user %}
                 <twig:NavItem route="app_logout" label="Logout" icon="power" />

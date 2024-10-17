@@ -33,6 +33,9 @@ class UserCandidate
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $inviteSentAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +85,18 @@ class UserCandidate
     public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getInviteSentAt(): ?\DateTimeImmutable
+    {
+        return $this->inviteSentAt;
+    }
+
+    public function setInviteSentAt(?\DateTimeImmutable $inviteSentAt): static
+    {
+        $this->inviteSentAt = $inviteSentAt;
 
         return $this;
     }
