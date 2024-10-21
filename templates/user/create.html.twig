@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'user.create.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Primarybox>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="person-rolodex" />{{ 'user.create.title'|trans }}</h1>
+        </twig:Row>
+        <twig:Row label="user.label.name">{{ user_candidate.name }}</twig:Row>
+        <twig:Row rowClass="mb-3" label="user.label.email">{{ user_candidate.email }}</twig:Row>
+        <twig:FormStart form="{{ form_create }}"/>
+        <twig:FormRow field="{{ form_create.password }}" />
+        <twig:Row rowClass="my-4">{{ 'user.create.explain'|trans }}</twig:Row>
+        <twig:ButtonsRow rowClass="pt-3" icon="check" field="{{ form_create.submit }}" label="user.create.submitbutton" />
+        {{ form_end(form_create) }}
+    </twig:Primarybox>
+{% endblock %}

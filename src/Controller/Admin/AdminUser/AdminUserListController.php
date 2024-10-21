@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin\AdminUser;
 
-use App\Repository\UserCandidateRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -12,20 +12,20 @@ use Twig\Environment;
 
 #[AsController]
 #[IsGranted('ROLE_USERMANAGER')]
-#[Route('/admin/user/candidate-list', name: 'app_admin_user_candidate_list', methods: [Request::METHOD_GET])]
-final readonly class AdminUserCandidateList
+#[Route('/admin/user/list', name: 'app_admin_user_list', methods: [Request::METHOD_GET])]
+final readonly class AdminUserListController
 {
     public function __construct(
-        private UserCandidateRepository $userCandidateRepository,
+        private UserRepository $userRepository,
         private Environment $twig,
     ) {
     }
 
     public function __invoke(Request $request): Response
     {
-        $candidates = $this->userCandidateRepository->findAll();
+        $candidates = $this->userRepository->findAll();
 
-        return new Response($this->twig->render('admin/user/candidate_list.html.twig', [
+        return new Response($this->twig->render('admin/user/list.html.twig', [
             'users' => $candidates,
         ]));
     }

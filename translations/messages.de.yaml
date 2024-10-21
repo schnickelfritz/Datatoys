@@ -1,4 +1,7 @@
 admin:
+  user:
+    list:
+      title: Benutzerverzeichnis
   candidate:
     label:
       name: Name
@@ -12,7 +15,7 @@ admin:
     create:
       title: 'User erstellen'
       submitbutton: 'User erstellen'
-      link: User erstellen
+      link: User (Kandidat) erstellen
     update:
       title: 'Kandidaten ändern'
       submitbutton: 'Ändern'
@@ -20,10 +23,22 @@ admin:
         success:
     list:
       title: Kandidaten
+user:
+  create:
+    title: 'Account einrichten'
+    submitbutton: 'Account einrichten'
+    explain: 'Mit der Angabe eines Passworts, dass den Vorgaben entspricht, und dem Betätigen des Buttons bekommst du einen Account. Danach kannst du dich hier anmelden und mitmachen.'
+  label:
+    name: Dein Name
+    email: Deine E-Mail-Adresse
+    password: Dein Passwort
+  flash:
+    created: 'Das Einrichten deines Accounts war erfolgreich. Melde dich nun mit deiner E-Mail-Adresse und deinem Passwort an.'
 menu:
   Admin: Admin
   Candidates: Kandidaten
-  Home: Anfang
+  Users: Benutzer
+  Home: Home
   Login: Anmelden
   Logout: Abmelden
   Impressum: Impressum
@@ -54,6 +69,9 @@ contact:
 flash:
   fail:
     invalid_inputs: 'Ungültige Eingaben'
+    invalid_url: 'Ungültiger Link (URL)'
+    email_not_sent: 'Beim Versuch, eine E-Mail zu senden, ist ein Fehler aufgetreten'
   success:
     create: 'Eintrag gespeichert'
     update: 'Änderung gespeichert'
+    done: 'Aktion ausgeführt'

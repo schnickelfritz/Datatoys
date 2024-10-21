@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'admin.user.list.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row label="admin.user.list.title">
+            {{ include('admin/user/_list.html.twig') }}
+        </twig:Row>
+        <twig:Row rowClass="mt-4">
+            <a href="{{ path('app_admin_user_candidate_create') }}" class="btn btn-primary">
+                <twig:Icon name="plus-circle" />{{ 'admin.candidate.create.link'|trans }}
+            </a>
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'email/email_base.html.twig' %}
+{% block title %}{{ email.subject }}{% endblock %}
+{% block content%}
+    <div>
+        <p>
+            Hallo <b>{{ user_name }}</b>!
+        </p>
+        <p>
+            Du bist eingeladen, bei <b>{{ app_title }}</b> teilzunehmen.<br>
+            Um die Einladung anzunehmen, betätige den folgenden Button.<br>
+            <button href="{{ signed_url }}">Einladung annehmen</button>
+        </p>
+    </div>
+{% endblock %}

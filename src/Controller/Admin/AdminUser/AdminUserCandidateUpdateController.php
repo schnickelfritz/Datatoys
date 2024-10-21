@@ -7,6 +7,7 @@ use App\Form\UserCandidate\UserCandidateFormType;
 use App\Repository\UserCandidateRepository;
 use App\Service\User\CheckUserCandidate;
 use App\Trait\FlashMessageTrait;
+use App\Trait\FormStringValueTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,19 +18,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
-use function Symfony\Component\Clock\now;
 
 #[AsController]
 #[IsGranted('ROLE_USERMANAGER')]
-#[Route('/admin/user/create-candidate', name: 'app_admin_user_candidate_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
-final readonly class AdminUserCandidateCreate
+#[Route('/admin/user/update-candidate/{id}', name: 'app_admin_user_candidate_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+final readonly class AdminUserCandidateUpdateController
 {
-
-    /*
-     * User Candidates are like Users without password. They cannot login, but can receive an invitation for
-     * confirmation. If they set a valid password, they become a "real" User, who are able to login.
-     */
-
     use FlashMessageTrait;
 
     public function __construct(
@@ -42,41 +36,43 @@ final readonly class AdminUserCandidateCreate
     ) {
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, int $id): Response
     {
-        $candidates = $this->userCandidateRepository->findAll();
-        $userCandidate = new UserCandidate();
+        $userCandidate = $this->userCandidateRepository->find($id);
+        if (!$userCandidate instanceof UserCandidate) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+        }
+
         $form = $this->formFactory->create(UserCandidateFormType::class, $userCandidate);
         $form->handleRequest($request);
 
-        // TODO Next ...
-        
         if (!$form->isSubmitted()) {
-            return new Response($this->twig->render('admin/user/candidate_create.html.twig', [
+            $candidates = $this->userCandidateRepository->findAll();
+            return new Response($this->twig->render('admin/user/candidate_update.html.twig', [
                 'form_candidate' => $form->createView(),
                 'users' => $candidates,
+                'selected' => $userCandidate,
             ]));
         }
 
         if (!$form->isValid()) {
             $this->addFlash($request, 'fail', 'flash.fail.invalid_inputs');
 
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_create'));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
         }
 
         $credentialsAvailableResult = $this->checkUserCandidate->isCredentialsAvailable($userCandidate);
         if ($credentialsAvailableResult !== true) {
             $this->addFlash($request, 'fail', sprintf('Abort: %s', $credentialsAvailableResult));
 
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_create'));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
         }
 
-        $userCandidate->setCreatedAt(now());
         $this->entityManager->persist($userCandidate);
         $this->entityManager->flush();
-        $this->addFlash($request, 'success', 'flash.success.create');
+        $this->addFlash($request, 'success', 'flash.success.update');
 
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
     }
 
 }

@@ -3,10 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Entity\UserCandidate;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use DateTimeImmutable;
+use function Symfony\Component\Clock\now;
 
 class AppFixtures extends Fixture
 {
@@ -17,12 +19,20 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $candidate1 = new UserCandidate();
+        $candidate1
+            ->setName('Bernd B')
+            ->setEmail('bernd@test.de')
+            ->setRoles(['ROLE_WORKTIME_PLANNER'])
+            ->setCreatedAt(now());
+        $manager->persist($candidate1);
+
         $user1 = new User();
         $user1->setName('Martin N');
         $user1->setEmail('martin@test.de');
         $user1->setPassword($this->passwordHasher->hashPassword($user1, 'tada'));
         $user1->setRoles(['ROLE_ADMIN']);
-        $user1->setCreatedAt(new DateTimeImmutable());
+        $user1->setCreatedAt(now());
         $manager->persist($user1);
 
         $user2 = new User();
