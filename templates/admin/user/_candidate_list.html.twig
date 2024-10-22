@@ -7,9 +7,9 @@
     'admin.candidate.label.invite_sent_at',
     'admin.candidate.label.invite',
 ] }}">
-    {% for user in users %}
+    {% for user in candidates %}
         <tr
-            class="{% if selected|default() and selected.id == user.id %}table-active{% endif %}"
+            class="{% if candidate_selected|default() and candidate_selected.id == user.id %}table-active{% endif %}"
         >
             <td>
                 <a href="{{ path('app_admin_user_candidate_update', {'id': user.id}) }}" class="btn btn-primary">

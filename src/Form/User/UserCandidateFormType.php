@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\UserCandidate;
+namespace App\Form\User;
 
 use App\Enum\RoleEnum;
 use Symfony\Component\Form\AbstractType;

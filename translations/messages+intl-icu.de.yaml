@@ -1,5 +1,23 @@
 admin:
   user:
+    label:
+      name: Name
+      email: E-Mail-Adresse
+      roles: Rollen
+      actions: Aktionen
+      created_at: Angelegt am
+      update: 'Ändern'
+    update:
+      title: 'User ändern'
+      submitbutton: 'Ändern'
+      flash:
+        success: 'Änderungen vorgenommen'
+    delete:
+      title: 'User löschen'
+      flash:
+        success: 'User {name} ({email}) gelöscht'
+        fail_me: 'Du kannst dich nicht selbst löschen!'
+      confirm_text: 'Soll User <b>{name}</b> wirklich gelöscht werden?'
     list:
       title: Benutzerverzeichnis
   candidate:
@@ -13,14 +31,18 @@ admin:
       invite_sent_at: Einladung gesendet am
       invite: Senden
     create:
-      title: 'User erstellen'
+      title: 'User (Kandidat) erstellen'
       submitbutton: 'User erstellen'
       link: User (Kandidat) erstellen
     update:
-      title: 'Kandidaten ändern'
+      title: 'Kandidat ändern'
       submitbutton: 'Ändern'
       flash:
-        success:
+        success: 'Änderungen vorgenommen'
+    delete:
+      title: 'Kandidat löschen'
+      flash: 'Kandidat {name} ({email}) gelöscht'
+      confirm_text: 'Soll Kandidat <b>{name}</b> wirklich gelöscht werden?'
     list:
       title: Kandidaten
 user:
@@ -75,3 +97,11 @@ flash:
     create: 'Eintrag gespeichert'
     update: 'Änderung gespeichert'
     done: 'Aktion ausgeführt'
+modal:
+  close: 'Schließen'
+  cancel: 'Abbrechen'
+  delete:
+    button: 'Löschen'
+    submitbutton: 'Ja, Löschen!'
+
+

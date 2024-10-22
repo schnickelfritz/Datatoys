@@ -75,6 +75,9 @@ u {
 .app-footer-box .nav-link.active {
     color: var(--cc-1);
 }
+.app-readable-width {
+    max-width: var(--readable);
+}
 .app-primarybox {
     max-width: var(--readable);
     margin: 0 auto 0 auto;

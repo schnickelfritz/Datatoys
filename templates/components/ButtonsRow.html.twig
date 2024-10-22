@@ -1,6 +1,6 @@
 {% set width = 12-offset %}
 <div class="row {{ rowClass }}">
-    <div class="col-sm-{{ width }} offset-sm-{{ offset }} app-col-form-content">
+    <div class="col-12 col-{{ gridThreshold }}-{{ width }} offset-{{ gridThreshold }}-{{ offset }} app-col-form-content">
         <button
                 id="{{ field.vars.id }}"
                 name="{{ field_name(field) }}"

@@ -8,7 +8,7 @@
             <label for="{{ field.vars.id }}" class="label">{{ label }}</label>
         {% endif %}
     </div>
-    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
+    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }} app-readable-width">
         {% if toggle and ('choice' in field.vars.block_prefixes) %}
 
             {% set type = field.vars.multiple == true ? 'checkbox' : 'radio' %}

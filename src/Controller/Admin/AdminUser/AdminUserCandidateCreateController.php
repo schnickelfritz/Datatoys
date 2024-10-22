@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\UserCandidate;
-use App\Form\UserCandidate\UserCandidateFormType;
+use App\Form\User\UserCandidateFormType;
 use App\Repository\UserCandidateRepository;
 use App\Service\User\CheckUserCandidate;
 use App\Trait\FlashMessageTrait;
@@ -52,7 +52,7 @@ final readonly class AdminUserCandidateCreateController
         if (!$form->isSubmitted()) {
             return new Response($this->twig->render('admin/user/candidate_create.html.twig', [
                 'form_candidate' => $form->createView(),
-                'users' => $candidates,
+                'candidates' => $candidates,
             ]));
         }
 

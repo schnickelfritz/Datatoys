@@ -30,4 +30,7 @@ stan:
 cs:
 	symfony php vendor/bin/php-cs-fixer fix --allow-risky=yes
 fix:
+	symfony console doctrine:database:drop --if-exists -n --force
+	symfony console doctrine:database:create -n
+	symfony console doctrine:migrations:migrate -n
 	symfony console doctrine:fixtures:load -n

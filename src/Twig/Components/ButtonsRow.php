@@ -10,6 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class ButtonsRow
 {
     public int $offset = 3;
+    public string $gridThreshold = 'lg';
 
     public string $rowClass = '';
     public mixed $field;

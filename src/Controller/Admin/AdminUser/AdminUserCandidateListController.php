@@ -26,7 +26,7 @@ final readonly class AdminUserCandidateListController
         $candidates = $this->userCandidateRepository->findAll();
 
         return new Response($this->twig->render('admin/user/candidate_list.html.twig', [
-            'users' => $candidates,
+            'candidates' => $candidates,
         ]));
     }
 }

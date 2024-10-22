@@ -110,3 +110,6 @@ textarea.app-textarea-small {
 .table {
     margin-bottom: 0;
 }
+.modal {
+    color: var(--cc-black);
+}

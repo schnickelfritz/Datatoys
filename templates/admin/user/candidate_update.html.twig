@@ -9,8 +9,27 @@
         <twig:FormRow field="{{ form_candidate.name }}" />
         <twig:FormRow field="{{ form_candidate.email }}" />
         <twig:FormRow field="{{ form_candidate.roles }}" toggle="true" />
-        <twig:ButtonsRow rowClass="pt-3" icon="pencil" field="{{ form_candidate.submit }}" label="admin.candidate.update.submitbutton" />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="pencil"
+                field="{{ form_candidate.submit }}"
+                label="admin.candidate.update.submitbutton"
+                cancelPath="app_admin_user_candidate_list"
+                modalId="candidate_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
         {{ form_end(form_candidate) }}
+        <twig:ModalDeleteFormContainer
+                id="candidate_delete"
+                title="{{ 'admin.candidate.delete.title' }}"
+                path="app_admin_user_candidate_delete"
+                deleteId="{{ candidate_selected.id }}"
+        >
+            {{ 'admin.candidate.delete.confirm_text'|trans({'%name%': candidate_selected.name}, 'messages')|raw }}
+        </twig:ModalDeleteFormContainer>
+    </twig:Box>
+    <twig:Box>
         <twig:Row rowClass="mt-5" label="admin.candidate.list.title">
             {{ include('admin/user/_candidate_list.html.twig') }}
         </twig:Row>

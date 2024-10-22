@@ -1,0 +1,37 @@
+<div
+        class="modal fade"
+        id="modal{{ id }}"
+        tabindex="-1"
+        aria-labelledby="modal{{ id }}Label"
+        aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal{{ id }}Label">{{ title|trans }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'modal.close'|trans }}"></button>
+            </div>
+            <div class="modal-body">
+                {% block content %}{% endblock %}
+                <div class="mt-4 text-end">
+                    <form
+                            name="{{ formName }}"
+                            id="{{ formId }}"
+                            method="POST"
+                            action="{{ path(path, {id: deleteId}) }}"
+                    >
+                        <button type="submit" class="btn btn-primary">
+                            <span class="bi-eraser-fill pe-2"></span>{{ buttonLabel|trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{ close|default('modal.cancel'|trans) }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

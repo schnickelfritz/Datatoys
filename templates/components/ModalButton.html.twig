@@ -1,0 +1,12 @@
+<button
+        type="button"
+        class="btn btn-{{ type|default('primary') }}"
+        data-bs-toggle="modal"
+        data-bs-target="#modal{{ id }}"
+>
+    {% if icon != '' %}
+        <span class="bi-{{ icon }} pe-2"></span>
+    {% endif %}
+    {{ label }}
+    <span class="bi-menu-up ps-2 {{ (type|default('primary') == 'danger') ? 'text-light' : 'text-dark' }}"></span>
+</button>

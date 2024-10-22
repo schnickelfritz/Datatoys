@@ -2,10 +2,11 @@
 
 namespace App\Controller\Admin\AdminUser;
 
-use App\Entity\UserCandidate;
-use App\Form\User\UserCandidateFormType;
+use App\Entity\User;
+use App\Form\User\UserFormType;
 use App\Repository\UserCandidateRepository;
-use App\Service\User\CheckUserCandidate;
+use App\Repository\UserRepository;
+use App\Service\User\CheckUser;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,58 +21,61 @@ use Twig\Environment;
 
 #[AsController]
 #[IsGranted('ROLE_USERMANAGER')]
-#[Route('/admin/user/update-candidate/{id}', name: 'app_admin_user_candidate_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
-final readonly class AdminUserCandidateUpdateController
+#[Route('/admin/user/update/{id}', name: 'app_admin_user_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+final readonly class AdminUserUpdateController
 {
     use FlashMessageTrait;
 
     public function __construct(
         private EntityManagerInterface  $entityManager,
         private UserCandidateRepository $userCandidateRepository,
+        private UserRepository $userRepository,
         private FormFactoryInterface    $formFactory,
         private UrlGeneratorInterface   $urlGenerator,
-        private CheckUserCandidate      $checkUserCandidate,
+        private CheckUser      $checkUser,
         private Environment             $twig,
     ) {
     }
 
     public function __invoke(Request $request, int $id): Response
     {
-        $userCandidate = $this->userCandidateRepository->find($id);
-        if (!$userCandidate instanceof UserCandidate) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+        $user = $this->userRepository->find($id);
+        if (!$user instanceof User) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
         }
 
-        $form = $this->formFactory->create(UserCandidateFormType::class, $userCandidate);
+        $form = $this->formFactory->create(UserFormType::class, $user);
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
+            $users = $this->userRepository->findAll();
             $candidates = $this->userCandidateRepository->findAll();
-            return new Response($this->twig->render('admin/user/candidate_update.html.twig', [
-                'form_candidate' => $form->createView(),
+            return new Response($this->twig->render('admin/user/update.html.twig', [
+                'form_user' => $form->createView(),
+                'users' => $users,
                 'candidates' => $candidates,
-                'candidate_selected' => $userCandidate,
+                'user_selected' => $user,
             ]));
         }
 
         if (!$form->isValid()) {
             $this->addFlash($request, 'fail', 'flash.fail.invalid_inputs');
 
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
         }
 
-        $credentialsAvailableResult = $this->checkUserCandidate->isCredentialsAvailable($userCandidate);
+        $credentialsAvailableResult = $this->checkUser->isCredentialsAvailable($user);
         if ($credentialsAvailableResult !== true) {
             $this->addFlash($request, 'fail', sprintf('Abort: %s', $credentialsAvailableResult));
 
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
         }
 
-        $this->entityManager->persist($userCandidate);
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
         $this->addFlash($request, 'success', 'flash.success.update');
 
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
     }
 
 }

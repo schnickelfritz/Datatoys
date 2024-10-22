@@ -3,7 +3,7 @@
 namespace App\Controller\User;
 
 use App\Entity\UserCandidate;
-use App\Form\UserCandidate\UserCreateFormType;
+use App\Form\User\UserCreateFormType;
 use App\Repository\UserCandidateRepository;
 use App\Service\User\CreateUser;
 use App\Trait\FlashMessageTrait;

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'admin.user.update.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="person-circle" />{{ 'admin.user.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_user }}"/>
+        <twig:FormRow field="{{ form_user.name }}" />
+        <twig:FormRow field="{{ form_user.email }}" />
+        <twig:FormRow field="{{ form_user.roles }}" toggle="true" />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="pencil"
+                field="{{ form_user.submit }}"
+                label="admin.user.update.submitbutton"
+                cancelPath="app_admin_user_list"
+                modalId="user_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
+        {{ form_end(form_user) }}
+        <twig:ModalDeleteFormContainer
+                id="user_delete"
+                title="{{ 'admin.user.delete.title' }}"
+                path="app_admin_user_delete"
+                deleteId="{{ user_selected.id }}"
+        >
+            {{ 'admin.user.delete.confirm_text'|trans({'%name%': user_selected.name}, 'messages')|raw }}
+        </twig:ModalDeleteFormContainer>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="admin.user.list.title">
+            {{ include('admin/user/_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row>
+            <a href="{{ path('app_admin_user_candidate_create') }}" class="btn btn-primary">
+                <twig:Icon name="plus-circle" />{{ 'admin.candidate.create.link'|trans }}
+            </a>
+        </twig:Row>
+        <twig:Row rowClass="mt-2" label="admin.candidate.list.title">
+            {{ include('admin/user/_candidate_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}
