@@ -1,15 +1,16 @@
+{% set label = (label == '') ? labelDirect : ('menu.'~label)|trans  %}
 {% set route_now = app.request.attributes.get('_route') %}
 {% set show = true %}
-{% set href = ( route == '' ) ? '#' : path(route) %}
+{% set href = ( route == '' ) ? path : path(route) %}
 {% if show == true %}
     {% set active = '' %}
     {% set active = ( route_now is same as route ? ' active' : '') %}
     {% if route_now starts with routePrefix and routePrefix != '' %}
         {% set active = ' active' %}
     {% endif %}
-    <li class="nav-item">
+    <li class="nav-item{{ (class == '') ? '' : ' '~class }}">
         <a href="{{ href }}" class="nav-link{{ active }}">
-            {% if icon != '' %}<i class="bi-{{ icon }} pe-2"></i>{% endif %}<span>{{ ('menu.'~label)|trans }}</span>
+            {% if icon != '' %}<i class="bi-{{ icon }} pe-2"></i>{% endif %}<span>{{ label }}</span>
         </a>
     </li>
 {% endif %}

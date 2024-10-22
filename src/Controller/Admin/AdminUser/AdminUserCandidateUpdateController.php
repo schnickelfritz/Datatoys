@@ -5,6 +5,7 @@ namespace App\Controller\Admin\AdminUser;
 use App\Entity\UserCandidate;
 use App\Form\User\UserCandidateFormType;
 use App\Repository\UserCandidateRepository;
+use App\Repository\UserRepository;
 use App\Service\User\CheckUserCandidate;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,7 @@ final readonly class AdminUserCandidateUpdateController
     public function __construct(
         private EntityManagerInterface  $entityManager,
         private UserCandidateRepository $userCandidateRepository,
+        private UserRepository $userRepository,
         private FormFactoryInterface    $formFactory,
         private UrlGeneratorInterface   $urlGenerator,
         private CheckUserCandidate      $checkUserCandidate,
@@ -45,33 +47,27 @@ final readonly class AdminUserCandidateUpdateController
         $form = $this->formFactory->create(UserCandidateFormType::class, $userCandidate);
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted()) {
-            $candidates = $this->userCandidateRepository->findAll();
-            return new Response($this->twig->render('admin/user/candidate_update.html.twig', [
-                'form_candidate' => $form->createView(),
-                'candidates' => $candidates,
-                'candidate_selected' => $userCandidate,
-            ]));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $credentialsAvailableResult = $this->checkUserCandidate->isCredentialsAvailable($userCandidate);
+            if ($credentialsAvailableResult === true) {
+                $this->entityManager->persist($userCandidate);
+                $this->entityManager->flush();
+                $this->addFlash($request, 'success', 'flash.success.update');
+
+                return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
+            }
+            $this->addFlash($request, 'fail', sprintf('admin.candidate.update.flash.abort_%s', $credentialsAvailableResult));
         }
 
-        if (!$form->isValid()) {
-            $this->addFlash($request, 'fail', 'flash.fail.invalid_inputs');
+        $candidates = $this->userCandidateRepository->findAll();
+        $users = $this->userRepository->allUsersFiltered();
 
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
-        }
-
-        $credentialsAvailableResult = $this->checkUserCandidate->isCredentialsAvailable($userCandidate);
-        if ($credentialsAvailableResult !== true) {
-            $this->addFlash($request, 'fail', sprintf('Abort: %s', $credentialsAvailableResult));
-
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
-        }
-
-        $this->entityManager->persist($userCandidate);
-        $this->entityManager->flush();
-        $this->addFlash($request, 'success', 'flash.success.update');
-
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_update', ['id' => $userCandidate->getId()]));
+        return new Response($this->twig->render('admin/user/candidate_update.html.twig', [
+            'form_candidate' => $form->createView(),
+            'candidates' => $candidates,
+            'users' => $users,
+            'candidate_selected' => $userCandidate,
+        ]));
     }
 
 }

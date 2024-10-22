@@ -10,6 +10,9 @@ class NavItem
     public string $route = '';
     public string $routePrefix = '';
     public string $icon = '';
-    public string $label;
+    public string $label = '';
+    public string $labelDirect = '';
+    public mixed $path = '';
+    public string $class = '';
 
 }

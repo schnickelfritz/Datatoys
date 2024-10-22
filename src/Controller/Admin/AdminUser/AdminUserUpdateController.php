@@ -47,35 +47,27 @@ final readonly class AdminUserUpdateController
         $form = $this->formFactory->create(UserFormType::class, $user);
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted()) {
-            $users = $this->userRepository->findAll();
-            $candidates = $this->userCandidateRepository->findAll();
-            return new Response($this->twig->render('admin/user/update.html.twig', [
-                'form_user' => $form->createView(),
-                'users' => $users,
-                'candidates' => $candidates,
-                'user_selected' => $user,
-            ]));
-        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $credentialsAvailableResult = $this->checkUser->isCredentialsAvailable($user);
+            if ($credentialsAvailableResult === true) {
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                $this->addFlash($request, 'success', 'flash.success.update');
 
-        if (!$form->isValid()) {
-            $this->addFlash($request, 'fail', 'flash.fail.invalid_inputs');
-
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
-        }
-
-        $credentialsAvailableResult = $this->checkUser->isCredentialsAvailable($user);
-        if ($credentialsAvailableResult !== true) {
+                return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
+            }
             $this->addFlash($request, 'fail', sprintf('Abort: %s', $credentialsAvailableResult));
-
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
         }
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-        $this->addFlash($request, 'success', 'flash.success.update');
+        $users = $this->userRepository->allUsersFiltered();
+        $candidates = $this->userCandidateRepository->findAll();
 
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_update', ['id' => $user->getId()]));
+        return new Response($this->twig->render('admin/user/update.html.twig', [
+            'form_user' => $form->createView(),
+            'users' => $users,
+            'candidates' => $candidates,
+            'user_selected' => $user,
+        ]));
     }
 
 }

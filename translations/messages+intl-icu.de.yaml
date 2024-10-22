@@ -6,6 +6,7 @@ admin:
       roles: Rollen
       actions: Aktionen
       created_at: Angelegt am
+      imitate: Imitieren
       update: 'Ändern'
     update:
       title: 'User ändern'
@@ -39,6 +40,9 @@ admin:
       submitbutton: 'Ändern'
       flash:
         success: 'Änderungen vorgenommen'
+        abort_name: 'Abbruch: Name wird bereits von einem User verwendet'
+        abort_email: 'Abbruch: E-Mail-Adresse wird bereits von einem User verwendet'
+        abort_name_email: 'Abbruch: Sowohl Name als auch E-Mail-Adresse wird bereits von einem User verwendet'
     delete:
       title: 'Kandidat löschen'
       flash: 'Kandidat {name} ({email}) gelöscht'
@@ -103,5 +107,5 @@ modal:
   delete:
     button: 'Löschen'
     submitbutton: 'Ja, Löschen!'
-
+close_view: 'Tu nix'
 

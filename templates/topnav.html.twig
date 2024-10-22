@@ -1,6 +1,14 @@
 <div class="app-topnav-box">
     <nav>
         <ul class="nav nav-pills justify-content-center">
+            {% if is_granted('IS_IMPERSONATOR') %}
+                <twig:NavItem
+                        path="{{ path('app_admin_user_list', {'_switch_user': '_exit'}) }}"
+                        labelDirect="{{ app.user.name }}"
+                        icon="bandaid-fill"
+                        class="app-warn-blink"
+                />
+            {% endif %}
             <twig:NavItem route="app_home" label="Home"/>
             {% if is_granted('ROLE_USERMANAGER') or is_granted('ROLE_ADMIN') %}
                 <twig:NavItem

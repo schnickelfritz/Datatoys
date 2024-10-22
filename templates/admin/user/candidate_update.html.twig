@@ -30,13 +30,18 @@
         </twig:ModalDeleteFormContainer>
     </twig:Box>
     <twig:Box>
-        <twig:Row rowClass="mt-5" label="admin.candidate.list.title">
+        <twig:Row label="admin.candidate.list.title">
             {{ include('admin/user/_candidate_list.html.twig') }}
         </twig:Row>
-        <twig:Row rowClass="mt-5">
+        <twig:Row rowClass="mt-3">
             <a href="{{ path('app_admin_user_candidate_create') }}" class="btn btn-primary">
                 <twig:Icon name="plus-circle" />{{ 'admin.candidate.create.link'|trans }}
             </a>
+        </twig:Row>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="admin.user.list.title">
+            {{ include('admin/user/_list.html.twig') }}
         </twig:Row>
     </twig:Box>
 {% endblock %}

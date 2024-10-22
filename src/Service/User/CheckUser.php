@@ -19,13 +19,13 @@ final readonly class CheckUser
         $userCandidateByName = $this->userCandidateByName($user->getName());
         $userCandidateByEmail = $this->userCandidateByEmail($user->getEmail());
         if ($userCandidateByName !== null && $userCandidateByEmail !== null) {
-            return 'user and email taken';
+            return 'user_email';
         }
         if ($userCandidateByName !== null) {
-            return 'name taken';
+            return 'name';
         }
         if ($userCandidateByEmail !== null) {
-            return 'email taken';
+            return 'email';
         }
 
         return true;

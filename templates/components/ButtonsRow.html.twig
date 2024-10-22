@@ -67,7 +67,7 @@
 
         {% if cancelPath|default('') != '' %}
             <a href="{{ path(cancelPath) }}" class="btn btn-secondary">
-                <span class="bi-x pe-2"></span>{{ cancelLabel|default('Abbrechen') }}
+                <span class="bi-x pe-2"></span>{{ cancelLabel|default('close_view'|trans) }}
             </a>
         {% endif %}
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\AdminUser;
 
 use App\Repository\UserCandidateRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -17,6 +18,7 @@ final readonly class AdminUserCandidateListController
 {
     public function __construct(
         private UserCandidateRepository $userCandidateRepository,
+        private UserRepository $userRepository,
         private Environment $twig,
     ) {
     }
@@ -24,9 +26,11 @@ final readonly class AdminUserCandidateListController
     public function __invoke(Request $request): Response
     {
         $candidates = $this->userCandidateRepository->findAll();
+        $users = $this->userRepository->allUsersFiltered();
 
         return new Response($this->twig->render('admin/user/candidate_list.html.twig', [
             'candidates' => $candidates,
+            'users' => $users,
         ]));
     }
 }

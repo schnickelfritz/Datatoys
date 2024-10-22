@@ -1,9 +1,10 @@
 <twig:Table headers="{{ [
-    'admin.candidate.label.update',
-    'admin.candidate.label.name',
-    'admin.candidate.label.email',
-    'admin.candidate.label.roles',
-    'admin.candidate.label.created_at',
+    'admin.user.label.update',
+    'admin.user.label.name',
+    'admin.user.label.email',
+    'admin.user.label.roles',
+    'admin.user.label.created_at',
+    'admin.user.label.imitate',
 ] }}">
     {% for user in users %}
         <tr
@@ -18,6 +19,16 @@
             <td>{{ user.email }}</td>
             <td>{{ user.roles|join(' | ') }}</td>
             <td>{{ user.createdAt ? user.createdAt|date('d.m.y H:i') : '?' }}</td>
+            <td>
+                {% if is_granted('ROLE_ALLOWED_TO_SWITCH') and user.id != app.user.id %}
+                    <a
+                            href="{{ path('app_home', {'_switch_user': user.userIdentifier}) }}"
+                            class="btn btn-primary"
+                    >
+                        <span class="bi-person-bounding-box"></span>
+                    </a>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 </twig:Table>

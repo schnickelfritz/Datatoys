@@ -37,12 +37,22 @@
     --readable: 1100px;
 }
 
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 body {
     font-family: "Roboto Condensed Variable", sans-serif;
     font-size: 17px;
     background-color: var(--cc-dark);
     color: var(--cc-lighter);
     padding: 0;
+}
+.app-warn-blink {
+    color: var(--cc-alert) !important;
+    animation: blinker 1s linear infinite;
 }
 u {
     text-decoration: none;
