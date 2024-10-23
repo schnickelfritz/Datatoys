@@ -59,7 +59,7 @@ final readonly class AdminUserCandidateCreateController
                 $this->entityManager->flush();
                 $this->addFlash($request, 'success', 'flash.success.create');
 
-                return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+                return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
             }
             $this->addFlash($request, 'fail', sprintf('admin.candidate.update.flash.abort_%s', $credentialsAvailableResult));
         }

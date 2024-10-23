@@ -9,7 +9,11 @@
         <twig:FormRow field="{{ form_candidate.name }}" />
         <twig:FormRow field="{{ form_candidate.email }}" />
         <twig:FormRow field="{{ form_candidate.roles }}" toggle="true" />
-        <twig:ButtonsRow rowClass="pt-3" icon="plus-circle" field="{{ form_candidate.submit }}" cancelPath="app_admin_user_candidate_list" />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="plus-circle"
+                field="{{ form_candidate.submit }}"
+                cancelPath="app_admin_user_list" />
         {{ form_end(form_candidate) }}
     </twig:Box>
     <twig:Box>

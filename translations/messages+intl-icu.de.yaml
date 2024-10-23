@@ -20,7 +20,7 @@ admin:
         fail_me: 'Du kannst dich nicht selbst löschen!'
       confirm_text: 'Soll User <b>{name}</b> wirklich gelöscht werden?'
     list:
-      title: Benutzerverzeichnis
+      title: Benutzer-Verzeichnis
   candidate:
     label:
       name: Name
@@ -48,7 +48,7 @@ admin:
       flash: 'Kandidat {name} ({email}) gelöscht'
       confirm_text: 'Soll Kandidat <b>{name}</b> wirklich gelöscht werden?'
     list:
-      title: Kandidaten
+      title: Kandidaten-Verzeichnis
 user:
   create:
     title: 'Account einrichten'

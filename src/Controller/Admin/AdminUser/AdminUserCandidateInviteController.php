@@ -43,7 +43,7 @@ final readonly class AdminUserCandidateInviteController
             $this->addFlash($request, 'fail', 'flash.fail.email_not_sent');
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
     }
 
 }

@@ -34,7 +34,7 @@ final readonly class AdminUserCandidateDeleteController
         $this->entityManager->flush();
         $this->addFlash($request, 'success', $this->translator->trans('admin.candidate.delete.flash', ['name'=>$userCandidate->getName(), 'email'=>$userCandidate->getEmail()]));
 
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
 
     }
 }
