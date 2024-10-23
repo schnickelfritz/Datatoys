@@ -15,6 +15,6 @@ class ModalDeleteFormContainer
     public string $path;
     public string $formId = 'delete_form';
     public string $formName = 'delete_form';
-    public int $deleteId;
+    public int $deleteId = -1;
     public string $buttonLabel = 'modal.delete.submitbutton';
 }

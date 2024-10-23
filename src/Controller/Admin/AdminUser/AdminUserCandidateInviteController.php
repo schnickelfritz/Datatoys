@@ -3,7 +3,6 @@
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\UserCandidate;
-use App\Repository\UserCandidateRepository;
 use App\Service\Email\SendInviteEmail;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +13,6 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Twig\Environment;
 use function Symfony\Component\Clock\now;
 
 #[AsController]
@@ -28,19 +26,12 @@ final readonly class AdminUserCandidateInviteController
     public function __construct(
         private SendInviteEmail $sendInviteEmail,
         private EntityManagerInterface  $entityManager,
-        private UserCandidateRepository $userCandidateRepository,
         private UrlGeneratorInterface   $urlGenerator,
-        private Environment             $twig,
     ) {
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, UserCandidate $userCandidate): Response
     {
-        $userCandidate = $this->userCandidateRepository->find($id);
-        if (!$userCandidate instanceof UserCandidate) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
-        }
-
         $emailSuccessfullySent = $this->sendInviteEmail->send($userCandidate);
 
         if ($emailSuccessfullySent) {

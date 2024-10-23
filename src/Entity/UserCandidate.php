@@ -19,19 +19,19 @@ class UserCandidate
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private string $email;
 
     /**
      * @var list<string> The user roles
      */
-    #[ORM\Column]
-    private array $roles = [];
+    #[ORM\Column(nullable: true)]
+    private ?array $roles = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $createdAt = null;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $inviteSentAt = null;
@@ -41,7 +41,7 @@ class UserCandidate
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -53,7 +53,7 @@ class UserCandidate
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -65,11 +65,20 @@ class UserCandidate
         return $this;
     }
 
+    /** @return string[] */
     public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        if (empty($roles)) {
+            return [];
+        }
+
+        return array_unique($roles);
     }
 
+    /**
+     * @param list<string> $roles
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -77,12 +86,12 @@ class UserCandidate
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 

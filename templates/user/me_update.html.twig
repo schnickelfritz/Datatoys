@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'user.update.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Primarybox>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="person-vcard" />{{ 'user.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:Row label="user.label.name">{{ user.name }}</twig:Row>
+        <twig:Row rowClass="mb-3" label="user.label.email">{{ user.email }}</twig:Row>
+        <twig:FormStart form="{{ form_update }}"/>
+        <twig:FormRow field="{{ form_update.new_password }}" />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="check"
+                field="{{ form_update.submit }}"
+                label="user.update.submitbutton"
+                cancelPath="app_home"
+                modalId="user_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
+        {{ form_end(form_update) }}
+        <twig:ModalDeleteFormContainer
+                id="user_delete"
+                title="{{ 'user.delete.title' }}"
+                path="app_me_delete"
+                buttonLabel="user.delete.deletebutton"
+        >
+            {{ 'user.delete.confirm_text'|trans|raw }}
+        </twig:ModalDeleteFormContainer>
+
+    </twig:Primarybox>
+{% endblock %}

@@ -37,13 +37,8 @@ final readonly class AdminUserUpdateController
     ) {
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, User $user): Response
     {
-        $user = $this->userRepository->find($id);
-        if (!$user instanceof User) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
-        }
-
         $form = $this->formFactory->create(UserFormType::class, $user);
         $form->handleRequest($request);
 

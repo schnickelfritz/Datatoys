@@ -37,13 +37,8 @@ final readonly class AdminUserCandidateUpdateController
     ) {
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, UserCandidate $userCandidate): Response
     {
-        $userCandidate = $this->userCandidateRepository->find($id);
-        if (!$userCandidate instanceof UserCandidate) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin_user_candidate_list'));
-        }
-
         $form = $this->formFactory->create(UserCandidateFormType::class, $userCandidate);
         $form->handleRequest($request);
 

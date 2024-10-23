@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/logout', name: 'app_logout', methods: [Request::METHOD_GET])]
 final readonly class UserLogoutController
 {
-    public function __invoke()
+    public function __invoke(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

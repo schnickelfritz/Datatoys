@@ -25,6 +25,7 @@
                 />
             {% endif %}
             {% if app.user %}
+                <twig:NavItem route="app_me_update" label="You" icon="person-vcard" />
                 <twig:NavItem route="app_logout" label="Logout" icon="power" />
             {% else %}
                 <twig:NavItem route="app_login" label="Login" icon="lamp" />

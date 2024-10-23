@@ -47,7 +47,7 @@ final readonly class UserCreateController
             $this->verifyEmailHelper->validateEmailConfirmation(
                 $request->getUri(),
                 $userCandidate->getEmail(),
-                $userCandidate->getEmail() ?? '',
+                $userCandidate->getEmail(),
             );
         } catch (VerifyEmailExceptionInterface $e) {
             $this->addFlash($request, 'fail', 'flash.fail.invalid_url');
