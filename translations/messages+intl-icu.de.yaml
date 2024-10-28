@@ -69,12 +69,20 @@ user:
   flash:
     created: 'Das Einrichten deines Accounts war erfolgreich. Melde dich nun mit deiner E-Mail-Adresse und deinem Passwort an.'
 planner:
-  entries:
-    title: Mein Arbeitsplan
+  crud_flash: 'Änderungen gespeichert: Neu: {create}. Geändert: {update}. Gelöscht: {delete}.'
+  my_entries:
+    title: Mein Einsatzplan
+  all_entries:
+    title: Einsatzplan
   label:
-    day: Arbeitstag
+    weekday: Tag
+    date: Datum
     options: Optionen
-    start: Beginn
+    option:
+      away: Abwesend
+      office: Office
+      home: Home
+    start: Ab (Uhrzeit)
     hours: Arbeitsstunden
 menu:
   Admin: Admin
@@ -113,6 +121,7 @@ contact:
 flash:
   info:
     not_working_yet: 'Diese Funktion funktioniert noch nicht'
+    no_changes_found: 'Keine Änderungen gefunden'
   fail:
     invalid_inputs: 'Ungültige Eingaben'
     invalid_url: 'Ungültiger Link (URL)'

@@ -18,9 +18,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
 
 #[AsController]
-#[Route('/planner/entries', 'app_planner_entries', methods: [Request::METHOD_GET])]
+#[Route('/planner/my-entries', 'app_planner_my_entries', methods: [Request::METHOD_GET])]
 #[IsGranted('ROLE_WORKTIME_PLANNER')]
-final readonly class WorkdayEntriesController
+final readonly class WorkdayMyEntriesController
 {
 
     public function __construct(
@@ -42,13 +42,13 @@ final readonly class WorkdayEntriesController
 
         $today = new DateTime('today');
         $daysForEntries = $this->makeDaylist->daylistOfFullWeeks($today, 3);
-        $existingEntries = $this->workdayRepository->existingEntriesSince($user, $today);
+        $existingEntries = $this->workdayRepository->existingEntriesOfUserSince($user, $today);
         $existingEntriesByYmd = array_combine(
             array_map(fn ($wd) => $this->datetimeYmd($wd->getDay()), $existingEntries),
             $existingEntries
         );
 
-        return new Response($this->twig->render('planner/entries.html.twig', [
+        return new Response($this->twig->render('planner/my_entries.html.twig', [
             'calendar_days' => $daysForEntries,
             'existing_entries' => $existingEntriesByYmd,
         ]));
@@ -56,7 +56,7 @@ final readonly class WorkdayEntriesController
 
     private function datetimeYmd(?DateTimeInterface $dateTime): string
     {
-        return ($dateTime instanceof DateTime) ? $dateTime->format('Y-m-d') : '';
+        return ($dateTime instanceof DateTime) ? $dateTime->format('Ymd') : '';
     }
 
 }

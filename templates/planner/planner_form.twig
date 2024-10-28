@@ -3,7 +3,7 @@
     <input
             type="radio"
             class="btn-check"
-            name="option[{{ row_index }}]"
+            name="entry[{{ row_index }}][option]"
             value="{{ value }}"
             id="option{{ option_index }}_{{ row_index }}"
             autocomplete="off"
@@ -19,25 +19,36 @@
         {% endif %}
     </label>
 {% endmacro %}
-{% macro input(row_index, name, value, label) %}
-    <input
-            type="text"
-            name="{{ name }}[{{ row_index }}]"
-            class="form-control"
-            id="{{ name }}_{{ row_index }}"
-            value="{{ value }}"
-    >
-    <label for="{{ name }}_{{ row_index }}" class="d-none">{{ label|trans }}</label>
-{% endmacro %}
-{% macro range(row_index, name, value, label, min, max) %}
-    <label for="{{ name }}_{{ row_index }}" class="d-none">{{ label|trans }}</label>
-    <input
-            type="range"
-            class="form-range"
-            min="{{ min }}"
-            max="{{ max }}"
-            step="1"
-            id="{{ name }}_{{ row_index }}"
-            value="{{ value }}"
-    >
+{% macro range(row_index, name, value, min, max, nullLabel="", class="btn btn-outline-info btn-narrow") %}
+
+    {% if nullLabel != "" %}
+        <input
+                type="radio"
+                class="btn-check"
+                name="entry[{{ row_index }}][{{ name }}]"
+                value=""
+                id="{{ name }}_{{ row_index }}_null"
+                autocomplete="off"
+                {% if value is null %}
+                    checked
+                {% endif %}
+        >
+        <label class="{{ class }}" for="{{ name }}_{{ row_index }}_null">{{ nullLabel }}</label>
+    {% endif %}
+    {% for i in range(min, max) %}
+        <input
+                type="radio"
+                class="btn-check"
+                name="entry[{{ row_index }}][{{ name }}]"
+                value="{{ i }}"
+                id="{{ name }}_{{ row_index }}_{{ i }}"
+                autocomplete="off"
+                {% if i == value %}
+                    checked
+                {% endif %}
+        >
+        <label class="{{ class }}" for="{{ name }}_{{ row_index }}_{{ i }}">
+            {{ i }}
+        </label>
+    {% endfor %}
 {% endmacro %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'planner.all_entries.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Box>
+
+            <div class="sticky-top app-bg-box py-2">
+                <h2><span class="bi-calendar3 pe-2"></span>{{ 'planner.all_entries.title'|trans }}</h2>
+            </div>
+
+            <twig:Table headers="{{ [
+                'planner.label.weekday',
+                'planner.label.date',
+                'planner.label.name',
+                'planner.label.start',
+                'planner.label.hours',
+            ] }}" :stripes="false">
+                {% for day in calendar_days %}
+                {% endfor %}
+            </twig:Table>
+    </twig:Box>
+{% endblock %}
