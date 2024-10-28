@@ -68,11 +68,20 @@ user:
     new_password: Dein neues Passwort
   flash:
     created: 'Das Einrichten deines Accounts war erfolgreich. Melde dich nun mit deiner E-Mail-Adresse und deinem Passwort an.'
+planner:
+  entries:
+    title: Mein Arbeitsplan
+  label:
+    day: Arbeitstag
+    options: Optionen
+    start: Beginn
+    hours: Arbeitsstunden
 menu:
   Admin: Admin
   Candidates: Kandidaten
   Users: Benutzer
   Home: Home
+  'My Plan': Mein Arbeitsplan
   Login: Anmelden
   You: Dein Account
   Logout: Abmelden
@@ -102,6 +111,8 @@ contact:
     error_found: Fehler gefunden
     greeting: Gruß
 flash:
+  info:
+    not_working_yet: 'Diese Funktion funktioniert noch nicht'
   fail:
     invalid_inputs: 'Ungültige Eingaben'
     invalid_url: 'Ungültiger Link (URL)'
@@ -118,4 +129,5 @@ modal:
     button: 'Löschen'
     submitbutton: 'Ja, Löschen!'
 close_view: 'Abbrechen'
+save: Speichern
 

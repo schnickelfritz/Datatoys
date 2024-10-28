@@ -34,7 +34,7 @@ final readonly class MeDeleteController
         if ($user instanceof User) {
             $this->entityManager->remove($user);
             $this->entityManager->flush();
-            //TODO 2024-10-23 ME: Fehler vermeiden, der dadurch entsteht, dass gelöschter User noch authentifiziert gilt
+            //TODO 2024-10-23 ME: Fehler vermeiden, der dadurch entsteht, dass gelöschter User noch authentifiziert gilt (wahrscheinlich)
             $this->addFlash($request, 'success', 'flash.success.bye');
         }
 

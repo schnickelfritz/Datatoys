@@ -43,7 +43,7 @@ final readonly class MeUpdateController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //TODO 2024-10-23 ME: Passwort setzen (altes überprüfen)
+            //TODO 2024-10-23 ME: neues Passwort setzen
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             $this->addFlash($request, 'success', 'flash.success.update');

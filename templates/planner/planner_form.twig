@@ -1,0 +1,43 @@
+
+{% macro radio(row_index, option_index, value, current_value, label = "", icon = "") %}
+    <input
+            type="radio"
+            class="btn-check"
+            name="option[{{ row_index }}]"
+            value="{{ value }}"
+            id="option{{ option_index }}_{{ row_index }}"
+            autocomplete="off"
+            {% if value == current_value %}
+                checked
+            {% endif %}
+    >
+    <label class="btn btn-outline-info" for="option{{ option_index }}_{{ row_index }}">
+        {% if label == "" %}
+            <span class="bi-{{ icon }}"></span>
+        {% else %}
+            {{ label|trans }}
+        {% endif %}
+    </label>
+{% endmacro %}
+{% macro input(row_index, name, value, label) %}
+    <input
+            type="text"
+            name="{{ name }}[{{ row_index }}]"
+            class="form-control"
+            id="{{ name }}_{{ row_index }}"
+            value="{{ value }}"
+    >
+    <label for="{{ name }}_{{ row_index }}" class="d-none">{{ label|trans }}</label>
+{% endmacro %}
+{% macro range(row_index, name, value, label, min, max) %}
+    <label for="{{ name }}_{{ row_index }}" class="d-none">{{ label|trans }}</label>
+    <input
+            type="range"
+            class="form-range"
+            min="{{ min }}"
+            max="{{ max }}"
+            step="1"
+            id="{{ name }}_{{ row_index }}"
+            value="{{ value }}"
+    >
+{% endmacro %}

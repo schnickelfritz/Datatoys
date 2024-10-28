@@ -92,6 +92,9 @@ u {
     max-width: var(--readable);
     margin: 0 auto 0 auto;
 }
+.app-bg-box {
+    background-color: var(--cc-darkest);
+}
 .app-box {
     background-color: var(--cc-darkest);
     padding:1em;
