@@ -7,11 +7,13 @@
             value="{{ value }}"
             id="option{{ option_index }}_{{ row_index }}"
             autocomplete="off"
+            {{ stimulus_action('planner', 'onChange', 'input') }}
+            {{ stimulus_target('planner', 'radio') }}
             {% if value == current_value %}
                 checked
             {% endif %}
     >
-    <label class="btn btn-outline-info" for="option{{ option_index }}_{{ row_index }}">
+    <label class="btn btn-outline-info btn-narrow" for="option{{ option_index }}_{{ row_index }}">
         {% if label == "" %}
             <span class="bi-{{ icon }}"></span>
         {% else %}
@@ -20,7 +22,6 @@
     </label>
 {% endmacro %}
 {% macro range(row_index, name, value, min, max, nullLabel="", class="btn btn-outline-info btn-narrow") %}
-
     {% if nullLabel != "" %}
         <input
                 type="radio"

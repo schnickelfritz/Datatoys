@@ -1,4 +1,4 @@
-<div class="app-topnav-box">
+<div class="sticky-top app-topnav-box">
     <nav>
         <ul class="nav nav-pills justify-content-center">
             {% if is_granted('IS_IMPERSONATOR') %}
@@ -10,14 +10,26 @@
                 />
             {% endif %}
             <twig:NavItem route="app_home" label="Home"/>
+            {% if is_granted('ROLE_GRIDADMIN') %}
+                <twig:NavItem
+                        route="app_grid_scope_create"
+                        label="Grid Scope"
+                        icon="grid-3x3-gap"
+                />
+            {% endif %}
             {% if is_granted('ROLE_WORKTIME_PLANNER') %}
+                <twig:NavItem
+                        route="app_planner_all_entries"
+                        label="Our Plan"
+                        icon="calendar2-range"
+                />
                 <twig:NavItem
                         route="app_planner_my_entries"
                         label="My Plan"
                         icon="calendar3"
                 />
             {% endif %}
-            {% if is_granted('ROLE_USERMANAGER') or is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_USERMANAGER') %}
                 <twig:NavItem
                         route="app_admin_user_list"
                         routePrefix="app_admin_user"

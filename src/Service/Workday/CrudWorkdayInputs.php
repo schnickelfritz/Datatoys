@@ -111,6 +111,7 @@ final readonly class CrudWorkdayInputs
             ->setHomeoffice($option === 'home')
             ->setStartHour($startHour)
             ->setWorkHours($workHours)
+            ->setSuperAway(false)
         ;
         $this->entityManager->persist($existingEntry);
 
@@ -119,6 +120,9 @@ final readonly class CrudWorkdayInputs
 
     private function isNoChange(Workday $existingEntry, string $option, ?int $startHour, ?int $workHours): bool
     {
+        if ($existingEntry->isSuperAway() === true) {
+            return false;
+        }
         if ($existingEntry->isAway() !== ($option === 'away')) {
             return false;
         }

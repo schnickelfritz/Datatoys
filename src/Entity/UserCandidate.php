@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\RoleEnum;
 use App\Repository\UserCandidateRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -74,6 +75,24 @@ class UserCandidate
         }
 
         return array_unique($roles);
+    }
+
+    /** @return string[] */
+    public function getRolesLabels(): array
+    {
+        $roles = $this->roles;
+        if (empty($roles)) {
+            return [];
+        }
+        $labels = [];
+        foreach ($roles as $role) {
+            $roleEnum = RoleEnum::tryFrom($role);
+            if ($roleEnum) {
+                $labels[] = $roleEnum->label();
+            }
+        }
+
+        return array_unique($labels);
     }
 
     /**

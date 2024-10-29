@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Entity\UserCandidate;
+use App\Entity\Workday;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -105,6 +107,29 @@ class AppFixtures extends Fixture
         $user10->setPassword($this->passwordHasher->hashPassword($user10, 'tada9'));
         $user10->setCreatedAt(new DateTimeImmutable());
         $manager->persist($user10);
+
+        $today = new DateTime('today');
+        $workday01 = new Workday();
+        $workday01
+            ->setDay($today)
+            ->setUser($user1)
+            ->setAway(false)
+            ->setHomeoffice(false)
+            ->setWorkHours(6)
+            ->setStartHour(9)
+        ;
+        $manager->persist($workday01);
+
+        $workday02 = new Workday();
+        $workday02
+            ->setDay($today)
+            ->setUser($user2)
+            ->setAway(false)
+            ->setHomeoffice(false)
+            ->setWorkHours(8)
+            ->setStartHour(7)
+        ;
+        $manager->persist($workday02);
 
         $manager->flush();
 

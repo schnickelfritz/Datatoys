@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WorkdayRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAILNAME', fields: ['day', 'user'])]
 class Workday
 {
     #[ORM\Id]
@@ -32,6 +33,9 @@ class Workday
 
     #[ORM\Column(nullable: true)]
     private ?int $workHours = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isSuperAway = null;
 
     public function getId(): ?int
     {
@@ -106,6 +110,18 @@ class Workday
     public function setWorkHours(?int $workHours): static
     {
         $this->workHours = $workHours;
+
+        return $this;
+    }
+
+    public function isSuperAway(): ?bool
+    {
+        return $this->isSuperAway;
+    }
+
+    public function setSuperAway(?bool $isSuperAway): static
+    {
+        $this->isSuperAway = $isSuperAway;
 
         return $this;
     }

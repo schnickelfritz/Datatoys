@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\RoleEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email', 'name'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAILNAME', fields: ['email', 'name'])]
 #[UniqueEntity(fields: ['email'], message: 'Email already in use.')]
 #[UniqueEntity(fields: ['name'], message: 'Name already in use.')]
 
@@ -85,6 +86,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return array_unique($roles);
+    }
+    /** @return string[] */
+    public function getRolesLabels(): array
+    {
+        $roles = $this->roles;
+        if (empty($roles)) {
+            return [];
+        }
+        $labels = [];
+        foreach ($roles as $role) {
+            $roleEnum = RoleEnum::tryFrom($role);
+            if ($roleEnum) {
+                $labels[] = $roleEnum->label();
+            }
+        }
+
+        return array_unique($labels);
     }
 
     /**

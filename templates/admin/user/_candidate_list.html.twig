@@ -18,7 +18,7 @@
             </td>
             <th scope="row">{{ user.name }}</th>
             <td>{{ user.email }}</td>
-            <td>{{ user.roles|join(' | ') }}</td>
+            <td>{{ user.rolesLabels|map(label => label|trans)|join(' | ') }}</td>
             <td>{{ user.createdAt ? user.createdAt|date('d.m.y H:i') : '?' }}</td>
             <td>{{ user.inviteSentAt ? user.inviteSentAt|date('d.m.y H:i') : '-' }}</td>
             <td>

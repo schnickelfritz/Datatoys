@@ -9,4 +9,5 @@ class Box
 {
     public string $class = "app-box";
     public string $content;
+    public bool $stickyTop = false;
 }

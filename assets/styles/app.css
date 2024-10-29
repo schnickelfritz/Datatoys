@@ -69,13 +69,13 @@ u {
     text-align: center;
     background-color: var(--cc-dark);
     padding:0.5em;
-    margin: 1em auto 1em auto;
+    margin: 0 auto 0 auto;
 }
 .app-topnav-box {
     text-align: center;
     background-color: var(--cc-dark);
     padding:0.5em;
-    margin: 1em auto 1em auto;
+    margin: 0 auto 0 auto;
 }
 .app-footer-box {
     background-color: var(--cc-dark);
@@ -137,4 +137,14 @@ u {
 }
 .app-bg-highlight-2 {
     background-color:var(--cc-1-darker-1) !important;
+}
+.app-bar-container {
+    border:1px solid var(--cc-1-darker-1);
+    height:1.5rem;
+    border-radius: 5px;
+}
+.app-bar {
+    background-color: var(--cc-1-darker-1);
+    height:100%;
+    padding:0 5px 0 5px;
 }

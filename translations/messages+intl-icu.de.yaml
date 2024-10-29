@@ -77,8 +77,11 @@ planner:
   label:
     weekday: Tag
     date: Datum
+    name: Kollege/Kollegin
     options: Optionen
+    type: A/H/O
     option:
+      superaway: 'Abwesend!'
       away: Abwesend
       office: Office
       home: Home
@@ -89,7 +92,9 @@ menu:
   Candidates: Kandidaten
   Users: Benutzer
   Home: Home
+  'Grid Scope': 'Grid: Scope'
   'My Plan': Mein Arbeitsplan
+  'Our Plan': Einsatzplan
   Login: Anmelden
   You: Dein Account
   Logout: Abmelden
@@ -98,7 +103,8 @@ menu:
   Contact: Kontakt
 optional: optional
 roles:
-  admin: 'Administrator'
+  admin: 'Super-Admin'
+  gridadmin: 'Grid-Admin'
   user_manager: 'User Manager'
   worktime_planner_user: 'Zeitplan-Benutzer/in'
 contact:
@@ -139,4 +145,3 @@ modal:
     submitbutton: 'Ja, Löschen!'
 close_view: 'Abbrechen'
 save: Speichern
-

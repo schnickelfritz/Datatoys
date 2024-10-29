@@ -9,7 +9,7 @@ enum RoleEnum: string
     case ROLE_USERMANAGER = 'ROLE_USERMANAGER';
     case ROLE_WORKTIME_PLANNER = 'ROLE_WORKTIME_PLANNER';
 
-    public function humanReadable(): string
+    public function label(): string
     {
         return match ($this) {
             self::ROLE_ADMIN => 'roles.admin',
@@ -26,7 +26,7 @@ enum RoleEnum: string
     {
         $r = [];
         foreach (self::cases() as $case) {
-            $r[$case->humanReadable()] = $case->value;
+            $r[$case->label()] = $case->value;
         }
 
         return $r;

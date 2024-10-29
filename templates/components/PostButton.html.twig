@@ -1,0 +1,18 @@
+<form
+        class="d-inline"
+        name="{{ formId }}"
+        id="{{ formId }}"
+        method="POST"
+        action="{{ (id == -1) ? path(path) : path(path, {id: id}) }}"
+>
+    <button type="submit" class="btn btn-primary">
+        {% if icon != '' %}
+            <span
+                class="bi-{{ icon }}{{ label == '' ? '' : ' pe-2' }}"
+                {% if title != '' %}
+                    title="{{ title|trans }}"
+                {% endif %}
+            ></span>
+        {% endif %}{{ label|trans }}
+    </button>
+</form>

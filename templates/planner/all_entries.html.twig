@@ -2,20 +2,67 @@
 {% block title %}{{ parent() }} :: {{ 'planner.all_entries.title'|trans }}{% endblock %}
 {% block body %}
     <twig:Box>
+        {% set start_min = 18 %}
+        {% set start_max = 0 %}
+        {% set hours_max = 0 %}
+        {% for entry in existing_entries %}
+            {% if entry.startHour>start_max %}
+                {% set start_max = entry.startHour %}
+            {% endif %}
+            {% if entry.startHour<start_min and entry.startHour is not null %}
+                {% set start_min = entry.startHour %}
+            {% endif %}
+            {% if entry.workHours > hours_max %}
+                {% set hours_max = entry.workHours %}
+            {% endif %}
+        {% endfor %}
+        <div class="app-bg-box py-2">
+            <h2><span class="bi-calendar2-range pe-2"></span>{{ 'planner.all_entries.title'|trans }}</h2>
+        </div>
 
-            <div class="sticky-top app-bg-box py-2">
-                <h2><span class="bi-calendar3 pe-2"></span>{{ 'planner.all_entries.title'|trans }}</h2>
-            </div>
+        <twig:Table headers="{{ [
+            '',
+            'planner.label.date',
+            'planner.label.name',
+            'planner.label.type',
+            'planner.label.start',
+            'planner.label.hours',
+        ] }}" small="true">
+            {% import 'planner/planner_utilities.twig' as utilities %}
 
-            <twig:Table headers="{{ [
-                'planner.label.weekday',
-                'planner.label.date',
-                'planner.label.name',
-                'planner.label.start',
-                'planner.label.hours',
-            ] }}" :stripes="false">
-                {% for day in calendar_days %}
-                {% endfor %}
-            </twig:Table>
+            {% set day_displayed = '' %}
+            {% for entry in existing_entries %}
+                <tr>
+                    <td>
+                        {% if is_granted('ROLE_USERMANAGER') %}
+                            <twig:PostButton
+                                    path="app_admin_planner_away_toggle"
+                                    id="{{ entry.id }}"
+                                    icon="building-x"
+                                    title="planner.label.option.superaway"
+                            />
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="{{ entry.day|date('Ymd') == day_displayed ? 'd-none' : '' }}">
+                            {{ entry.day|date('D, d.m.y') }}
+                        </div>
+                    </td>
+                    <td>
+                        {{ entry.user.name }}
+                    </td>
+                    <td>
+                        {{ utilities.type(entry) }}
+                    </td>
+                    <td>
+                        {{ utilities.start(entry.away, entry.startHour, start_min, start_max) }}
+                    </td>
+                    <td>
+                        {{ utilities.hours_bar(entry.away, entry.workHours, hours_max) }}
+                    </td>
+                </tr>
+                {% set day_displayed = entry.day|date('Ymd') %}
+            {% endfor %}
+        </twig:Table>
     </twig:Box>
 {% endblock %}

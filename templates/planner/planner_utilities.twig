@@ -1,0 +1,37 @@
+
+{% macro type(entry) %}
+    {% if entry.away %}
+        <span class="badge text-bg-danger">{{ 'planner.label.option.away'|trans }}</span>
+    {% elseif  entry.superAway == true %}
+        <span class="badge text-bg-danger">{{ 'planner.label.option.superaway'|trans }}</span>
+    {% elseif entry.homeoffice %}
+        <span class="badge text-bg-info">{{ 'planner.label.option.home'|trans }}</span>
+    {% else %}
+        <span class="badge text-bg-success">{{ 'planner.label.option.office'|trans }}</span>
+    {% endif %}
+{% endmacro %}
+
+{% macro start(away, hour, min, max) %}
+    {% if away %}
+    {% elseif hour is null %}
+        <span class="badge text-bg-info">?</span>
+    {% else %}
+        {% for i in range(min, max) %}
+            <span class="badge text-bg-{{ i == hour ? 'info' : 'secondary' }}">{{ i }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro hours_bar(away, hours, max) %}
+    {% if away %}
+    {% elseif hours is null %}
+        <span class="badge text-bg-info">?</span>
+    {% else %}
+        <div class="app-bar-container">
+            {% set percent = hours/max*100 %}
+            <div class="app-bar" style="width:{{ percent }}%">
+                {{ hours }}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

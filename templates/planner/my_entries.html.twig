@@ -1,23 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} :: {{ 'planner.my_entries.title'|trans }}{% endblock %}
 {% block body %}
-    <twig:Box>
-        <form name="createWorkdays" method="POST" action="{{ path('app_planner_crud') }}">
+    <form name="createWorkdays" method="POST" action="{{ path('app_planner_crud') }}">
 
-            <div class="sticky-top app-bg-box py-2">
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <h2><span class="bi-calendar3 pe-2"></span>{{ 'planner.my_entries.title'|trans }}</h2>
-                    </div>
-                    <div class="col-12 col-lg-6 text-end">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="bi-floppy-fill pe-2"></span>{{ 'save'|trans }}
-                        </button>
-                    </div>
+        <twig:Box stickyTop>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <h2><span class="bi-calendar3 pe-2"></span>{{ 'planner.my_entries.title'|trans }}</h2>
                 </div>
-
+                <div class="col-12 col-lg-6 text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="bi-floppy-fill pe-2"></span>{{ 'save'|trans }}
+                    </button>
+                </div>
             </div>
+        </twig:Box>
 
+        <twig:Box>
             <twig:Table headers="{{ [
                 'planner.label.date',
                 'planner.label.options',
@@ -35,32 +34,44 @@
                         {% set work_hours = existing_entries[day_ymd].workHours|default(null) %}
                         {% set option = existing_entries[day_ymd].isAway
                             ? 'away'
-                            : (existing_entries[day_ymd].isHomeoffice ? 'home' : 'office')
-                        %}
+                            : (existing_entries[day_ymd].isHomeoffice ? 'home' : 'office') %}
                     {% else %}
                         {% set start_hour = null %}
                         {% set work_hours = null %}
                         {% set option = 'none' %}
                     {% endif %}
-                    <tr>
+                    {% set details_class = (option == 'none' or option == 'away') ? 'd-none' : '' %}
+                    <tr {{ stimulus_controller('planner') }}>
                         <td class="{{ weekdaynumber > 5 ? 'app-bg-highlight-2' : '' }}">
                             <b>{{ day|date('D') }}</b> | {{ day|date('d.m.y') }}
                         </td>
                         <td class="{{ weekdaynumber > 5 ? 'app-bg-highlight-2' : '' }}">
-                            {{ planner_form.radio(day_ymd, 1, 'none', option, "", 'ban')}}
-                            {{ planner_form.radio(day_ymd, 2, 'away', option, "planner.label.option.away")}}
-                            {{ planner_form.radio(day_ymd, 3, 'office', option, "planner.label.option.office")}}
-                            {{ planner_form.radio(day_ymd, 4, 'home', option, "planner.label.option.home")}}
+                            {{ planner_form.radio(day_ymd, 1, 'none', option, "", 'ban') }}
+                            {{ planner_form.radio(day_ymd, 2, 'away', option, "planner.label.option.away") }}
+                            {{ planner_form.radio(day_ymd, 3, 'office', option, "planner.label.option.office") }}
+                            {{ planner_form.radio(day_ymd, 4, 'home', option, "planner.label.option.home") }}
                         </td>
                         <td class="{{ weekdaynumber > 5 ? 'app-bg-highlight-2' : '' }}">
-                            {{ planner_form.range(day_ymd, 'startHour', start_hour, 6, 18, "?") }}
+                            <div {{ stimulus_target('planner', 'detailsStart') }} class="{{ details_class }}">
+                                {{ planner_form.range(day_ymd, 'startHour', start_hour, 6, 18, "?") }}
+                            </div>
                         </td>
                         <td class="{{ weekdaynumber > 5 ? 'app-bg-highlight-2' : '' }}">
-                            {{ planner_form.range(day_ymd, 'workHours', work_hours, 1, 10, "?") }}
+                            <div {{ stimulus_target('planner', 'detailsHours') }} class="{{ details_class }}">
+                                {{ planner_form.range(day_ymd, 'workHours', work_hours, 1, 10, "?") }}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
             </twig:Table>
-        </form>
-    </twig:Box>
+
+            <div class="pt-2 text-end">
+                <button type="submit" class="btn btn-primary">
+                    <span class="bi-floppy-fill pe-2"></span>{{ 'save'|trans }}
+                </button>
+            </div>
+
+        </twig:Box>
+    </form>
+
 {% endblock %}
