@@ -25,9 +25,16 @@ class Gridcol
     #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'x', orphanRemoval: true)]
     private Collection $gridcells;
 
+    /**
+     * @var Collection<int, GridscopeCol>
+     */
+    #[ORM\OneToMany(targetEntity: GridscopeCol::class, mappedBy: 'col', orphanRemoval: true)]
+    private Collection $gridscopeCols;
+
     public function __construct()
     {
         $this->gridcells = new ArrayCollection();
+        $this->gridscopeCols = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +78,36 @@ class Gridcol
             // set the owning side to null (unless already changed)
             if ($gridcell->getX() === $this) {
                 $gridcell->setX(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GridscopeCol>
+     */
+    public function getGridscopeCols(): Collection
+    {
+        return $this->gridscopeCols;
+    }
+
+    public function addGridscopeCol(GridscopeCol $gridscopeCol): static
+    {
+        if (!$this->gridscopeCols->contains($gridscopeCol)) {
+            $this->gridscopeCols->add($gridscopeCol);
+            $gridscopeCol->setCol($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGridscopeCol(GridscopeCol $gridscopeCol): static
+    {
+        if ($this->gridscopeCols->removeElement($gridscopeCol)) {
+            // set the owning side to null (unless already changed)
+            if ($gridscopeCol->getCol() === $this) {
+                $gridscopeCol->setCol(null);
             }
         }
 

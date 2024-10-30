@@ -19,9 +19,6 @@ up:
 	symfony console doctrine:fixtures:load -n
 	symfony console cache:clear
 	symfony local:server:start -d
-setup:
-	composer install
-	symfony console importmap:install
 down:
 	docker compose down
 	symfony local:server:stop
@@ -32,5 +29,6 @@ cs:
 fix:
 	symfony console doctrine:database:drop --if-exists -n --force
 	symfony console doctrine:database:create -n
+	symfony console doctrine:migrations:diff -n
 	symfony console doctrine:migrations:migrate -n
 	symfony console doctrine:fixtures:load -n
