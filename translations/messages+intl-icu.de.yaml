@@ -87,12 +87,61 @@ planner:
       home: Home
     start: Ab (Uhrzeit)
     hours: Arbeitsstunden
+grid:
+  scope:
+    list:
+      title: Scope-Verzeichnis
+    delete:
+      title: Scope löschen
+      confirm_text: 'Willst du den Scope <b>{name}</b> wirklich löschen? Alle mit diesem Scope verknüpften Regeln werden entfernt!'
+      flash: 'Scope {name} gelöscht'
+    create:
+      title: Scope erstellen
+      submitbutton: Scope erstellen
+    update:
+      title: Scope ändern
+      submitbutton: Ändern
+    label:
+      update: Ändern
+      name: Scope-Name
+      key: Schlüssel
+      description: Beschreibung
+  col:
+    list:
+      title: Felder-Verzeichnis
+    label:
+      update: Ändern
+      names: Feldnamen
+      name: Feld
+    create:
+      title: Felder
+      submitbutton: Neue Felder erstellen
+  pool:
+    list:
+      title: Pool-Verzeichnis
+    delete:
+      title: Pool löschen
+      confirm_text: 'Willst du den Pool <b>{name}</b> wirklich löschen? Alle mit diesem Pool verknüpften Einträge (Zeilen, Werte) werden entfernt!'
+      flash: 'Pool {name} gelöscht'
+    submitbutton: Neuer Pool
+    update:
+      title: Pool ändern
+      submitbutton: Ändern
+    label:
+      update: Ändern
+      name: Name des Pools
+      scope: Scope
+    create:
+      title: Pool erstellen
 menu:
   Admin: Admin
   Candidates: Kandidaten
   Users: Benutzer
   Home: Home
-  'Grid Scope': 'Grid: Scope'
+  'Grid Hub': 'Grid'
+  'Grid Col': 'Felder'
+  'Grid Pool': 'Pool'
+  'Grid Scope': 'Scope'
   'My Plan': Mein Arbeitsplan
   'Our Plan': Einsatzplan
   Login: Anmelden

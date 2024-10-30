@@ -16,28 +16,13 @@ class GridscopeRepository extends ServiceEntityRepository
         parent::__construct($registry, Gridscope::class);
     }
 
-//    /**
-//     * @return Gridscope[] Returns an array of Gridscope objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function choices(): array
+    {
+        $choices = ['-' => null];
+        foreach ($this->findAll() as $scope) {
+            $choices[$scope->getName()] = $scope;
+        }
 
-//    public function findOneBySomeField($value): ?Gridscope
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $choices;
+    }
 }

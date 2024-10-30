@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} :: {{ 'grid.scope.create.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
 {% block body %}
     <twig:Box>
         <twig:Row rowClass="mb-4">

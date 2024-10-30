@@ -1,0 +1,17 @@
+<twig:Table headers="{{ [
+    'grid.col.label.update',
+    'grid.col.label.name',
+] }}" small>
+    {% for column in columns %}
+        <tr
+            class="{% if col_selected|default() and col_selected.id == column.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_grid_pool_update', {'id': column.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <th scope="row">{{ column.name }}</th>
+        </tr>
+    {% endfor %}
+</twig:Table>

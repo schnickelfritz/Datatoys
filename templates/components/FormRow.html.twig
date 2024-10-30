@@ -24,11 +24,14 @@
                             id="{{ choice.vars.id }}"
                             name="{{ choice.vars.full_name }}"
                             class="btn-check" value="{{ choice.vars.value }}"
-                            {% if (field.vars.multiple and choice.vars.value in field.vars.value) or (not field.vars.multiple and field.vars.value == choice.vars.value) %}
+                            {% if (field.vars.multiple and choice.vars.value in field.vars.value)
+                                or (not field.vars.multiple and field.vars.value == choice.vars.value) %}
                                 checked="checked"
                             {% endif %}
                     >
-                    <label class="btn btn-outline-info" for="{{ choice.vars.id }}">{{ choice.vars.label|trans }}</label>
+                    <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
+                        {% if translate %}{{ choice.vars.label|trans }}{% else %}{{ choice.vars.label }}{% endif %}
+                    </label>
                 {% endfor %}
             </div>
 

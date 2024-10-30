@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.pool.update.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap-fill" />{{ 'grid.pool.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_pool }}"/>
+        <twig:FormRow field="{{ form_pool.name }}"/>
+        <twig:FormRow field="{{ form_pool.scope }}" toggle />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="pencil"
+                field="{{ form_pool.submit }}"
+                label="grid.pool.update.submitbutton"
+                cancelPath="app_grid_pool_create"
+                modalId="pool_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
+        {{ form_end(form_pool) }}
+        <twig:ModalDeleteFormContainer
+                id="pool_delete"
+                title="{{ 'grid.pool.delete.title' }}"
+                path="app_grid_pool_delete"
+                deleteId="{{ pool_selected.id }}"
+        >
+            {{ 'grid.pool.delete.confirm_text'|trans({'%name%': pool_selected.name}, 'messages')|raw }}
+        </twig:ModalDeleteFormContainer>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.pool.list.title">
+            {{ include('grid/_pool_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

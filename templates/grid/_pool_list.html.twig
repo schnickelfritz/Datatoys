@@ -1,0 +1,19 @@
+<twig:Table headers="{{ [
+    'grid.pool.label.update',
+    'grid.pool.label.name',
+    'grid.pool.label.scope',
+] }}" small>
+    {% for pool in pools %}
+        <tr
+            class="{% if pool_selected|default() and pool_selected.id == pool.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_grid_pool_update', {'id': pool.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <th scope="row">{{ pool.name }}</th>
+            <td>{% if pool.scope %}{{ pool.scope.name }}{% endif %}</td>
+        </tr>
+    {% endfor %}
+</twig:Table>

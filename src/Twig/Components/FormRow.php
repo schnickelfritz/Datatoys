@@ -14,4 +14,5 @@ class FormRow
     public string $gridThreshold = 'lg';
     public int $labelWidth = 3;
     public bool $toggle = false;
+    public bool $translate = false;
 }

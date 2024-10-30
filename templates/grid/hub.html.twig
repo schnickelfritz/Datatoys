@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.hub.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap" />{{ 'grid.hub.title'|trans }}</h1>
+        </twig:Row>
+    </twig:Box>
+{% endblock %}
