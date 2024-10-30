@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\User;
 
 use App\Entity\User;
 use App\Entity\UserCandidate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use function Symfony\Component\Clock\now;
 
 final readonly class CreateUser
@@ -30,5 +33,4 @@ final readonly class CreateUser
         $this->entityManager->remove($userCandidate);
         $this->entityManager->flush();
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -29,5 +31,4 @@ final readonly class UserLoginController
             'error' => $error,
         ]));
     }
-
 }

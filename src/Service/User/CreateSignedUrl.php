@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\User;
 
 use App\Entity\UserCandidate;
@@ -9,8 +11,7 @@ final readonly class CreateSignedUrl
 {
     public function __construct(
         private VerifyEmailHelperInterface $verifyEmailHelper,
-    )
-    {
+    ) {
     }
 
     public function getSignedUrl(UserCandidate $userCandidate, string $routeName): string

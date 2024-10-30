@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
@@ -18,7 +20,6 @@ class PostButton
 
     public function getFormId(): string
     {
-        return ($this->formId === null) ? 'postbutton_' . uniqid() :  $this->formId;
+        return ($this->formId === null) ? 'postbutton_' . uniqid() : $this->formId;
     }
-
 }

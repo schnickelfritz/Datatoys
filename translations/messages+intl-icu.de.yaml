@@ -131,6 +131,7 @@ flash:
   fail:
     invalid_inputs: 'Ungültige Eingaben'
     invalid_url: 'Ungültiger Link (URL)'
+    taken: 'Wird bereits verwendet'
     email_not_sent: 'Beim Versuch, eine E-Mail zu senden, ist ein Fehler aufgetreten'
   success:
     create: 'Eintrag gespeichert'

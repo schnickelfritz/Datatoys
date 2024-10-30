@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User;
@@ -22,9 +24,9 @@ final readonly class MeDeleteController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
+        private EntityManagerInterface $entityManager,
         private Me $me,
-        private UrlGeneratorInterface   $urlGenerator,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -34,7 +36,7 @@ final readonly class MeDeleteController
         if ($user instanceof User) {
             $this->entityManager->remove($user);
             $this->entityManager->flush();
-            //TODO 2024-10-23 ME: Fehler vermeiden, der dadurch entsteht, dass gelöschter User noch authentifiziert gilt (wahrscheinlich)
+            // TODO 2024-10-23 ME: Fehler vermeiden, der dadurch entsteht, dass gelöschter User noch authentifiziert gilt (wahrscheinlich)
             $this->addFlash($request, 'success', 'flash.success.bye');
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\User;
@@ -23,10 +25,10 @@ final readonly class AdminUserDeleteController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
+        private EntityManagerInterface $entityManager,
         private Me $me,
-        private UrlGeneratorInterface   $urlGenerator,
-        private TranslatorInterface     $translator,
+        private UrlGeneratorInterface $urlGenerator,
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -40,9 +42,8 @@ final readonly class AdminUserDeleteController
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
-        $this->addFlash($request, 'success', $this->translator->trans('admin.user.delete.flash.success', ['name'=>$user->getName(), 'email'=>$user->getEmail()]));
+        $this->addFlash($request, 'success', $this->translator->trans('admin.user.delete.flash.success', ['name' => $user->getName(), 'email' => $user->getEmail()]));
 
         return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
-
     }
 }

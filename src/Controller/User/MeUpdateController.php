@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User;
@@ -25,11 +27,11 @@ final readonly class MeUpdateController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
-        private FormFactoryInterface    $formFactory,
-        private UrlGeneratorInterface   $urlGenerator,
+        private EntityManagerInterface $entityManager,
+        private FormFactoryInterface $formFactory,
+        private UrlGeneratorInterface $urlGenerator,
         private Me $me,
-        private Environment             $twig,
+        private Environment $twig,
     ) {
     }
 
@@ -43,10 +45,11 @@ final readonly class MeUpdateController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //TODO 2024-10-23 ME: neues Passwort setzen
+            // TODO 2024-10-23 ME: neues Passwort setzen
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             $this->addFlash($request, 'success', 'flash.success.update');
+
             return new RedirectResponse($this->urlGenerator->generate('app_me_update'));
         }
 
@@ -55,5 +58,4 @@ final readonly class MeUpdateController
             'user' => $user,
         ]));
     }
-
 }

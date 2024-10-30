@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Enum\RoleEnum;
 use App\Repository\UserCandidateRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserCandidateRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email', 'name'])]
-#[UniqueEntity(fields: ['email'], message: 'Email already in use.')]
-#[UniqueEntity(fields: ['name'], message: 'Name already in use.')]
-
+#[UniqueEntity(fields: ['email'], message: 'flash.fail.taken')]
+#[UniqueEntity(fields: ['name'], message: 'flash.fail.taken')]
 class UserCandidate
 {
     #[ORM\Id]
@@ -32,10 +34,10 @@ class UserCandidate
     private ?array $roles = null;
 
     #[ORM\Column(nullable: true)]
-    private \DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $inviteSentAt = null;
+    private ?DateTimeImmutable $inviteSentAt = null;
 
     public function getId(): ?int
     {
@@ -105,24 +107,24 @@ class UserCandidate
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeImmutable
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getInviteSentAt(): ?\DateTimeImmutable
+    public function getInviteSentAt(): ?DateTimeImmutable
     {
         return $this->inviteSentAt;
     }
 
-    public function setInviteSentAt(?\DateTimeImmutable $inviteSentAt): static
+    public function setInviteSentAt(?DateTimeImmutable $inviteSentAt): static
     {
         $this->inviteSentAt = $inviteSentAt;
 

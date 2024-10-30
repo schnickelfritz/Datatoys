@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\AdminWorkday;
 
 use App\Entity\Workday;
@@ -21,10 +23,9 @@ final readonly class AdminWorkdayToggleSuperAwayController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
-        private UrlGeneratorInterface   $urlGenerator,
-    )
-    {
+        private EntityManagerInterface $entityManager,
+        private UrlGeneratorInterface $urlGenerator,
+    ) {
     }
 
     public function __invoke(Request $request, Workday $workday): Response
@@ -38,6 +39,7 @@ final readonly class AdminWorkdayToggleSuperAwayController
             $this->entityManager->flush();
             $this->addFlash($request, 'success', 'flash.success.update');
         }
+
         return new RedirectResponse($this->urlGenerator->generate('app_planner_all_entries'));
     }
 }

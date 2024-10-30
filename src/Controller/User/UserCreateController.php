@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\UserCandidate;
@@ -8,9 +10,9 @@ use App\Repository\UserCandidateRepository;
 use App\Service\User\CreateUser;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,10 +32,9 @@ final readonly class UserCreateController
         private VerifyEmailHelperInterface $verifyEmailHelper,
         private UserCandidateRepository $userCandidateRepository,
         private UrlGeneratorInterface $urlGenerator,
-        private FormFactoryInterface    $formFactory,
-        private Environment             $twig,
-    )
-    {
+        private FormFactoryInterface $formFactory,
+        private Environment $twig,
+    ) {
     }
 
     public function __invoke(Request $request): Response

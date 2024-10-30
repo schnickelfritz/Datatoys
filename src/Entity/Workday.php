@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\WorkdayRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,11 +28,11 @@ class Workday
     private ?bool $isHomeoffice = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $day = null;
+    private ?DateTimeInterface $day = null;
 
     #[ORM\ManyToOne(inversedBy: 'workdays')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $workHours = null;
@@ -78,24 +81,24 @@ class Workday
         return $this;
     }
 
-    public function getDay(): ?\DateTimeInterface
+    public function getDay(): ?DateTimeInterface
     {
         return $this->day;
     }
 
-    public function setDay(\DateTimeInterface $day): static
+    public function setDay(DateTimeInterface $day): static
     {
         $this->day = $day;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

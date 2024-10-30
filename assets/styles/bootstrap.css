@@ -100,9 +100,9 @@ textarea.app-textarea-small {
     border-radius: 0;
 }
 .invalid-feedback {
+    font-size: 0.7em;
     margin-top:-7px;
-    margin-bottom:0.25rem;
-    color:var(--cc-alert);
+    color:var(--cc-invalid);
 }
 .table-active {
     --bs-table-active-bg: var(--cc-2-darker-1);

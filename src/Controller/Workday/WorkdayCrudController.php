@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Controller\Workday;
+declare(strict_types=1);
 
+namespace App\Controller\Workday;
 
 use App\Entity\User;
 use App\Service\User\Me;
 use App\Service\Workday\CrudWorkdayInputs;
 use App\Trait\FlashMessageTrait;
 use DateTime;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -28,9 +29,8 @@ final readonly class WorkdayCrudController
         private Me $me,
         private CrudWorkdayInputs $crudWorkdayInputs,
         private UrlGeneratorInterface $urlGenerator,
-        private TranslatorInterface     $translator,
-    )
-    {
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function __invoke(Request $request): Response
@@ -48,6 +48,11 @@ final readonly class WorkdayCrudController
         return new RedirectResponse($this->urlGenerator->generate('app_planner_my_entries'));
     }
 
+    /**
+     * @param Request $request
+     * @param array{'create':int, 'update':int, 'delete':int} $counts
+     * @return void
+     */
     private function flash(Request $request, array $counts): void
     {
         $sum = array_sum($counts);

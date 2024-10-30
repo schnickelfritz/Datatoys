@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.scope.create.title'|trans }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap" />{{ 'grid.scope.create.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_scope }}"/>
+        <twig:FormRow field="{{ form_scope.name }}" />
+        <twig:FormRow field="{{ form_scope.scopeKey }}" />
+        <twig:FormRow field="{{ form_scope.description }}" />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="plus-circle"
+                field="{{ form_scope.submit }}"
+        />
+        {{ form_end(form_scope) }}
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.scope.list.title">
+            {{ include('grid/_scope_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

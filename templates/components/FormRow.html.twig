@@ -7,6 +7,10 @@
         {% else %}
             <label for="{{ field.vars.id }}" class="label">{{ label }}</label>
         {% endif %}
+
+        {% if field.vars.errors is not empty %}
+            {{ form_errors(field) }}
+        {% endif %}
     </div>
     <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }} app-readable-width">
         {% if toggle and ('choice' in field.vars.block_prefixes) %}
@@ -44,5 +48,6 @@
                 {{ form_widget(field) }}
             {% endif %}
         {% endif %}
+
     </div>
 </div>

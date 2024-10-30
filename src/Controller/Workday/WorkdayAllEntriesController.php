@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Workday;
 
-use App\Entity\User;
 use App\Repository\WorkdayRepository;
-use App\Service\Datetime\MakeDaylist;
-use App\Service\User\Me;
 use DateTime;
-use DateTimeInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
 
@@ -22,12 +18,10 @@ use Twig\Environment;
 #[IsGranted('ROLE_WORKTIME_PLANNER')]
 final readonly class WorkdayAllEntriesController
 {
-
     public function __construct(
         private WorkdayRepository $workdayRepository,
         private Environment $twig,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): Response
@@ -39,6 +33,4 @@ final readonly class WorkdayAllEntriesController
             'existing_entries' => $existingEntries,
         ]));
     }
-
-
 }

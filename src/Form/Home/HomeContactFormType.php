@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form\Home;
 
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +15,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class HomeContactFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $choices = [
@@ -34,14 +35,14 @@ class HomeContactFormType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(['message' => 'Your Message must not be empty!']),
-                ]
+                ],
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'contact.label.email',
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'optional',
-                ]
+                ],
             ])
             ->add('about', ChoiceType::class, [
                 'label' => 'contact.label.about',
@@ -61,6 +62,6 @@ class HomeContactFormType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'contact.submitbutton',
             ])
-            ;
+        ;
     }
 }

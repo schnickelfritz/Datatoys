@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\UserCandidate;
@@ -18,6 +20,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
+
+use function sprintf;
 use function Symfony\Component\Clock\now;
 
 #[AsController]
@@ -25,9 +29,8 @@ use function Symfony\Component\Clock\now;
 #[Route('/admin/user/create-candidate', name: 'app_admin_user_candidate_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class AdminUserCandidateCreateController
 {
-
     /*
-     * User Candidates are like Users without password. They cannot login, but can receive an invitation for
+     * User Candidates are like Users without a password. They cannot login, but can receive an invitation for
      * confirmation. If they set a valid password, they become a "real" User, who are able to login: the only way
      * a real User can be created.
      */
@@ -35,13 +38,13 @@ final readonly class AdminUserCandidateCreateController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
+        private EntityManagerInterface $entityManager,
         private UserCandidateRepository $userCandidateRepository,
         private UserRepository $userRepository,
-        private FormFactoryInterface    $formFactory,
-        private UrlGeneratorInterface   $urlGenerator,
-        private CheckUserCandidate      $checkUserCandidate,
-        private Environment             $twig,
+        private FormFactoryInterface $formFactory,
+        private UrlGeneratorInterface $urlGenerator,
+        private CheckUserCandidate $checkUserCandidate,
+        private Environment $twig,
     ) {
     }
 
@@ -72,7 +75,5 @@ final readonly class AdminUserCandidateCreateController
             'candidates' => $candidates,
             'users' => $users,
         ]));
-
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\UserCandidate;
@@ -19,6 +21,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
 
+use function sprintf;
+
 #[AsController]
 #[IsGranted('ROLE_USERMANAGER')]
 #[Route('/admin/user/update-candidate/{id}', name: 'app_admin_user_candidate_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
@@ -27,13 +31,13 @@ final readonly class AdminUserCandidateUpdateController
     use FlashMessageTrait;
 
     public function __construct(
-        private EntityManagerInterface  $entityManager,
+        private EntityManagerInterface $entityManager,
         private UserCandidateRepository $userCandidateRepository,
         private UserRepository $userRepository,
-        private FormFactoryInterface    $formFactory,
-        private UrlGeneratorInterface   $urlGenerator,
-        private CheckUserCandidate      $checkUserCandidate,
-        private Environment             $twig,
+        private FormFactoryInterface $formFactory,
+        private UrlGeneratorInterface $urlGenerator,
+        private CheckUserCandidate $checkUserCandidate,
+        private Environment $twig,
     ) {
     }
 
@@ -64,5 +68,4 @@ final readonly class AdminUserCandidateUpdateController
             'candidate_selected' => $userCandidate,
         ]));
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Workday;
 
 use App\Entity\User;
@@ -22,15 +24,13 @@ use Twig\Environment;
 #[IsGranted('ROLE_WORKTIME_PLANNER')]
 final readonly class WorkdayMyEntriesController
 {
-
     public function __construct(
         private WorkdayRepository $workdayRepository,
-        private UrlGeneratorInterface   $urlGenerator,
+        private UrlGeneratorInterface $urlGenerator,
         private MakeDaylist $makeDaylist,
         private Me $me,
         private Environment $twig,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): Response
@@ -58,5 +58,4 @@ final readonly class WorkdayMyEntriesController
     {
         return ($dateTime instanceof DateTime) ? $dateTime->format('Ymd') : '';
     }
-
 }

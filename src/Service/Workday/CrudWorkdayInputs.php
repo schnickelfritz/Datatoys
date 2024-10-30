@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Workday;
 
 use App\Entity\User;
@@ -9,16 +11,22 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
+use function in_array;
+
 final readonly class CrudWorkdayInputs
 {
-
     public function __construct(
         private WorkdayRepository $workdayRepository,
         private EntityManagerInterface $entityManager,
-    )
-    {
+    ) {
     }
 
+    /**
+     * @param array<string, array<string, array<string, string>>> $inputs
+     * @param User $user
+     * @param DateTime $today
+     * @return array{'create':int, 'update':int, 'delete':int}
+     */
     public function crudByInputs(array $inputs, User $user, DateTime $today): array
     {
         $counts = ['create' => 0, 'update' => 0, 'delete' => 0];
@@ -42,6 +50,14 @@ final readonly class CrudWorkdayInputs
         return $counts;
     }
 
+    /**
+     * @param string $dayYmd
+     * @param User $user
+     * @param Workday|null $existingEntry
+     * @param array<string, string> $newEntry
+     * @param array{'create':int, 'update':int, 'delete':int} $counts
+     * @return array{'create':int, 'update':int, 'delete':int}
+     */
     private function crudByEntry(string $dayYmd, User $user, ?Workday $existingEntry, array $newEntry, array $counts): array
     {
         $option = $this->sanitizedOption($newEntry['option']); // none, away, office, home
@@ -66,7 +82,6 @@ final readonly class CrudWorkdayInputs
             $counts['update'] += $this->update($existingEntry, $option, $newEntry);
         }
 
-
         return $counts;
     }
 
@@ -77,6 +92,13 @@ final readonly class CrudWorkdayInputs
         return 1;
     }
 
+    /**
+     * @param User $user
+     * @param string $dayYmd
+     * @param string $option
+     * @param array<string, string> $newEntry
+     * @return int
+     */
     private function create(User $user, string $dayYmd, string $option, array $newEntry): int
     {
         $startHour = $this->sanitizeStartHour($newEntry['startHour'], $option);
@@ -97,6 +119,12 @@ final readonly class CrudWorkdayInputs
         return 1;
     }
 
+    /**
+     * @param Workday $existingEntry
+     * @param string $option
+     * @param array<string, string> $newEntry
+     * @return int
+     */
     private function update(Workday $existingEntry, string $option, array $newEntry): int
     {
         $startHour = $this->sanitizeStartHour($newEntry['startHour'], $option);
@@ -149,7 +177,8 @@ final readonly class CrudWorkdayInputs
         if (in_array($option, ['none', 'away'])) {
             return null;
         }
-        $int = intval($startHour);
+        $int = (int) $startHour;
+
         return ($int >= 6 && $int <= 18) ? $int : null;
     }
 
@@ -158,7 +187,8 @@ final readonly class CrudWorkdayInputs
         if (in_array($option, ['none', 'away'])) {
             return null;
         }
-        $int = intval($workHours);
+        $int = (int) $workHours;
+
         return ($int >= 1 && $int <= 10) ? $int : null;
     }
 
@@ -166,5 +196,4 @@ final readonly class CrudWorkdayInputs
     {
         return ($dateTime instanceof DateTime) ? $dateTime->format('Ymd') : '';
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form\User;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,7 +13,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserCreateFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -34,6 +35,6 @@ class UserCreateFormType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'user.create.submitbutton',
             ])
-            ;
+        ;
     }
 }

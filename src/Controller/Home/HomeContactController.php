@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Home;
 
 use App\Form\Home\HomeContactFormType;
@@ -19,7 +21,6 @@ use Twig\Environment;
 #[Route('/contact', name: 'app_contact', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class HomeContactController
 {
-
     /*
      * Let any user send an email message to the app admin email address
      */
@@ -45,8 +46,9 @@ final readonly class HomeContactController
                 $this->formStringValue($form, 'contactEmail'),
                 $this->formStringValue($form, 'about'),
             );
-            //if ($form->sendcopy) { $this->contactEmailCopy->send(message, contactEmail) }
+            // if ($form->sendcopy) { $this->contactEmailCopy->send(message, contactEmail) }
             $this->addFlash($request, 'success', 'Your message was received.');
+
             return new RedirectResponse($this->urlGenerator->generate('app_contact'));
         }
 
@@ -54,5 +56,4 @@ final readonly class HomeContactController
             'form_contact' => $form->createView(),
         ]));
     }
-
 }

@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Form\User;
+namespace App\Form\Grid;
 
-use App\Enum\RoleEnum;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class UserFormType extends AbstractType
+class GridscopeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'admin.user.label.name',
+                'label' => 'grid.scope.label.name',
+                'required' => true,
                 'attr' => [
                     'focus' => true,
                 ],
@@ -27,21 +26,22 @@ class UserFormType extends AbstractType
                     new NotBlank(['message' => 'The Name must not be empty!']),
                 ],
             ])
-            ->add('email', EmailType::class, [
-                'label' => 'admin.user.label.email',
+            ->add('scopeKey', TextType::class, [
+                'label' => 'grid.scope.label.key',
+                'required' => true,
                 'constraints' => [
                     new NotBlank(['message' => 'The Name must not be empty!']),
                 ],
             ])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'admin.user.label.roles',
-                'choices' => RoleEnum::all(),
-                'multiple' => true,
-                'expanded' => true,
-                'required' => true,
+            ->add('description', TextareaType::class, [
+                'label' => 'grid.scope.label.description',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'optional',
+                ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'admin.user.create.submitbutton',
+                'label' => 'grid.scope.create.submitbutton',
             ])
         ;
     }

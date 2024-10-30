@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\AdminUser;
 
 use App\Entity\UserCandidate;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 use function Symfony\Component\Clock\now;
 
 #[AsController]
@@ -20,13 +23,12 @@ use function Symfony\Component\Clock\now;
 #[Route('/admin/user/invite-candidate/{id}', name: 'app_admin_user_candidate_invite', methods: [Request::METHOD_GET])]
 final readonly class AdminUserCandidateInviteController
 {
-
     use FlashMessageTrait;
 
     public function __construct(
         private SendInviteEmail $sendInviteEmail,
-        private EntityManagerInterface  $entityManager,
-        private UrlGeneratorInterface   $urlGenerator,
+        private EntityManagerInterface $entityManager,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -45,5 +47,4 @@ final readonly class AdminUserCandidateInviteController
 
         return new RedirectResponse($this->urlGenerator->generate('app_admin_user_list'));
     }
-
 }

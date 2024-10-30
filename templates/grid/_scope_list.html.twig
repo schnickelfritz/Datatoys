@@ -1,0 +1,21 @@
+<twig:Table headers="{{ [
+    'grid.scope.label.update',
+    'grid.scope.label.name',
+    'grid.scope.label.key',
+    'grid.scope.label.description',
+] }}">
+    {% for scope in scopes %}
+        <tr
+            class="{% if scope_selected|default() and scope_selected.id == scope.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_grid_scope_update', {'id': scope.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <th scope="row">{{ scope.name }}</th>
+            <td>{{ scope.scopeKey }}</td>
+            <td>{{ scope.description }}</td>
+        </tr>
+    {% endfor %}
+</twig:Table>

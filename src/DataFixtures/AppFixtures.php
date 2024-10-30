@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Entity\UserCandidate;
 use App\Entity\Workday;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use DateTimeImmutable;
+
 use function Symfony\Component\Clock\now;
 
 class AppFixtures extends Fixture
@@ -26,7 +29,8 @@ class AppFixtures extends Fixture
             ->setName('Bernd B')
             ->setEmail('bernd@test.de')
             ->setRoles(['ROLE_WORKTIME_PLANNER'])
-            ->setCreatedAt(now());
+            ->setCreatedAt(now())
+        ;
         $manager->persist($candidate1);
 
         $user1 = new User();
@@ -132,6 +136,5 @@ class AppFixtures extends Fixture
         $manager->persist($workday02);
 
         $manager->flush();
-
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -7,6 +9,8 @@ use App\Entity\Workday;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function is_array;
 
 /**
  * @extends ServiceEntityRepository<Workday>
@@ -62,6 +66,6 @@ class WorkdayRepository extends ServiceEntityRepository
             ->setParameter('sinceday', $sinceDay)
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 }

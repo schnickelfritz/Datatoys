@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\User;
 
 use App\Entity\User;
@@ -8,7 +10,6 @@ use App\Repository\UserRepository;
 
 final readonly class CheckUserCandidate
 {
-
     public function __construct(
         private UserRepository $userRepository,
     ) {
@@ -33,11 +34,11 @@ final readonly class CheckUserCandidate
 
     private function userByEmail(string $email): ?User
     {
-        return $this->userRepository->findOneBy(['email'=>$email]);
+        return $this->userRepository->findOneBy(['email' => $email]);
     }
 
     private function userByName(string $name): ?User
     {
-        return $this->userRepository->findOneBy(['name'=>$name]);
+        return $this->userRepository->findOneBy(['name' => $name]);
     }
 }

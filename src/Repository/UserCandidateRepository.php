@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\UserCandidate;
@@ -15,5 +17,4 @@ class UserCandidateRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, UserCandidate::class);
     }
-
 }
