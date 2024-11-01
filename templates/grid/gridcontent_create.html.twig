@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.content.create.title'|trans({name:table_selected.name}) }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="ui-checks-grid" />{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_content }}"/>
+        <twig:Row rowClass="mb-3" label="grid.content.label.manual">{{ 'grid.content.create.manual'|trans|raw }}</twig:Row>
+        <twig:FormRow field="{{ form_content.content }}"/>
+        <twig:FormRow field="{{ form_content.separator }}" toggle translate />
+        <twig:FormRow rowClass="mt-4" field="{{ form_content.options }}" toggle translate/>
+        <twig:Row rowClass="mb-3" label="grid.content.label.manual_options">{{ 'grid.content.create.manual_options'|trans|raw }}</twig:Row>
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="plus-circle"
+                field="{{ form_content.submit }}"
+                cancelPath="app_grid_table_create"
+        />
+        {{ form_end(form_content) }}
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.table.list.title">
+            {{ include('grid/_table_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

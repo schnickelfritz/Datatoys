@@ -8,6 +8,8 @@
         </twig:Row>
         <twig:FormStart form="{{ form_cols }}"/>
         <twig:FormRow field="{{ form_cols.names }}"/>
+        <twig:FormRow rowClass="mt-2" field="{{ form_cols.linkColsToScope }}" />
+        <twig:FormRow field="{{ form_cols.scope }}" toggle />
         <twig:ButtonsRow
                 rowClass="pt-3"
                 icon="plus-circle"

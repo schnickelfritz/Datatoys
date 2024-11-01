@@ -18,6 +18,23 @@ class GridcolRepository extends ServiceEntityRepository
 
     public function allColumnsFiltered(): array
     {
-        return $this->findAll();
+        $columns = $this->createQueryBuilder('c')
+            ->leftJoin('c.gridscopeCols', 'scopes')
+            ->addSelect('scopes')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return is_array($columns) ? $columns : [];
+    }
+
+    public function allNames(): array
+    {
+        $names = [];
+        foreach ($this->findAll() as $col) {
+            $names[] = $col->getName();
+        }
+
+        return $names;
     }
 }

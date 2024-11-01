@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.table.update.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap-fill" />{{ 'grid.table.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_table }}"/>
+        <twig:FormRow field="{{ form_table.name }}"/>
+        <twig:FormRow field="{{ form_table.scope }}" toggle />
+        <twig:FormRow field="{{ form_table.status }}" toggle translate />
+        <twig:FormRow field="{{ form_table.category }}"/>
+        <twig:FormRow field="{{ form_table.numberOfSources }}"/>
+        <twig:FormRow field="{{ form_table.additionalExpense }}"/>
+        <twig:FormRow field="{{ form_table.notes }}"/>
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="pencil"
+                field="{{ form_table.submit }}"
+                label="grid.table.update.submitbutton"
+                cancelPath="app_grid_table_create"
+                modalId="table_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
+        {{ form_end(form_table) }}
+        <twig:ModalDeleteFormContainer
+                id="table_delete"
+                title="{{ 'grid.table.delete.title' }}"
+                path="app_grid_table_delete"
+                deleteId="{{ table_selected.id }}"
+        >
+            {{ 'grid.table.delete.confirm_text'|trans({'%name%': table_selected.name}, 'messages')|raw }}
+        </twig:ModalDeleteFormContainer>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.table.list.title">
+            {{ include('grid/_table_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

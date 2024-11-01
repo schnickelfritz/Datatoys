@@ -1,0 +1,37 @@
+<twig:Table headers="{{ [
+    'grid.table.label.update',
+    'grid.table.label.entries',
+    'grid.table.label.name',
+    'grid.table.label.scope',
+    'grid.table.label.status',
+    'grid.table.label.rows',
+    'grid.table.label.category',
+    'grid.table.label.sources',
+    'grid.table.label.expense',
+    'grid.table.label.notes',
+] }}" small>
+    {% for table in tables %}
+        <tr
+            class="{% if table_selected|default() and table_selected.id == table.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_grid_table_update', {'id': table.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('app_grid_tablecontent_create', {'id': table.id}) }}" class="btn btn-primary">
+                    <span class="bi-list-columns"></span>
+                </a>
+            </td>
+            <th scope="row">{{ table.name }}</th>
+            <td>{% if table.scope %}{{ table.scope.name }}{% endif %}</td>
+            <td>{{ table.status }}</td>
+            <td>{{ table.gridrows.count }}</td>
+            <td>{{ table.category }}</td>
+            <td>{{ table.numberOfSources }}</td>
+            <td>{{ table.additionalExpense }}</td>
+            <td>{{ table.notes }}</td>
+        </tr>
+    {% endfor %}
+</twig:Table>

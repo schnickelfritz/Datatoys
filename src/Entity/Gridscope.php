@@ -30,10 +30,10 @@ class Gridscope
     private ?string $scopeKey = null;
 
     /**
-     * @var Collection<int, Gridpool>
+     * @var Collection<int, Gridtable>
      */
-    #[ORM\OneToMany(targetEntity: Gridpool::class, mappedBy: 'scope')]
-    private Collection $gridpools;
+    #[ORM\OneToMany(targetEntity: Gridtable::class, mappedBy: 'scope')]
+    private Collection $gridtables;
 
     /**
      * @var Collection<int, GridscopeCol>
@@ -43,7 +43,7 @@ class Gridscope
 
     public function __construct()
     {
-        $this->gridpools = new ArrayCollection();
+        $this->gridtables = new ArrayCollection();
         $this->gridscopeCols = new ArrayCollection();
     }
 
@@ -101,29 +101,29 @@ class Gridscope
     }
 
     /**
-     * @return Collection<int, Gridpool>
+     * @return Collection<int, Gridtable>
      */
-    public function getGridpools(): Collection
+    public function getGridtables(): Collection
     {
-        return $this->gridpools;
+        return $this->gridtables;
     }
 
-    public function addGridpool(Gridpool $gridpool): static
+    public function addGridtable(Gridtable $gridtable): static
     {
-        if (!$this->gridpools->contains($gridpool)) {
-            $this->gridpools->add($gridpool);
-            $gridpool->setScope($this);
+        if (!$this->gridtables->contains($gridtable)) {
+            $this->gridtables->add($gridtable);
+            $gridtable->setScope($this);
         }
 
         return $this;
     }
 
-    public function removeGridpool(Gridpool $gridpool): static
+    public function removeGridtable(Gridtable $gridtable): static
     {
-        if ($this->gridpools->removeElement($gridpool)) {
+        if ($this->gridtables->removeElement($gridtable)) {
             // set the owning side to null (unless already changed)
-            if ($gridpool->getScope() === $this) {
-                $gridpool->setScope(null);
+            if ($gridtable->getScope() === $this) {
+                $gridtable->setScope(null);
             }
         }
 

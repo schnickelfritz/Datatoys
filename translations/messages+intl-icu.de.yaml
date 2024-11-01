@@ -88,6 +88,27 @@ planner:
     start: Ab (Uhrzeit)
     hours: Arbeitsstunden
 grid:
+  content:
+    submitbutton: Inhalt einfügen
+    create:
+      title: 'Inhalte für {name} einfügen'
+      manual: 'Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).<br>In der ersten Zeile werden Spaltenüberschriften erwartet.<br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.'
+      manual_options: 'Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert. <br>Einfügen ....'
+      option:
+        update: Aktualisieren
+        allow_new_columns: Einfügen neuer Felder erlauben
+        skip_same_name_columns: Gleichnamige Felder überspringen
+        concat_same_name_columns: Werte gleichnamiger Felder verknüpfen
+      separator:
+        tab: Tab
+        comma: Komma (,)
+        semicolon: Semikolon (;)
+    label:
+      content: Inhalt
+      options: Optionen
+      manual: Bedienungsanleitung
+      manual_options: Hinweise zu den Optionen
+      separator: Trenner
   scope:
     list:
       title: Scope-Verzeichnis
@@ -113,26 +134,39 @@ grid:
       update: Ändern
       names: Feldnamen
       name: Feld
+      link_to_scope: Mit einem Scope verknüpfen
+      scopes: Scopes
     create:
       title: Felder
       submitbutton: Neue Felder erstellen
-  pool:
+  table:
     list:
-      title: Pool-Verzeichnis
+      title: Tabellen
     delete:
-      title: Pool löschen
-      confirm_text: 'Willst du den Pool <b>{name}</b> wirklich löschen? Alle mit diesem Pool verknüpften Einträge (Zeilen, Werte) werden entfernt!'
-      flash: 'Pool {name} gelöscht'
-    submitbutton: Neuer Pool
+      title: Tabelle löschen
+      confirm_text: 'Willst du die Tabelle <b>{name}</b> wirklich löschen? Alle mit dieser Tabelle verknüpften Einträge (Zeilen, Werte) werden entfernt!'
+      flash: 'Tabelle {name} gelöscht'
+    submitbutton: Neue Tabelle
     update:
-      title: Pool ändern
+      title: Tabelle ändern
       submitbutton: Ändern
     label:
       update: Ändern
-      name: Name des Pools
+      entries: Einträge
+      name: Name der Tabelle
       scope: Scope
+      status: Status
+      category: Kategorie
+      sources: Anzahl Quellen
+      expense: Zusatzaufwand
+      notes: Anmerkungen
+      rows: Anzahl Zeilen
+    status:
+      new: Neu
+      in_progress: In Bearbeitung
+      done: Fertig
     create:
-      title: Pool erstellen
+      title: Tabelle erstellen
 menu:
   Admin: Admin
   Candidates: Kandidaten
@@ -140,8 +174,8 @@ menu:
   Home: Home
   'Grid Hub': 'Grid'
   'Grid Col': 'Felder'
-  'Grid Pool': 'Pool'
-  'Grid Scope': 'Scope'
+  'Grid Table': 'Tabellen'
+  'Grid Scope': 'Scopes'
   'My Plan': Mein Arbeitsplan
   'Our Plan': Einsatzplan
   Login: Anmelden

@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GridrowRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_MASTERKEY', fields: ['masterkey'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_TABLELINENUMBER', fields: ['gridtable', 'linenumber'])]
 class Gridrow
 {
     #[ORM\Id]
@@ -16,12 +16,12 @@ class Gridrow
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $masterkey = null;
+    #[ORM\Column]
+    private ?int $lineNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'gridrows')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridpool $pool = null;
+    private ?Gridtable $gridtable = null;
 
     /**
      * @var Collection<int, Gridcell>
@@ -39,26 +39,14 @@ class Gridrow
         return $this->id;
     }
 
-    public function getMasterkey(): ?string
+    public function getGridtable(): ?Gridtable
     {
-        return $this->masterkey;
+        return $this->gridtable;
     }
 
-    public function setMasterkey(?string $masterkey): static
+    public function setGridtable(?Gridtable $table): static
     {
-        $this->masterkey = $masterkey;
-
-        return $this;
-    }
-
-    public function getPool(): ?Gridpool
-    {
-        return $this->pool;
-    }
-
-    public function setPool(?Gridpool $pool): static
-    {
-        $this->pool = $pool;
+        $this->gridtable = $table;
 
         return $this;
     }
@@ -89,6 +77,18 @@ class Gridrow
                 $gridcell->setY(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLineNumber(): ?int
+    {
+        return $this->lineNumber;
+    }
+
+    public function setLineNumber(int $lineNumber): static
+    {
+        $this->lineNumber = $lineNumber;
 
         return $this;
     }

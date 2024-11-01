@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Grid;
 
-use App\Entity\Gridpool;
-use App\Form\Grid\GridpoolFormType;
-use App\Repository\GridpoolRepository;
-use App\Service\Grid\CreateGridpool;
+use App\Entity\Gridtable;
+use App\Form\Grid\GridtableFormType;
+use App\Repository\GridtableRepository;
+use App\Service\Grid\CreateGridtable;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,42 +21,44 @@ use Twig\Environment;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
-#[Route('/grid/pool/create', name: 'app_grid_pool_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
-final readonly class GridpoolCreateController
+#[Route('/grid/table/create', name: 'app_grid_table_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+final readonly class GridtableCreateController
 {
+
     /*
-     * A Gridpool is a collection of GridRows.
+     * A Gridtable is a collection of GridRows.
      * Each GridRow is a collection of GridCells.
      * Each GridCell is linked to a GridRow and a GridCol.
      */
+
     use FlashMessageTrait;
 
     public function __construct(
-        private CreateGridpool         $createPool,
+        private CreateGridtable         $createtable,
         private FormFactoryInterface   $formFactory,
         private UrlGeneratorInterface  $urlGenerator,
-        private GridpoolRepository     $poolRepository,
+        private GridtableRepository     $tableRepository,
         private Environment            $twig,
     ) {
     }
 
     public function __invoke(Request $request): Response
     {
-        $pool = new Gridpool();
-        $form = $this->formFactory->create(GridpoolFormType::class, $pool);
+        $table = new Gridtable();
+        $form = $this->formFactory->create(GridtableFormType::class, $table);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->createPool->create($pool);
+            $this->createtable->create($table);
             $this->addFlash($request, 'success', 'flash.success.create');
 
-            return new RedirectResponse($this->urlGenerator->generate('app_grid_pool_create'));
+            return new RedirectResponse($this->urlGenerator->generate('app_grid_table_create'));
         }
 
-        $pools = $this->poolRepository->allPoolsFiltered();
-        return new Response($this->twig->render('grid/gridpool_create.html.twig', [
-            'form_pool' => $form->createView(),
-            'pools' => $pools,
+        $tables = $this->tableRepository->alltablesFiltered();
+        return new Response($this->twig->render('grid/gridtable_create.html.twig', [
+            'form_table' => $form->createView(),
+            'tables' => $tables,
 
         ]));
     }

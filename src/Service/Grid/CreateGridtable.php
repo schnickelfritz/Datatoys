@@ -2,11 +2,11 @@
 
 namespace App\Service\Grid;
 
-use App\Entity\Gridpool;
+use App\Entity\Gridtable;
 use Doctrine\ORM\EntityManagerInterface;
 use function Symfony\Component\Clock\now;
 
-final readonly class CreateGridpool
+final readonly class CreateGridtable
 {
 
     public function __construct(
@@ -15,10 +15,10 @@ final readonly class CreateGridpool
     {
     }
 
-    public function create(Gridpool $pool): void
+    public function create(Gridtable $table): void
     {
-        $pool->setCreatedAt(now());
-        $this->entityManager->persist($pool);
+        $table->setCreatedAt(now());
+        $this->entityManager->persist($table);
         $this->entityManager->flush();
     }
 }

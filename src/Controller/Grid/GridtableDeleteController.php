@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Grid;
 
-use App\Entity\Gridpool;
+use App\Entity\Gridtable;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,8 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
-#[Route('/grid/pool/delete/{id}', name: 'app_grid_pool_delete', methods: [Request::METHOD_POST])]
-final readonly class GridpoolDeleteController
+#[Route('/grid/table/delete/{id}', name: 'app_grid_table_delete', methods: [Request::METHOD_POST])]
+final readonly class GridtableDeleteController
 {
     use FlashMessageTrait;
 
@@ -30,12 +30,12 @@ final readonly class GridpoolDeleteController
     ) {
     }
 
-    public function __invoke(Request $request, Gridpool $pool): Response
+    public function __invoke(Request $request, Gridtable $table): Response
     {
-        $this->entityManager->remove($pool);
+        $this->entityManager->remove($table);
         $this->entityManager->flush();
-        $this->addFlash($request, 'success', $this->translator->trans('grid.pool.delete.flash', ['name' => $pool->getName()]));
+        $this->addFlash($request, 'success', $this->translator->trans('grid.table.delete.flash', ['name' => $table->getName()]));
 
-        return new RedirectResponse($this->urlGenerator->generate('app_grid_pool_create'));
+        return new RedirectResponse($this->urlGenerator->generate('app_grid_table_create'));
     }
 }
