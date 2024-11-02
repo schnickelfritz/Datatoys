@@ -52,7 +52,7 @@ final readonly class GridcolCreateController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newCols = $this->createGridcols->createMultiple($this->formStringValue($form, 'names'));
-            $this->linkNewColsToScope($form, $newCols);
+            $this->linkNewColsToScope($form);
             $this->addFlash($request, 'success', 'flash.success.create');
 
             return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));

@@ -16,6 +16,9 @@ class GridcolRepository extends ServiceEntityRepository
         parent::__construct($registry, Gridcol::class);
     }
 
+    /**
+     * @return array<int, Gridcol>
+     */
     public function allColumnsFiltered(): array
     {
         $columns = $this->createQueryBuilder('c')
@@ -28,10 +31,14 @@ class GridcolRepository extends ServiceEntityRepository
         return is_array($columns) ? $columns : [];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function allNames(): array
     {
         $names = [];
-        foreach ($this->findAll() as $col) {
+        $allCols = $this->findAll();
+        foreach ($allCols as $col) {
             $names[] = $col->getName();
         }
 

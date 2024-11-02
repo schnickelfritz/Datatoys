@@ -19,6 +19,10 @@ final readonly class CreateGridcols
     {
     }
 
+    /**
+     * @param string $multipleNames
+     * @return array<int, Gridcol>
+     */
     public function createMultiple(string $multipleNames): array
     {
         $existingNames = $this->colRepository->allNames();

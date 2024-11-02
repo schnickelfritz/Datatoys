@@ -16,6 +16,9 @@ class GridscopeRepository extends ServiceEntityRepository
         parent::__construct($registry, Gridscope::class);
     }
 
+    /**
+     * @return array<string, Gridscope|null>
+     */
     public function choices(): array
     {
         $choices = ['-' => null];

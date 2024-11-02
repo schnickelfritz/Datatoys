@@ -20,7 +20,7 @@ class GridscopeColRepository extends ServiceEntityRepository
 
     /**
      * @param Gridscope $scope
-     * @return list<Gridcol>
+     * @return array<int, Gridcol>
      */
     public function allColsInScope(Gridscope $scope): array
     {
@@ -38,6 +38,7 @@ class GridscopeColRepository extends ServiceEntityRepository
         $cols = [];
         foreach ($scopeCols as $scopeCol) {
             if ($scopeCol instanceof GridscopeCol) {
+                $col = $scopeCol->getCol();
                 $cols[] = $scopeCol->getCol();
             }
         }

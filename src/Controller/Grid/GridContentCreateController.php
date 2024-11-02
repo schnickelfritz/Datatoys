@@ -5,7 +5,6 @@ namespace App\Controller\Grid;
 use App\Entity\Gridtable;
 use App\Form\Grid\GridContentCreateFormType;
 use App\Repository\GridtableRepository;
-use App\Service\Convert\ConvertCsvStringToMatrixArray;
 use App\Service\Grid\CreateGridContent;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -48,7 +47,7 @@ final readonly class GridContentCreateController
             $separator = $form->get('separator')->getData();
             Assert::string($separator);
             $options = $form->get('options')->getData();
-            Assert::allString($options);
+            Assert::isArray($options);
 
             $errorMessage = $this->createGridContent->processInputs($table, $content, $separator, $options);
             if ($errorMessage === null) {

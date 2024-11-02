@@ -17,12 +17,12 @@ class Gridcol
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @var Collection<int, Gridcell>
      */
-    #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'x', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'gridcol', orphanRemoval: true)]
     private Collection $gridcells;
 
     /**
@@ -42,7 +42,7 @@ class Gridcol
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -62,28 +62,6 @@ class Gridcol
         return $this->gridcells;
     }
 
-    public function addGridcell(Gridcell $gridcell): static
-    {
-        if (!$this->gridcells->contains($gridcell)) {
-            $this->gridcells->add($gridcell);
-            $gridcell->setGridcol($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridcell(Gridcell $gridcell): static
-    {
-        if ($this->gridcells->removeElement($gridcell)) {
-            // set the owning side to null (unless already changed)
-            if ($gridcell->getGridcol() === $this) {
-                $gridcell->setGridcol(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, GridscopeCol>
      */
@@ -92,25 +70,4 @@ class Gridcol
         return $this->gridscopeCols;
     }
 
-    public function addGridscopeCol(GridscopeCol $gridscopeCol): static
-    {
-        if (!$this->gridscopeCols->contains($gridscopeCol)) {
-            $this->gridscopeCols->add($gridscopeCol);
-            $gridscopeCol->setCol($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridscopeCol(GridscopeCol $gridscopeCol): static
-    {
-        if ($this->gridscopeCols->removeElement($gridscopeCol)) {
-            // set the owning side to null (unless already changed)
-            if ($gridscopeCol->getCol() === $this) {
-                $gridscopeCol->setCol(null);
-            }
-        }
-
-        return $this;
-    }
 }

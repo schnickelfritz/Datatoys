@@ -20,7 +20,7 @@ class GridscopeCol
 
     #[ORM\ManyToOne(inversedBy: 'gridscopeCols')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridcol $col = null;
+    private Gridcol $col;
 
     public function getId(): ?int
     {
@@ -39,12 +39,12 @@ class GridscopeCol
         return $this;
     }
 
-    public function getCol(): ?Gridcol
+    public function getCol(): Gridcol
     {
         return $this->col;
     }
 
-    public function setCol(?Gridcol $col): static
+    public function setCol(Gridcol $col): static
     {
         $this->col = $col;
 

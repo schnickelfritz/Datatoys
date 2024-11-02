@@ -17,7 +17,7 @@ class Gridrow
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $lineNumber = null;
+    private int $lineNumber;
 
     #[ORM\ManyToOne(inversedBy: 'gridrows')]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,7 +26,7 @@ class Gridrow
     /**
      * @var Collection<int, Gridcell>
      */
-    #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'y', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'gridrow', orphanRemoval: true)]
     private Collection $gridcells;
 
     public function __construct()
@@ -59,29 +59,7 @@ class Gridrow
         return $this->gridcells;
     }
 
-    public function addGridcell(Gridcell $gridcell): static
-    {
-        if (!$this->gridcells->contains($gridcell)) {
-            $this->gridcells->add($gridcell);
-            $gridcell->setGridrow($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridcell(Gridcell $gridcell): static
-    {
-        if ($this->gridcells->removeElement($gridcell)) {
-            // set the owning side to null (unless already changed)
-            if ($gridcell->getGridrow() === $this) {
-                $gridcell->setGridrow(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getLineNumber(): ?int
+    public function getLineNumber(): int
     {
         return $this->lineNumber;
     }

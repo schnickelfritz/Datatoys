@@ -21,6 +21,14 @@ class GridtableRepository extends ServiceEntityRepository
      */
     public function allTablesFiltered(): array
     {
-        return $this->findBy([], ['name' => 'ASC']);
+        $tables = $this->createQueryBuilder('t')
+            ->leftJoin('t.gridrows', 'rows')
+            ->addSelect('rows')
+            ->orderBy('t.name')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return is_array($tables) ? $tables : [];
     }
 }

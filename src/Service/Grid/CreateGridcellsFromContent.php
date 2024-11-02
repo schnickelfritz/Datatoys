@@ -19,10 +19,10 @@ final readonly class CreateGridcellsFromContent
     }
 
     /**
-     * @param array<int, array<string, string>> $matrix
+     * @param array<int, array<int, string>> $matrix
      * @param array<int, Gridrow> $rows
      * @param array<int, Gridcol> $cols
-     * @param array $options
+     * @param array<int, string> $options
      * @return void
      */
     public function gridcellsCreateOrUpdate(array $matrix, array $rows, array $cols, array $options): void
@@ -79,7 +79,7 @@ final readonly class CreateGridcellsFromContent
 
     /**
      * @param array<int, Gridrow> $rows
-     * @return array<int, array<int, Gridcell>
+     * @return array<int, array<int, Gridcell>>
      */
     private function existingCellsByRowAndColIds(array $rows): array
     {
@@ -88,7 +88,11 @@ final readonly class CreateGridcellsFromContent
         foreach ($existingCells as $existingCell) {
             $row = $existingCell->getGridrow();
             $col = $existingCell->getGridcol();
-            $existigCellsByRowAndColIds[$row->getId()][$col->getId()] = $existingCell;
+            $rowId = $row->getId();
+            $colId = $col->getId();
+            if ($rowId !== null && $colId !== null) {
+                $existigCellsByRowAndColIds[$rowId][$colId] = $existingCell;
+            }
         }
 
         return $existigCellsByRowAndColIds;

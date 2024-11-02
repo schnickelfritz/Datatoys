@@ -1,10 +1,11 @@
 <twig:Table headers="{{ [
     'grid.table.label.update',
-    'grid.table.label.entries',
+    'grid.table.label.content',
     'grid.table.label.name',
     'grid.table.label.scope',
     'grid.table.label.status',
     'grid.table.label.rows',
+    'grid.table.label.images',
     'grid.table.label.category',
     'grid.table.label.sources',
     'grid.table.label.expense',
@@ -28,6 +29,7 @@
             <td>{% if table.scope %}{{ table.scope.name }}{% endif %}</td>
             <td>{{ table.status }}</td>
             <td>{{ table.gridrows.count }}</td>
+            <td>tbd</td>
             <td>{{ table.category }}</td>
             <td>{{ table.numberOfSources }}</td>
             <td>{{ table.additionalExpense }}</td>

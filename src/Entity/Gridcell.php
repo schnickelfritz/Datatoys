@@ -20,11 +20,11 @@ class Gridcell
 
     #[ORM\ManyToOne(inversedBy: 'gridcells')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridcol $gridcol = null;
+    private Gridcol $gridcol;
 
     #[ORM\ManyToOne(inversedBy: 'gridcells')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridrow $gridrow = null;
+    private Gridrow $gridrow;
 
     public function getId(): ?int
     {
@@ -43,24 +43,24 @@ class Gridcell
         return $this;
     }
 
-    public function getGridcol(): ?Gridcol
+    public function getGridcol(): Gridcol
     {
         return $this->gridcol;
     }
 
-    public function setGridcol(?Gridcol $gridcol): static
+    public function setGridcol(Gridcol $gridcol): static
     {
         $this->gridcol = $gridcol;
 
         return $this;
     }
 
-    public function getGridrow(): ?Gridrow
+    public function getGridrow(): Gridrow
     {
         return $this->gridrow;
     }
 
-    public function setGridrow(?Gridrow $gridrow): static
+    public function setGridrow(Gridrow $gridrow): static
     {
         $this->gridrow = $gridrow;
 

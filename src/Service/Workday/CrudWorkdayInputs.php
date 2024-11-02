@@ -11,6 +11,8 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
+use InvalidArgumentException;
+use Webmozart\Assert\Assert;
 use function in_array;
 
 final readonly class CrudWorkdayInputs
@@ -40,7 +42,8 @@ final readonly class CrudWorkdayInputs
             $existingEntries
         );
 
-        foreach ($inputs['entry'] as $dayYmd => $newEntry) {
+        foreach ($inputs['entry'] as $dayYmdInt => $newEntry) {
+            $dayYmd = strval($dayYmdInt);
             $existingEntry = $existingEntriesByYmd[$dayYmd] ?? null;
             $counts = $this->crudByEntry($dayYmd, $user, $existingEntry, $newEntry, $counts);
         }
@@ -104,6 +107,9 @@ final readonly class CrudWorkdayInputs
         $startHour = $this->sanitizeStartHour($newEntry['startHour'], $option);
         $workHours = $this->sanitizeWorkHours($newEntry['workHours'], $option);
         $day = DateTime::createFromFormat('Ymd', $dayYmd);
+        if (!$day) {
+            throw new InvalidArgumentException('Invalid date format: ' . $dayYmd);
+        }
 
         $workday = new Workday();
         $workday

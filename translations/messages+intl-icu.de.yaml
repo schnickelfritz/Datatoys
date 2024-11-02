@@ -92,8 +92,7 @@ grid:
     submitbutton: Inhalt einfügen
     create:
       title: 'Inhalte für {name} einfügen'
-      manual: 'Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).<br>In der ersten Zeile werden Spaltenüberschriften erwartet.<br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.'
-      manual_options: 'Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert. <br>Einfügen ....'
+      manual: 'Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).<br>In der ersten Zeile werden Spaltenüberschriften erwartet.<br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.<br>Zu den Optionen: <ul><li>Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert. Es zählt die Zeilennummer! Fügst du nach Umsortierung der Quelldaten ein, kann das unerwünschte Folgen haben.<li>Wenn du das Einfügen neuer Felder erlaubst, werden Felder angelegt, deren Namen nicht vorhanden sind. Vergisst du das Einfügen der Überschriften, kann das Einfügen crashen!<li>Ohne die Optionen zu gleichnamigen Feldern bricht das gesamte Einfügen ab, falls gleichnamige Felder vorhanden sind</ul>'
       option:
         update: Aktualisieren
         allow_new_columns: Einfügen neuer Felder erlauben
@@ -108,7 +107,6 @@ grid:
       content: Inhalt
       options: Optionen
       manual: Bedienungsanleitung
-      manual_options: Hinweise zu den Optionen
       separator: Trenner
   scope:
     list:
@@ -153,7 +151,7 @@ grid:
       submitbutton: Ändern
     label:
       update: Ändern
-      entries: Einträge
+      content: Inhalte
       name: Name der Tabelle
       scope: Scope
       status: Status
@@ -162,6 +160,7 @@ grid:
       expense: Zusatzaufwand
       notes: Anmerkungen
       rows: Anzahl Zeilen
+      images: Anzahl Bilder
     status:
       new: Neu
       in_progress: In Bearbeitung
