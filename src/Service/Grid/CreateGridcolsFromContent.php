@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Grid;
 
 use App\Entity\Gridcol;
 use App\Repository\GridcolRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+use function in_array;
+
 final readonly class CreateGridcolsFromContent
 {
     public function __construct(
         private GridcolRepository $colRepository,
         private EntityManagerInterface $entityManager,
-    )
-    {
+    ) {
     }
 
     /**
      * @param list<string> $columnNames
      * @param list<string> $options
+     *
      * @return array<int, Gridcol>|null
      */
     public function getOrCreateGridcols(array $columnNames, array $options): ?array
@@ -57,5 +61,4 @@ final readonly class CreateGridcolsFromContent
 
         return $columns;
     }
-
 }

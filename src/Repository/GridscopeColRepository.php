@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Gridcol;
@@ -7,6 +9,8 @@ use App\Entity\Gridscope;
 use App\Entity\GridscopeCol;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function is_array;
 
 /**
  * @extends ServiceEntityRepository<GridscopeCol>
@@ -19,7 +23,6 @@ class GridscopeColRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Gridscope $scope
      * @return array<int, Gridcol>
      */
     public function allColsInScope(Gridscope $scope): array

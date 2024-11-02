@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Grid;
 
 use App\Entity\Gridcell;
@@ -8,22 +10,21 @@ use App\Entity\Gridrow;
 use App\Repository\GridcellRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+use function in_array;
+
 final readonly class CreateGridcellsFromContent
 {
-
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GridcellRepository $cellRepository,
-    )
-    {
+    ) {
     }
 
     /**
      * @param array<int, array<int, string>> $matrix
-     * @param array<int, Gridrow> $rows
-     * @param array<int, Gridcol> $cols
-     * @param array<int, string> $options
-     * @return void
+     * @param array<int, Gridrow>            $rows
+     * @param array<int, Gridcol>            $cols
+     * @param array<int, string>             $options
      */
     public function gridcellsCreateOrUpdate(array $matrix, array $rows, array $cols, array $options): void
     {
@@ -32,9 +33,9 @@ final readonly class CreateGridcellsFromContent
             $existingCells = $this->existingCellsByRowAndColIds($rows);
         }
 
-        for ($lineNumber = 1; $lineNumber <= max(array_keys($matrix)); $lineNumber++) {
+        for ($lineNumber = 1; $lineNumber <= max(array_keys($matrix)); ++$lineNumber) {
             $matrixRow = $matrix[$lineNumber];
-            for ($colNumber = 0; $colNumber <= max(array_keys($matrixRow)); $colNumber++) {
+            for ($colNumber = 0; $colNumber <= max(array_keys($matrixRow)); ++$colNumber) {
                 $this->gridCellCreateOrUpdate($lineNumber, $colNumber, $matrixRow, $rows, $cols, $existingCells);
             }
         }
@@ -42,13 +43,10 @@ final readonly class CreateGridcellsFromContent
     }
 
     /**
-     * @param int $lineNumber
-     * @param int $colNumber
-     * @param array<int, string> $matrixRow
-     * @param array<int, Gridrow> $rows
-     * @param array<int, Gridcol> $cols
+     * @param array<int, string>               $matrixRow
+     * @param array<int, Gridrow>              $rows
+     * @param array<int, Gridcol>              $cols
      * @param array<int, array<int, Gridcell>> $existingCells
-     * @return void
      */
     private function gridCellCreateOrUpdate(
         int $lineNumber,
@@ -57,8 +55,7 @@ final readonly class CreateGridcellsFromContent
         array $rows,
         array $cols,
         array $existingCells
-    ): void
-    {
+    ): void {
         $value = $matrixRow[$colNumber];
         $row = $rows[$lineNumber];
         $rowId = $row->getId();
@@ -66,6 +63,7 @@ final readonly class CreateGridcellsFromContent
         $colId = $col->getId();
         if (isset($existingCells[$rowId][$colId])) {
             $existingCells[$rowId][$colId]->setValue($value);
+
             return;
         }
         $cell = new Gridcell();
@@ -79,6 +77,7 @@ final readonly class CreateGridcellsFromContent
 
     /**
      * @param array<int, Gridrow> $rows
+     *
      * @return array<int, array<int, Gridcell>>
      */
     private function existingCellsByRowAndColIds(array $rows): array
@@ -97,5 +96,4 @@ final readonly class CreateGridcellsFromContent
 
         return $existigCellsByRowAndColIds;
     }
-
 }

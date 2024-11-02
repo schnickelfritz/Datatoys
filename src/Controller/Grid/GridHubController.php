@@ -16,7 +16,6 @@ use Twig\Environment;
 #[Route('/grid/hub', name: 'app_grid_hub', methods: [Request::METHOD_GET])]
 final readonly class GridHubController
 {
-
     public function __construct(
         private Environment $twig,
     ) {

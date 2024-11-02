@@ -15,7 +15,6 @@ class GridContentCreateFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $choicesOptions = [
             'grid.content.create.option.update' => 'UPDATE',
             'grid.content.create.option.allow_new_columns' => 'ALLOW_NEW_COLUMNS',

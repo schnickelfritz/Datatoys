@@ -16,8 +16,7 @@ class GridcolsCreateFormType extends AbstractType
 {
     public function __construct(
         private readonly GridscopeRepository $scopeRepository,
-    )
-    {
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

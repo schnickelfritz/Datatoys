@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Service\Convert;
 
-use function sprintf;
 use function strlen;
 
 // TODO 2024-07-01 SESSION-TOPIC: Wie würde man eine Klasse wie diese (csv-text to assoc array) am besten aufbauen?
@@ -28,7 +27,7 @@ class ConvertCsvStringToMatrixArray
     private int $lenEscapeMarker;
     private string $escapeInline;
 
-    public function __construct(string $escapeMarker = '"', string $linebreak = "\r\n", ?string $innerSeparatorReplacer = "&nbsp;")
+    public function __construct(string $escapeMarker = '"', string $linebreak = "\r\n", ?string $innerSeparatorReplacer = '&nbsp;')
     {
         $this->escapeMarker = $escapeMarker;
         $this->linebreak = $linebreak;
@@ -51,6 +50,7 @@ class ConvertCsvStringToMatrixArray
         if (!empty($this->columnCollector)) {
             $this->lines[] = $this->columnCollector;
         }
+
         return $this->lines;
     }
 
@@ -99,7 +99,7 @@ class ConvertCsvStringToMatrixArray
             $pointer = $this->nextSeparatorPosByPointer($this->escapeMarker . $this->columnSeparator, $pointer) + $this->lenEscapeMarker + $this->lenColumnSeparator;
             $column = substr($this->csvTextToNextSeparator($pointer, $this->escapeMarker . $this->columnSeparator), $this->lenEscapeMarker);
             $countEscapers = substr_count($column, $this->escapeMarker);
-            $loopCount++;
+            ++$loopCount;
         }
         if ($countEscapers % 2 === 0) {
             $this->columnCollector[] = $this->fixInner($column);
@@ -114,6 +114,7 @@ class ConvertCsvStringToMatrixArray
         if ($this->innerSeparatorReplacer !== null) {
             $text = str_replace($this->columnSeparator, $this->innerSeparatorReplacer, $text);
         }
+
         return str_replace($this->escapeInline, $this->escapeMarker, $text);
     }
 

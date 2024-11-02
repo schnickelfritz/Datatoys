@@ -19,8 +19,7 @@ class GridtableFormType extends AbstractType
 {
     public function __construct(
         private readonly GridscopeRepository $scopeRepository,
-    )
-    {
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -58,22 +57,22 @@ class GridtableFormType extends AbstractType
             ])
             ->add('category', TextType::class, [
                 'label' => 'grid.table.label.category',
-                'required'=>false,
+                'required' => false,
                 'attr' => ['placeholder' => 'optional'],
             ])
             ->add('numberOfSources', IntegerType::class, [
                 'label' => 'grid.table.label.sources',
-                'required'=>false,
+                'required' => false,
                 'attr' => ['placeholder' => 'optional'],
             ])
             ->add('additionalExpense', IntegerType::class, [
                 'label' => 'grid.table.label.expense',
-                'required'=>false,
+                'required' => false,
                 'attr' => ['placeholder' => 'optional'],
             ])
             ->add('notes', TextareaType::class, [
                 'label' => 'grid.table.label.notes',
-                'required'=>false,
+                'required' => false,
                 'attr' => ['placeholder' => 'optional'],
             ])
             ->add('submit', SubmitType::class, [

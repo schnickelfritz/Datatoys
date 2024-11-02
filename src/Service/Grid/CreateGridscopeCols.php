@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Grid;
 
-use App\Entity\Gridcol;
 use App\Entity\Gridscope;
 use App\Entity\GridscopeCol;
 use App\Repository\GridcolRepository;
 use App\Repository\GridscopeColRepository;
 use App\Trait\StringExplodeTrait;
 use Doctrine\ORM\EntityManagerInterface;
+
+use function in_array;
 
 final readonly class CreateGridscopeCols
 {
@@ -18,8 +21,7 @@ final readonly class CreateGridscopeCols
         private EntityManagerInterface $entityManager,
         private GridscopeColRepository $gridscopeColRepository,
         private GridcolRepository $colRepository,
-    )
-    {
+    ) {
     }
 
     public function createMultiple(string $multipleNames, Gridscope $scope): void

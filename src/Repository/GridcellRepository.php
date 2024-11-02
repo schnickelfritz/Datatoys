@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Gridcell;
 use App\Entity\Gridrow;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function is_array;
 
 /**
  * @extends ServiceEntityRepository<Gridcell>
@@ -19,6 +23,7 @@ class GridcellRepository extends ServiceEntityRepository
 
     /**
      * @param array<int, Gridrow> $rows
+     *
      * @return array<int, Gridcell>
      */
     public function allByRows(array $rows): array

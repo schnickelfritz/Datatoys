@@ -10,9 +10,8 @@ use App\Repository\WorkdayRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
-
 use InvalidArgumentException;
-use Webmozart\Assert\Assert;
+
 use function in_array;
 
 final readonly class CrudWorkdayInputs
@@ -25,8 +24,7 @@ final readonly class CrudWorkdayInputs
 
     /**
      * @param array<string, array<string, array<string, string>>> $inputs
-     * @param User $user
-     * @param DateTime $today
+     *
      * @return array{'create':int, 'update':int, 'delete':int}
      */
     public function crudByInputs(array $inputs, User $user, DateTime $today): array
@@ -43,7 +41,7 @@ final readonly class CrudWorkdayInputs
         );
 
         foreach ($inputs['entry'] as $dayYmdInt => $newEntry) {
-            $dayYmd = strval($dayYmdInt);
+            $dayYmd = (string) $dayYmdInt;
             $existingEntry = $existingEntriesByYmd[$dayYmd] ?? null;
             $counts = $this->crudByEntry($dayYmd, $user, $existingEntry, $newEntry, $counts);
         }
@@ -54,11 +52,9 @@ final readonly class CrudWorkdayInputs
     }
 
     /**
-     * @param string $dayYmd
-     * @param User $user
-     * @param Workday|null $existingEntry
-     * @param array<string, string> $newEntry
+     * @param array<string, string>                           $newEntry
      * @param array{'create':int, 'update':int, 'delete':int} $counts
+     *
      * @return array{'create':int, 'update':int, 'delete':int}
      */
     private function crudByEntry(string $dayYmd, User $user, ?Workday $existingEntry, array $newEntry, array $counts): array
@@ -96,11 +92,7 @@ final readonly class CrudWorkdayInputs
     }
 
     /**
-     * @param User $user
-     * @param string $dayYmd
-     * @param string $option
      * @param array<string, string> $newEntry
-     * @return int
      */
     private function create(User $user, string $dayYmd, string $option, array $newEntry): int
     {
@@ -126,10 +118,7 @@ final readonly class CrudWorkdayInputs
     }
 
     /**
-     * @param Workday $existingEntry
-     * @param string $option
      * @param array<string, string> $newEntry
-     * @return int
      */
     private function update(Workday $existingEntry, string $option, array $newEntry): int
     {

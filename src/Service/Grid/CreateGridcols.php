@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Grid;
 
 use App\Entity\Gridcol;
@@ -7,20 +9,19 @@ use App\Repository\GridcolRepository;
 use App\Trait\StringExplodeTrait;
 use Doctrine\ORM\EntityManagerInterface;
 
+use function in_array;
+
 final readonly class CreateGridcols
 {
-
     use StringExplodeTrait;
 
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GridcolRepository $colRepository,
-    )
-    {
+    ) {
     }
 
     /**
-     * @param string $multipleNames
      * @return array<int, Gridcol>
      */
     public function createMultiple(string $multipleNames): array

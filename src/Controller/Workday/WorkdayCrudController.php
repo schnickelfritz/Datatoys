@@ -49,9 +49,7 @@ final readonly class WorkdayCrudController
     }
 
     /**
-     * @param Request $request
      * @param array{'create':int, 'update':int, 'delete':int} $counts
-     * @return void
      */
     private function flash(Request $request, array $counts): void
     {

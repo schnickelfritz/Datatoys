@@ -1,28 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Grid;
 
 use App\Entity\Gridtable;
 use App\Service\Convert\ConvertCsvStringToMatrixArray;
 use Webmozart\Assert\Assert;
 
+use function count;
+use function in_array;
+
 final readonly class CreateGridContent
 {
-
     public function __construct(
         private CreateGridcolsFromContent $createGridcolsFromContent,
         private CreateGridrowsFromContent $createGridrowsFromContent,
         private CreateGridcellsFromContent $createGridcellsFromContent,
-    )
-    {
+    ) {
     }
 
     /**
-     * @param Gridtable $table
-     * @param string $content
-     * @param string $separator
      * @param list<string> $options
-     * @return string|null
      */
     public function processInputs(Gridtable $table, string $content, string $separator, array $options): ?string
     {
@@ -37,7 +36,7 @@ final readonly class CreateGridContent
 
         $columnNames = $matrix[0];
         Assert::allString($columnNames);
-        $columnNamesSanitized = array_map(fn(string $name) => strtolower(trim($name)), $columnNames);
+        $columnNamesSanitized = array_map(fn (string $name) => strtolower(trim($name)), $columnNames);
         if ($this->illegalNonUniqueColnames($columnNamesSanitized, $options)) {
             return 'grid.content.error.colnames_not_unique';
         }
@@ -56,8 +55,7 @@ final readonly class CreateGridContent
 
     /**
      * @param array<int, string> $colNamesSanitized
-     * @param list<string> $options
-     * @return bool
+     * @param list<string>       $options
      */
     private function illegalNonUniqueColnames(array $colNamesSanitized, array $options): bool
     {
@@ -67,7 +65,6 @@ final readonly class CreateGridContent
 
         $countUnique = count(array_unique($colNamesSanitized));
 
-        return ($countUnique !== count($colNamesSanitized));
+        return $countUnique !== count($colNamesSanitized);
     }
-
 }

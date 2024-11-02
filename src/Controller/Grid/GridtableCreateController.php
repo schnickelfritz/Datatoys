@@ -24,7 +24,6 @@ use Twig\Environment;
 #[Route('/grid/table/create', name: 'app_grid_table_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class GridtableCreateController
 {
-
     /*
      * A Gridtable is a collection of GridRows.
      * Each GridRow is a collection of GridCells.
@@ -34,11 +33,11 @@ final readonly class GridtableCreateController
     use FlashMessageTrait;
 
     public function __construct(
-        private CreateGridtable         $createtable,
-        private FormFactoryInterface   $formFactory,
-        private UrlGeneratorInterface  $urlGenerator,
-        private GridtableRepository     $tableRepository,
-        private Environment            $twig,
+        private CreateGridtable $createtable,
+        private FormFactoryInterface $formFactory,
+        private UrlGeneratorInterface $urlGenerator,
+        private GridtableRepository $tableRepository,
+        private Environment $twig,
     ) {
     }
 
@@ -56,10 +55,10 @@ final readonly class GridtableCreateController
         }
 
         $tables = $this->tableRepository->alltablesFiltered();
+
         return new Response($this->twig->render('grid/gridtable_create.html.twig', [
             'form_table' => $form->createView(),
             'tables' => $tables,
-
         ]));
     }
 }

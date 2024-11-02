@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Grid;
 
 use App\Entity\Gridtable;
@@ -23,7 +25,6 @@ use Webmozart\Assert\Assert;
 #[Route('/grid/content/create/{id}', name: 'app_grid_tablecontent_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class GridContentCreateController
 {
-
     use FlashMessageTrait;
 
     public function __construct(
@@ -32,8 +33,7 @@ final readonly class GridContentCreateController
         private GridtableRepository $tableRepository,
         private CreateGridContent $createGridContent,
         private Environment $twig,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request, Gridtable $table): Response
@@ -68,6 +68,5 @@ final readonly class GridContentCreateController
                 'table_selected' => $table,
             ])
         );
-
     }
 }

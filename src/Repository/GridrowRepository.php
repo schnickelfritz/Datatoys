@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Gridrow;
 use App\Entity\Gridtable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function is_array;
 
 /**
  * @extends ServiceEntityRepository<Gridrow>
@@ -18,7 +22,6 @@ class GridrowRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Gridtable $table
      * @return array<int, Gridrow>
      */
     public function allByTable(Gridtable $table): array
