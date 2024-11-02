@@ -23,9 +23,10 @@ class GridContentCreateFormType extends AbstractType
             'grid.content.create.option.concat_same_name_columns' => 'CONCAT_SAME_NAME_COLUMNS',
         ];
         $choicesSeparator = [
-            'grid.content.create.separator.tab' => 'TAB',
-            'grid.content.create.separator.comma' => 'COMMA',
-            'grid.content.create.separator.semicolon' => 'SEMICOLON',
+            'grid.content.create.separator.tab' => "\t",
+            'grid.content.create.separator.comma' => ',',
+            'grid.content.create.separator.semicolon' => ';',
+            'grid.content.create.separator.pipe' => '|',
         ];
         $firstChoiceSeparator = current($choicesSeparator);
 

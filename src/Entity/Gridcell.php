@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GridcellRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_XY', fields: ['x', 'y'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_ROWCOL', fields: ['gridrow', 'gridcol'])]
 class Gridcell
 {
     #[ORM\Id]
@@ -20,11 +20,11 @@ class Gridcell
 
     #[ORM\ManyToOne(inversedBy: 'gridcells')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridcol $x = null;
+    private ?Gridcol $gridcol = null;
 
     #[ORM\ManyToOne(inversedBy: 'gridcells')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridrow $y = null;
+    private ?Gridrow $gridrow = null;
 
     public function getId(): ?int
     {
@@ -43,26 +43,26 @@ class Gridcell
         return $this;
     }
 
-    public function getX(): ?Gridcol
+    public function getGridcol(): ?Gridcol
     {
-        return $this->x;
+        return $this->gridcol;
     }
 
-    public function setX(?Gridcol $x): static
+    public function setGridcol(?Gridcol $gridcol): static
     {
-        $this->x = $x;
+        $this->gridcol = $gridcol;
 
         return $this;
     }
 
-    public function getY(): ?Gridrow
+    public function getGridrow(): ?Gridrow
     {
-        return $this->y;
+        return $this->gridrow;
     }
 
-    public function setY(?Gridrow $y): static
+    public function setGridrow(?Gridrow $gridrow): static
     {
-        $this->y = $y;
+        $this->gridrow = $gridrow;
 
         return $this;
     }

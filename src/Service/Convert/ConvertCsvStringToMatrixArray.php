@@ -22,9 +22,8 @@ class ConvertCsvStringToMatrixArray
     private int $pointer;
     private string $error;
 
-    public function __construct(string $columnSeparator = "\t", string $escapeMarker = '"', string $linebreak = "\n")
+    public function __construct(string $escapeMarker = '"', string $linebreak = "\n")
     {
-        $this->columnSeparator = $columnSeparator;
         $this->escapeMarker = $escapeMarker;
         $this->linebreak = $linebreak;
     }
@@ -32,8 +31,9 @@ class ConvertCsvStringToMatrixArray
     /**
      * @return array<int, array<int, string>>|null
      */
-    public function toMatrix(string $csvtext): ?array
+    public function toMatrix(string $csvtext, string $columnSeparator = "\t"): ?array
     {
+        $this->columnSeparator = $columnSeparator;
         $this->reset($csvtext);
         while ($this->pointer < strlen($this->csvtext) && $this->error === '') {
             $this->parsing();
@@ -91,16 +91,14 @@ class ConvertCsvStringToMatrixArray
             $this->columnCollector[] = $this->fixInnerEscapes($column);
             $this->pointer = $this->nextSeparatorPos($this->escapeMarker . $this->columnSeparator) + strlen($this->escapeMarker) + strlen($this->columnSeparator);
         } else {
-            // wenn $column eine ungerade anzahl an escapern hat, dann müsste $column bei tab-separators verbotenerweis ein tab enthalten
-            $this->error = sprintf('fail grabbing escaped column because column content contains escaper/separator parts (%s)', $column);
+            // TODO 2024-11-02 column
+            $this->error = sprintf('fail grabbing escaped column because column content contains separator(s) (%s)', $column);
         }
     }
 
     private function fixInnerEscapes(string $text): string
     {
-        $text = str_replace($this->escapeMarker . $this->escapeMarker, $this->escapeMarker, $text);
-
-        return $text;
+        return str_replace($this->escapeMarker . $this->escapeMarker, $this->escapeMarker, $text);
     }
 
     private function grabColumn(): void

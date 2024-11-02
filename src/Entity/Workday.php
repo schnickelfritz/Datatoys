@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WorkdayRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAILNAME', fields: ['day', 'user'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_DAYUSER', fields: ['day', 'user'])]
 class Workday
 {
     #[ORM\Id]

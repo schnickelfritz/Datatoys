@@ -15,4 +15,5 @@ class FormRow
     public int $labelWidth = 3;
     public bool $toggle = false;
     public bool $translate = false;
+    public bool $plain = false;
 }

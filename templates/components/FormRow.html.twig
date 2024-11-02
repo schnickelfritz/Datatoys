@@ -40,10 +40,14 @@
         {% else %}
             {% if 'text' in field.vars.block_prefixes %}
                 {% if 'textarea' in field.vars.block_prefixes %}
-                    {{ form_widget(field, {
-                        'attr': stimulus_action('submitform', 'submit', 'keydown.ctrl+enter').toArray() |
-                        merge( stimulus_controller('textarea_autosize').toArray() )
-                    }) }}
+                    {% if plain %}
+                        {{ form_widget(field, {'attr': {'wrap': 'off'}}) }}
+                    {% else %}
+                        {{ form_widget(field, {
+                            'attr': stimulus_action('submitform', 'submit', 'keydown.ctrl+enter').toArray() |
+                            merge( stimulus_controller('textarea_autosize').toArray() )
+                        }) }}
+                    {% endif %}
                 {% else %}
                     {{ form_widget(field, {'attr': stimulus_action('submitform', 'submit', 'keydown.ctrl+enter').toArray()}) }}
                 {% endif %}

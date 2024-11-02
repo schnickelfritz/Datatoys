@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GridrowRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_TABLELINENUMBER', fields: ['gridtable', 'linenumber'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_TABLE_LINENUMBER', columns: ['gridtable_id', 'line_number'])]
 class Gridrow
 {
     #[ORM\Id]
@@ -63,7 +63,7 @@ class Gridrow
     {
         if (!$this->gridcells->contains($gridcell)) {
             $this->gridcells->add($gridcell);
-            $gridcell->setY($this);
+            $gridcell->setGridrow($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Gridrow
     {
         if ($this->gridcells->removeElement($gridcell)) {
             // set the owning side to null (unless already changed)
-            if ($gridcell->getY() === $this) {
-                $gridcell->setY(null);
+            if ($gridcell->getGridrow() === $this) {
+                $gridcell->setGridrow(null);
             }
         }
 

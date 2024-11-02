@@ -103,6 +103,7 @@ grid:
         tab: Tab
         comma: Komma (,)
         semicolon: Semikolon (;)
+        pipe: Pipe (|)
     label:
       content: Inhalt
       options: Optionen

@@ -66,7 +66,7 @@ class Gridcol
     {
         if (!$this->gridcells->contains($gridcell)) {
             $this->gridcells->add($gridcell);
-            $gridcell->setX($this);
+            $gridcell->setGridcol($this);
         }
 
         return $this;
@@ -76,8 +76,8 @@ class Gridcol
     {
         if ($this->gridcells->removeElement($gridcell)) {
             // set the owning side to null (unless already changed)
-            if ($gridcell->getX() === $this) {
-                $gridcell->setX(null);
+            if ($gridcell->getGridcol() === $this) {
+                $gridcell->setGridcol(null);
             }
         }
 
