@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridtable;
 
 use App\Entity\Gridtable;
 use App\Form\Grid\GridtableFormType;
@@ -56,7 +56,7 @@ final readonly class GridtableCreateController
 
         $tables = $this->tableRepository->alltablesFiltered();
 
-        return new Response($this->twig->render('grid/gridtable_create.html.twig', [
+        return new Response($this->twig->render('grid/table/gridtable_create.html.twig', [
             'form_table' => $form->createView(),
             'tables' => $tables,
         ]));

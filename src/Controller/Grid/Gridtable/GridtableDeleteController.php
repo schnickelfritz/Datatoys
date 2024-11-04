@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridtable;
 
 use App\Entity\Gridtable;
 use App\Trait\FlashMessageTrait;

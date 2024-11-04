@@ -28,6 +28,9 @@ class Gridcell
     #[ORM\JoinColumn(nullable: false)]
     private Gridrow $gridrow;
 
+    #[ORM\ManyToOne(inversedBy: 'gridcells')]
+    private ?Gridfile $gridfile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,6 +68,18 @@ class Gridcell
     public function setGridrow(Gridrow $gridrow): static
     {
         $this->gridrow = $gridrow;
+
+        return $this;
+    }
+
+    public function getGridfile(): ?Gridfile
+    {
+        return $this->gridfile;
+    }
+
+    public function setGridfile(?Gridfile $gridfile): static
+    {
+        $this->gridfile = $gridfile;
 
         return $this;
     }

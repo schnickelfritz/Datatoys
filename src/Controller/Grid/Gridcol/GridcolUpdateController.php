@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridcol;
 
 use App\Entity\Gridcol;
 use App\Form\Grid\GridcolUpdateFormType;
@@ -11,7 +11,6 @@ use App\Repository\GridscopeColRepository;
 use App\Service\Grid\CreateGridscopeCols;
 use App\Service\Grid\DeleteGridscopeCols;
 use App\Trait\FlashMessageTrait;
-use App\Trait\FormStringValueTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -52,7 +51,7 @@ final readonly class GridcolUpdateController
             $cols = $this->colRepository->allColumnsFiltered();
 
             return new Response(
-                $this->twig->render('grid/gridcol_update.html.twig', [
+                $this->twig->render('grid/col/gridcol_update.html.twig', [
                     'form_col' => $form->createView(),
                     'columns' => $cols,
                     'col_selected' => $col,

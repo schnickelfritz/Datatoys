@@ -52,9 +52,16 @@ class Gridtable
     #[ORM\OneToMany(targetEntity: Gridrow::class, mappedBy: 'gridtable', orphanRemoval: true)]
     private Collection $gridrows;
 
+    /**
+     * @var Collection<int, Gridfile>
+     */
+    #[ORM\ManyToMany(targetEntity: Gridfile::class, mappedBy: 'gridtable')]
+    private Collection $gridfiles;
+
     public function __construct()
     {
         $this->gridrows = new ArrayCollection();
+        $this->gridfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +202,33 @@ class Gridtable
     public function setAdditionalExpense(?int $additionalExpense): static
     {
         $this->additionalExpense = $additionalExpense;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gridfile>
+     */
+    public function getGridfiles(): Collection
+    {
+        return $this->gridfiles;
+    }
+
+    public function addGridfile(Gridfile $gridfile): static
+    {
+        if (!$this->gridfiles->contains($gridfile)) {
+            $this->gridfiles->add($gridfile);
+            $gridfile->addGridtable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGridfile(Gridfile $gridfile): static
+    {
+        if ($this->gridfiles->removeElement($gridfile)) {
+            $gridfile->removeGridtable($this);
+        }
 
         return $this;
     }

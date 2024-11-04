@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }}{{ ' :: ' }}
+    {{- 'grid.row.update.title'|trans({linenumber: row_selected.lineNumber, table_name:table_selected.name}) -}}
+{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <form {{ stimulus_controller('submitform') }} action="{{ path('app_grid_row_update', {id: row_selected.id}) }}"
+                      method="post">
+                    <twig:Row rowClass="mb-4">
+                        <h1 class="h3">
+                            <twig:Icon name="ui-checks-grid"/>
+                            {{- 'grid.row.update.title'|trans({linenumber: row_selected.lineNumber, table_name:table_selected.name}) -}}
+                        </h1>
+                    </twig:Row>
+                    {% include('grid/row/_cell_list.html.twig') with {'as_form_elements': true} %}
+                    <twig:ButtonsRow label="save" icon="floppy"/>
+                </form>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div>
+                    <a href="{{ path('app_grid_tablecontent_create', {id:table_selected.id}) }}" class="btn btn-primary">
+                        <twig:Icon name="arrow-left-circle-fill"/>{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}
+                    </a>
+                </div>
+                <div class="mt-3">
+                    <b>{{ table_selected.name }}</b>
+                </div>
+                <div class="mt-3">
+                    {% include('grid/row/_row_list.html.twig') with {'show_details': false} %}
+                </div>
+            </div>
+        </div>
+    </twig:Box>
+{% endblock %}

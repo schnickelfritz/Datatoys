@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridscope;
 
 use App\Entity\Gridscope;
 use App\Form\Grid\GridscopeFormType;
@@ -60,7 +60,7 @@ final readonly class GridscopeCreateController
 
         $scopes = $this->scopeRepository->findAll();
 
-        return new Response($this->twig->render('grid/gridscope_create.html.twig', [
+        return new Response($this->twig->render('grid/scope/gridscope_create.html.twig', [
             'form_scope' => $form->createView(),
             'scopes' => $scopes,
         ]));

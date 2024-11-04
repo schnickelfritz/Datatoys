@@ -106,6 +106,8 @@ grid:
         semicolon: Semikolon (;)
         pipe: Pipe (|)
     label:
+      addrows: 'Zeilen hinzufügen/ändern'
+      addimages: 'Dateien hochladen/ändern'
       content: Inhalt
       options: Optionen
       manual: Bedienungsanleitung
@@ -114,6 +116,8 @@ grid:
     list:
       title: Zeilen
     linenumber: 'Zeile {number}'
+    update:
+      title: 'Bearbeite Zeile {linenumber} aus Tabelle {table_name}'
   scope:
     list:
       title: Scope-Verzeichnis
@@ -229,6 +233,7 @@ flash:
   success:
     create: 'Eintrag gespeichert'
     update: 'Änderung gespeichert'
+    updates: 'Durchgeführte Änderungen: {number}'
     done: 'Aktion ausgeführt'
     bye: 'Leb wohl!'
 modal:

@@ -10,5 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class Icon
 {
     public string $name;
-    public string $name2 = '';
+    public string $label = '';
+    public bool $title = false;
+    public bool $inline = false;
 }

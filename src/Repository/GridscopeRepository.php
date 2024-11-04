@@ -23,7 +23,7 @@ class GridscopeRepository extends ServiceEntityRepository
      */
     public function choices(): array
     {
-        $choices = [];
+        $choices = ['-'=>null];
         foreach ($this->findAll() as $scope) {
             $choices[$scope->getName()] = $scope;
         }

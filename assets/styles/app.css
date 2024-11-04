@@ -156,3 +156,9 @@ u {
     height:100%;
     padding:0 5px 0 5px;
 }
+.app-item {
+    padding:3px;
+}
+.app-item-active {
+    background-color: var(--cc-2-darker-1)
+}

@@ -1,0 +1,26 @@
+{% if as_form_elements == true %}
+    {% for cell in cells %}
+        {% set colname = cell.gridcol.name %}
+        <twig:Row label="{{ colname }}" labelId="cell_{{ cell.id }}">
+            <textarea
+                    {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                    id="cell_{{ cell.id }}"
+                    name="cellvalue[{{ cell.id }}]"
+                    class="form-control"
+            >
+                {{- cell.value -}}
+            </textarea>
+        </twig:Row>
+    {% endfor %}
+{% else %}
+    {% for col_name,value in mapped_row.cells %}
+        <div class="container">
+            <div class="row {{ loop.index % 2 == 0 ? 'app-bg-stripe-1' : '' }}">
+                <div class="col-12 col-lg-2 text-start text-lg-end label">
+                    {{ col_name }}
+                </div>
+                <div class="col-12 col-lg-10 app-readable-width">{{ value }}</div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

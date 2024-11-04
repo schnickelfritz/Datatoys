@@ -27,12 +27,12 @@
     </twig:Box>
     <twig:Box>
         <twig:Row label="grid.row.list.title">
-            {{ include('grid/_row_list.html.twig') }}
+            {% include('grid/row/_row_list.html.twig') with {'show_details': true} %}
         </twig:Row>
     </twig:Box>
     <twig:Box>
         <twig:Row label="grid.table.list.title">
-            {{ include('grid/_table_list.html.twig') }}
+            {{ include('grid/table/_table_list.html.twig') }}
         </twig:Row>
     </twig:Box>
 {% endblock %}

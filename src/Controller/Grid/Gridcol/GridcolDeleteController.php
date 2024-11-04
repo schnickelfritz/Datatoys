@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridcol;
 
-use App\Entity\Gridscope;
+use App\Entity\Gridcol;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,8 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
-#[Route('/grid/scope/delete/{id}', name: 'app_grid_scope_delete', methods: [Request::METHOD_POST])]
-final readonly class GridscopeDeleteController
+#[Route('/grid/col/delete/{id}', name: 'app_grid_col_delete', methods: [Request::METHOD_POST])]
+final readonly class GridcolDeleteController
 {
     use FlashMessageTrait;
 
@@ -30,12 +30,12 @@ final readonly class GridscopeDeleteController
     ) {
     }
 
-    public function __invoke(Request $request, Gridscope $scope): Response
+    public function __invoke(Request $request, Gridcol $col): Response
     {
-        $this->entityManager->remove($scope);
+        $this->entityManager->remove($col);
         $this->entityManager->flush();
-        $this->addFlash($request, 'success', $this->translator->trans('grid.scope.delete.flash', ['name' => $scope->getName()]));
+        $this->addFlash($request, 'success', $this->translator->trans('grid.col.delete.flash', ['name' => $col->getName()]));
 
-        return new RedirectResponse($this->urlGenerator->generate('app_grid_scope_create'));
+        return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));
     }
 }

@@ -1,5 +1,27 @@
-{% if name2 != '' %}
-    <span class="position-relative pe-2"><span class="bi-{{ name }} opacity-75 align-top"></span><span class="bi-{{ name2 }} fs-5 position-absolute bottom-0 end-0"></span></span>
+{% if ',' in name %}
+    {% set names = name|split(',') %}
+    {% set name =  names[0] %}
+    {% set name2 = names[1] %}
 {% else %}
-    <span class="bi-{{ name }} pe-2"></span>
+    {% set name2 = '' %}
+{% endif %}
+{% set spacerClass = (label == '' or title == true ? '' : ' pe-2') %}
+{% set titletext = label %}
+{% if name2 != '' %}
+    {% if inline %}
+        <div class="d-inline-block position-relative{{ spacerClass }}" title="{{ titletext }}">
+            <span class="bi-{{ name }} opacity-75"></span>
+            <span class="bi-{{ name2 }} position-absolute" style="font-size:14px; right:{{ spacerClass == '' ? '-5px' : '5px' }}; bottom:-2px"></span>
+        </div>
+    {% else %}
+        <div class="d-inline-block position-relative{{ spacerClass }}" title="{{ titletext }}">
+            <span class="bi-{{ name }} opacity-75"></span>
+            <span class="bi-{{ name2 }} fs-6 position-absolute bottom-0 end-0"></span>
+        </div>
+    {% endif %}
+{% else %}
+    <span class="bi-{{ name }}{{ spacerClass }}"></span>
+{% endif %}
+{% if title != true %}
+    {{- label -}}
 {% endif %}

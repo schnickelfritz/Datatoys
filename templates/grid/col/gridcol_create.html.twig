@@ -4,7 +4,9 @@
 {% block body %}
     <twig:Box>
         <twig:Row rowClass="mb-4">
-            <h1 class="h3"><twig:Icon name="grid-3x3-gap" name2="bookmarks-fill" />{{ 'grid.col.create.title'|trans }}</h1>
+            <h1 class="h3">
+                <twig:Icon name="grid-3x3-gap,bookmarks-fill" label="{{ 'grid.col.create.title'|trans }}" />
+            </h1>
         </twig:Row>
         <twig:FormStart form="{{ form_cols }}"/>
         <twig:FormRow field="{{ form_cols.names }}"/>
@@ -19,7 +21,7 @@
     </twig:Box>
     <twig:Box>
         <twig:Row label="grid.col.list.title">
-            {{ include('grid/_col_list.html.twig') }}
+            {{ include('grid/col/_col_list.html.twig') }}
         </twig:Row>
     </twig:Box>
 {% endblock %}

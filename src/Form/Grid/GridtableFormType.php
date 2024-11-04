@@ -25,7 +25,7 @@ class GridtableFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $scopesChoices = $this->scopeRepository->choices();
-        $firstScopeChoice = current($scopesChoices);
+        //$firstScopeChoice = (empty($scopesChoices) ? null : current($scopesChoices));
 
         $builder
             ->add('name', TextType::class, [
@@ -40,7 +40,6 @@ class GridtableFormType extends AbstractType
             ->add('scope', ChoiceType::class, [
                 'label' => 'grid.table.label.scope',
                 'choices' => $scopesChoices,
-                'empty_data' => $firstScopeChoice,
                 'multiple' => false,
                 'expanded' => true,
                 'required' => false,

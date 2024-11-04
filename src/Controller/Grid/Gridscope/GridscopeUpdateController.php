@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridscope;
 
-use App\Entity\Gridtable;
-use App\Form\Grid\GridtableFormType;
-use App\Repository\GridtableRepository;
+use App\Entity\Gridscope;
+use App\Form\Grid\GridscopeFormType;
+use App\Repository\GridscopeRepository;
 use App\Trait\FlashMessageTrait;
 use App\Trait\FormStringValueTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,47 +22,48 @@ use Twig\Environment;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
-#[Route('/grid/table/update/{id}', name: 'app_grid_table_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
-final readonly class GridtableUpdateController
+#[Route('/grid/scope/update/{id}', name: 'app_grid_scope_update', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+final readonly class GridscopeUpdateController
 {
     use FlashMessageTrait;
     use FormStringValueTrait;
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private GridtableRepository $tableRepository,
+        private GridscopeRepository $scopeRepository,
         private FormFactoryInterface $formFactory,
         private UrlGeneratorInterface $urlGenerator,
         private Environment $twig,
     ) {
     }
 
-    public function __invoke(Request $request, Gridtable $table): Response
+    public function __invoke(Request $request, Gridscope $scope): Response
     {
-        $checkSumBeforeUpdate = $table->getChecksum();
-        $form = $this->formFactory->create(GridtableFormType::class, $table);
+        $checkSumBeforeUpdate = $scope->getChecksum();
+        $form = $this->formFactory->create(GridscopeFormType::class, $scope);
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            $tables = $this->tableRepository->alltablesFiltered();
+            $scopes = $this->scopeRepository->findAll();
 
             return new Response(
-                $this->twig->render('grid/gridtable_update.html.twig', [
-                    'form_table' => $form->createView(),
-                    'tables' => $tables,
-                    'table_selected' => $table,
+                $this->twig->render('grid/scope/gridscope_update.html.twig', [
+                    'form_scope' => $form->createView(),
+                    'scopes' => $scopes,
+                    'scope_selected' => $scope,
                 ])
             );
         }
-        $this->entityManager->persist($table);
+        $scope->setScopeKey(strtoupper($this->formStringValue($form, 'scopeKey')));
+        $this->entityManager->persist($scope);
         $this->entityManager->flush();
 
-        if ($checkSumBeforeUpdate === $table->getChecksum()) {
+        if ($checkSumBeforeUpdate === $scope->getChecksum()) {
             $this->addFlash($request, 'info', 'flash.info.no_changes_found');
         } else {
             $this->addFlash($request, 'success', 'flash.success.update');
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_grid_table_update', ['id' => $table->getId()]));
+        return new RedirectResponse($this->urlGenerator->generate('app_grid_scope_update', ['id' => $scope->getId()]));
     }
 }

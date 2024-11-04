@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\Gridcol;
 
-use App\Entity\Gridscope;
 use App\Form\Grid\GridcolsCreateFormType;
 use App\Repository\GridcolRepository;
 use App\Service\Grid\CreateGridcols;
@@ -21,7 +20,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
-use Webmozart\Assert\Assert;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
@@ -60,7 +58,7 @@ final readonly class GridcolCreateController
 
         $columns = $this->colRepository->allColumnsFiltered();
 
-        return new Response($this->twig->render('grid/gridcol_create.html.twig', [
+        return new Response($this->twig->render('grid/col/gridcol_create.html.twig', [
             'form_cols' => $form->createView(),
             'columns' => $columns,
         ]));

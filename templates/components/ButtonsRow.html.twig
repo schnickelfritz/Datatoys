@@ -2,23 +2,19 @@
 <div class="row {{ rowClass }}">
     <div class="col-12 col-{{ gridThreshold }}-{{ width }} offset-{{ gridThreshold }}-{{ offset }} app-col-form-content">
         <button
-                id="{{ field.vars.id }}"
-                name="{{ field_name(field) }}"
+                id="{{ field is defined ? field.vars.id : 'button1' }}"
+                name="{{ field is defined ? field_name(field) : 'button1' }}"
                 type="submit"
                 class="btn btn-primary"
         >
             {% if icon|default('') != '' %}
-
+                {% set iconlabel = label == '' ? field_label(field) : label %}
+                {% set iconlabel = field is defined ? iconlabel|trans : iconlabel %}
                 {% if field2 is null and icon2|default('') != '' %}
-                    <span class="bi-{{ icon2 }}"></span>
+                    <twig:Icon name="{{ icon }},{{ icon2 }}" label="{{ iconlabel }}"/>
+                {% else %}
+                    <twig:Icon name="{{ icon }}" label="{{ iconlabel }}"/>
                 {% endif %}
-
-                <span class="bi-{{ icon }} pe-2"></span>
-            {% endif %}
-            {% if label == '' %}
-                {{ field_label(field) }}
-            {% else %}
-                {{ label|trans }}
             {% endif %}
         </button>
 
