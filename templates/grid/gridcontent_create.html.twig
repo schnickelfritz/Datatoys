@@ -6,11 +6,17 @@
         <twig:Row rowClass="mb-4">
             <h1 class="h3"><twig:Icon name="ui-checks-grid" />{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}</h1>
         </twig:Row>
+        <twig:Row rowClass="mb-3" readableWidth>
+            <twig:AccordionSingle flush button="{{ 'grid.content.label.manual'|trans }}">
+                <div class="small">
+                    {{ 'grid.content.create.manual'|trans|raw }}
+                </div>
+            </twig:AccordionSingle>
+        </twig:Row>
         <twig:FormStart form="{{ form_content }}"/>
         <twig:FormRow field="{{ form_content.content }}" plain />
         <twig:FormRow field="{{ form_content.separator }}" toggle translate />
-        <twig:FormRow rowClass="mt-4" field="{{ form_content.options }}" toggle translate/>
-        <twig:Row rowClass="mt-3" label="grid.content.label.manual">{{ 'grid.content.create.manual'|trans|raw }}</twig:Row>
+        <twig:FormRow field="{{ form_content.options }}" toggle translate/>
         <twig:ButtonsRow
                 rowClass="pt-3"
                 icon="plus-circle"
@@ -18,6 +24,11 @@
                 cancelPath="app_grid_table_create"
         />
         {{ form_end(form_content) }}
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.row.list.title">
+            {{ include('grid/_row_list.html.twig') }}
+        </twig:Row>
     </twig:Box>
     <twig:Box>
         <twig:Row label="grid.table.list.title">

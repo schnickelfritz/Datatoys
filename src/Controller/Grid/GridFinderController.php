@@ -13,8 +13,8 @@ use Twig\Environment;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
-#[Route('/grid/hub', name: 'app_grid_hub', methods: [Request::METHOD_GET])]
-final readonly class GridHubController
+#[Route('/grid/finder', name: 'app_grid_finder', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+final readonly class GridFinderController
 {
     public function __construct(
         private Environment $twig,
@@ -23,7 +23,7 @@ final readonly class GridHubController
 
     public function __invoke(Request $request): Response
     {
-        return new Response($this->twig->render('grid/hub.html.twig', [
+        return new Response($this->twig->render('grid/gridfinder.html.twig', [
         ]));
     }
 }

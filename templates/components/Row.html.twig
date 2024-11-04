@@ -33,7 +33,7 @@
         <div class="col-auto" style="width:50px"></div>
         <div class="col-auto" style="width:75px"></div>
     {% endif %}
-    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }}">
+    <div class="col-12 col-{{ gridThreshold }}-{{ contentWidth }} {{ readableWidth == true ? 'app-readable-width' : '' }}">
         {% block content %}
         {% endblock %}
     </div>

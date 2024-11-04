@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.col.update.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap" name2="bookmarks-fill" />{{ 'grid.col.update.title'|trans }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_col }}"/>
+        <twig:FormRow field="{{ form_col.name }}"/>
+        <twig:FormRow field="{{ form_col.scopes }}" toggle />
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="floppy"
+                field="{{ form_col.submit }}"
+                label="grid.col.update.submitbutton"
+                cancelPath="app_grid_col_create"
+                modalId="col_delete"
+                modalIcon="eraser-fill"
+                modalLabel="{{ 'modal.delete.button'|trans }}"
+        />
+        {{ form_end(form_col) }}
+        <twig:ModalDeleteFormContainer
+                id="col_delete"
+                title="{{ 'grid.col.delete.title' }}"
+                path="app_grid_col_delete"
+                deleteId="{{ col_selected.id }}"
+        >
+            {{ 'grid.col.delete.confirm_text'|trans({'%name%': col_selected.name}, 'messages')|raw }}
+        </twig:ModalDeleteFormContainer>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.col.list.title">
+            {{ include('grid/_col_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

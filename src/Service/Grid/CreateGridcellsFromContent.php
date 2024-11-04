@@ -14,6 +14,9 @@ use function in_array;
 
 final readonly class CreateGridcellsFromContent
 {
+
+    // TODO 2024-11-04 ME: same-name-options (skip, concat) berücksichtigen
+
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GridcellRepository $cellRepository,

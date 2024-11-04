@@ -1,0 +1,25 @@
+{% set show = expand|default(false) ? 'show' : '' %}
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ accordionId }}_{{ itemId }}"
+                aria-expanded="false"
+                aria-controls="{{ accordionId }}_{{ itemId }}"
+        >
+            {{ button|raw }}
+        </button>
+    </h2>
+    <div
+            id="{{ accordionId }}_{{ itemId }}"
+            class="accordion-collapse collapse {{ show }}"
+            data-bs-parent="#{{ accordionId }}"
+    >
+        <div class="accordion-body">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>

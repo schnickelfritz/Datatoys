@@ -19,11 +19,11 @@ class GridscopeRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array<string, Gridscope|null>
+     * @return array<string, Gridscope>
      */
     public function choices(): array
     {
-        $choices = ['-' => null];
+        $choices = [];
         foreach ($this->findAll() as $scope) {
             $choices[$scope->getName()] = $scope;
         }

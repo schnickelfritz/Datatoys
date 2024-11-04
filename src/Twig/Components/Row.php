@@ -22,4 +22,6 @@ class Row
     public int $appendWidth = 0;
     public string $prepend = '';
     public int $prependWidth = 0;
+    public bool $readableWidth = false;
+
 }

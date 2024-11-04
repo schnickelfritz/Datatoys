@@ -51,7 +51,7 @@ final readonly class GridcolCreateController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newCols = $this->createGridcols->createMultiple($this->formStringValue($form, 'names'));
+            $this->createGridcols->createMultiple($this->formStringValue($form, 'names'));
             $this->linkNewColsToScope($form);
             $this->addFlash($request, 'success', 'flash.success.create');
 
@@ -68,15 +68,9 @@ final readonly class GridcolCreateController
 
     private function linkNewColsToScope(FormInterface $form): void
     {
-        $doLinkColsToScope = $form->get('linkColsToScope')->getData();
-        Assert::boolean($doLinkColsToScope, 'should be boolean (from checkbox)');
-        if ($doLinkColsToScope === false) {
-            return;
+        $scopes = $form->get('scopes')->getData();
+        if (is_array($scopes)) {
+            $this->createGridscopeCols->createMultiple($this->formStringValue($form, 'names'), $scopes);
         }
-        $scope = $form->get('scope')->getData();
-        if (!$scope instanceof Gridscope) {
-            return;
-        }
-        $this->createGridscopeCols->createMultiple($this->formStringValue($form, 'names'), $scope);
     }
 }

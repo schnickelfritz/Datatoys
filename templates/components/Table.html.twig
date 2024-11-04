@@ -1,12 +1,14 @@
-<table class="table{{ small == true ? ' table-sm' : '' }} table-dark{{ stripes == true ? ' table-striped' : '' }} table-hover">
-    <thead>
-    <tr>
-        {% for th in headers %}
-            <th scope="col">{{ th|trans }}</th>
-        {% endfor %}
-    </tr>
-    </thead>
-    <tbody class="table-group-divider">
-    {% block content %}{% endblock %}
-    </tbody>
-</table>
+<div class="{{ small == true ? 'd-inline-block' : '' }}">
+    <table class="table table-dark{{ stripes == true ? ' table-striped' : '' }} table-hover">
+        <thead>
+        <tr>
+            {% for th in headers %}
+                <th scope="col">{{ th|trans }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% block content %}{% endblock %}
+        </tbody>
+    </table>
+</div>

@@ -137,6 +137,12 @@ u {
     font-size: 0.8em;
     opacity: 0.8;
 }
+.app-bg-stripe-1 {
+    background-color:var(--cc-darker) !important;
+}
+.app-bg-stripe-2 {
+    background-color:var(--cc-black) !important;
+}
 .app-bg-highlight-2 {
     background-color:var(--cc-1-darker-1) !important;
 }

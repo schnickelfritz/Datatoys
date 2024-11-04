@@ -71,4 +71,15 @@ class Gridcol
     {
         return $this->gridscopeCols;
     }
+
+    public function getChecksum(): string
+    {
+        $allValues = [
+            $this->getName(),
+        ];
+        $serializedValues = serialize($allValues);
+
+        return md5($serializedValues);
+    }
+
 }

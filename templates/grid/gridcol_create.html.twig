@@ -4,12 +4,12 @@
 {% block body %}
     <twig:Box>
         <twig:Row rowClass="mb-4">
-            <h1 class="h3"><twig:Icon name="bookmarks-fill" />{{ 'grid.col.create.title'|trans }}</h1>
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap" name2="bookmarks-fill" />{{ 'grid.col.create.title'|trans }}</h1>
         </twig:Row>
         <twig:FormStart form="{{ form_cols }}"/>
         <twig:FormRow field="{{ form_cols.names }}"/>
-        <twig:FormRow rowClass="mt-2" field="{{ form_cols.linkColsToScope }}" />
-        <twig:FormRow field="{{ form_cols.scope }}" toggle />
+        <twig:Row>{{ 'grid.col.scopes_manual'|trans }}</twig:Row>
+        <twig:FormRow field="{{ form_cols.scopes }}" toggle />
         <twig:ButtonsRow
                 rowClass="pt-3"
                 icon="plus-circle"

@@ -8,7 +8,7 @@
             class="{% if col_selected|default() and col_selected.id == column.id %}table-active{% endif %}"
         >
             <td>
-                <a href="{{ path('app_grid_table_update', {'id': column.id}) }}" class="btn btn-primary">
+                <a href="{{ path('app_grid_col_update', {'id': column.id}) }}" class="btn btn-primary">
                     <span class="bi-pencil"></span>
                 </a>
             </td>

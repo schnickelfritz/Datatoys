@@ -1,1 +1,5 @@
-<span class="bi-{{ name }} pe-2"></span>
+{% if name2 != '' %}
+    <span class="position-relative pe-2"><span class="bi-{{ name }} opacity-75 align-top"></span><span class="bi-{{ name2 }} fs-5 position-absolute bottom-0 end-0"></span></span>
+{% else %}
+    <span class="bi-{{ name }} pe-2"></span>
+{% endif %}

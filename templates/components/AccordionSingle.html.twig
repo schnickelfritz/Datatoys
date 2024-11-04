@@ -1,0 +1,27 @@
+{% set show = expand|default(false) ? 'show' : '' %}
+<div class="accordion {{ flush == true ? 'accordion-flush' : '' }}" id="{{ id }}">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ id }}_item"
+                    aria-expanded="false"
+                    aria-controls="{{ id }}_item"
+            >
+                {{ button|raw }}
+            </button>
+        </h2>
+        <div
+                id="{{ id }}_item"
+                class="accordion-collapse collapse {{ show }}"
+                data-bs-parent="#{{ id }}"
+        >
+            <div class="accordion-body">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

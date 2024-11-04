@@ -42,10 +42,39 @@ class GridscopeColRepository extends ServiceEntityRepository
         foreach ($scopeCols as $scopeCol) {
             if ($scopeCol instanceof GridscopeCol) {
                 $col = $scopeCol->getCol();
-                $cols[] = $scopeCol->getCol();
+                $cols[] = $col;
             }
         }
 
         return $cols;
+    }
+
+    /**
+     * @param Gridcol $col
+     * @return array<int, Gridscope>
+     */
+    public function scopesByCol(Gridcol $col): array
+    {
+        $scopeCols = $this->createQueryBuilder('c')
+            ->andWhere('c.col = :col')
+            ->setParameter('col', $col)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        if (!is_array($scopeCols)) {
+            return [];
+        }
+
+        $scopes = [];
+        foreach ($scopeCols as $scopeCol) {
+            if ($scopeCol instanceof GridscopeCol) {
+                $scope = $scopeCol->getScope();
+                $scopes[] = $scope;
+            }
+        }
+
+        return $scopes;
+
     }
 }

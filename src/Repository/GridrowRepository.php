@@ -27,6 +27,8 @@ class GridrowRepository extends ServiceEntityRepository
     public function allByTable(Gridtable $table): array
     {
         $rows = $this->createQueryBuilder('r')
+            ->leftJoin('r.gridcells', 'cells')
+            ->addSelect('cells')
             ->andWhere('r.gridtable = :table')
             ->setParameter('table', $table)
             ->getQuery()
@@ -35,4 +37,5 @@ class GridrowRepository extends ServiceEntityRepository
 
         return is_array($rows) ? $rows : [];
     }
+
 }

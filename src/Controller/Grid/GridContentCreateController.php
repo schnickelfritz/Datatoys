@@ -6,8 +6,10 @@ namespace App\Controller\Grid;
 
 use App\Entity\Gridtable;
 use App\Form\Grid\GridContentCreateFormType;
+use App\Repository\GridrowRepository;
 use App\Repository\GridtableRepository;
 use App\Service\Grid\CreateGridContent;
+use App\Service\Grid\MapGridrowsContent;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,6 +33,7 @@ final readonly class GridContentCreateController
         private FormFactoryInterface $formFactory,
         private UrlGeneratorInterface $urlGenerator,
         private GridtableRepository $tableRepository,
+        private MapGridrowsContent $mapGridrowsContent,
         private CreateGridContent $createGridContent,
         private Environment $twig,
     ) {
@@ -60,11 +63,13 @@ final readonly class GridContentCreateController
         }
 
         $tables = $this->tableRepository->alltablesFiltered();
+        $mappedRows = $this->mapGridrowsContent->mapRows($table);
 
         return new Response(
             $this->twig->render('grid/gridcontent_create.html.twig', [
                 'form_content' => $form->createView(),
                 'tables' => $tables,
+                'mapped_rows' => $mappedRows,
                 'table_selected' => $table,
             ])
         );

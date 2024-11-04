@@ -8,6 +8,7 @@ use App\Entity\Gridcol;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Webmozart\Assert\Assert;
 use function is_array;
 
 /**
@@ -43,7 +44,9 @@ class GridcolRepository extends ServiceEntityRepository
         $names = [];
         $allCols = $this->findAll();
         foreach ($allCols as $col) {
-            $names[] = $col->getName();
+            $id = $col->getId();
+            Assert::integer($id, 'integer expected');
+            $names[$id] = $col->getName();
         }
 
         return $names;

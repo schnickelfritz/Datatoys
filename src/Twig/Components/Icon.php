@@ -10,4 +10,5 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class Icon
 {
     public string $name;
+    public string $name2 = '';
 }

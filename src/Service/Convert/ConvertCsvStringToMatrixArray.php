@@ -6,7 +6,7 @@ namespace App\Service\Convert;
 
 use function strlen;
 
-// TODO 2024-07-01 SESSION-TOPIC: Wie würde man eine Klasse wie diese (csv-text to assoc array) am besten aufbauen?
+// TODO 2024-07-01 HOW-TO: Wie würde man eine Klasse wie diese (csv-text to assoc array) am besten aufbauen?
 
 class ConvertCsvStringToMatrixArray
 {

@@ -10,7 +10,7 @@
     'grid.table.label.sources',
     'grid.table.label.expense',
     'grid.table.label.notes',
-] }}" small>
+] }}">
     {% for table in tables %}
         <tr
             class="{% if table_selected|default() and table_selected.id == table.id %}table-active{% endif %}"

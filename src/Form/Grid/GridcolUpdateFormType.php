@@ -6,13 +6,13 @@ namespace App\Form\Grid;
 
 use App\Repository\GridscopeRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class GridcolsCreateFormType extends AbstractType
+class GridcolUpdateFormType extends AbstractType
 {
     public function __construct(
         private readonly GridscopeRepository $scopeRepository,
@@ -22,21 +22,23 @@ class GridcolsCreateFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $scopesChoices = $this->scopeRepository->choices();
-        $firstScopeChoice = current($scopesChoices);
 
         $builder
-            ->add('names', TextareaType::class, [
-                'label' => 'grid.col.label.names',
+            ->add('name', TextareaType::class, [
+                'label' => 'grid.col.label.name',
                 'attr' => [
                     'focus' => true,
                 ],
             ])
             ->add('scopes', ChoiceType::class, [
-                'required' => false,
-                'label' => 'grid.col.label.scopes',
+                'label' => 'grid.table.label.scope',
                 'choices' => $scopesChoices,
+                'data' => $options['selected_scopes'],
                 'multiple' => true,
+                'mapped' => false,
                 'expanded' => true,
+                'required' => false,
+                'placeholder' => false,
                 'attr' => [
                 ],
             ])
@@ -44,5 +46,12 @@ class GridcolsCreateFormType extends AbstractType
                 'label' => 'grid.col.create.submitbutton',
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'selected_scopes' => null,
+        ]);
     }
 }
