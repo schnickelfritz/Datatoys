@@ -16,4 +16,5 @@ class NavItem
     public string $labelDirect = '';
     public mixed $path = '';
     public string $class = '';
+    public string $settingkey = '';
 }

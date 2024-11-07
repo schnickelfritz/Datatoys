@@ -53,14 +53,20 @@ user:
   create:
     title: 'Account einrichten'
     submitbutton: 'Account einrichten'
-    explain: 'Mit der Angabe eines Passworts, dass den Vorgaben entspricht, und dem Betätigen des Buttons bekommst du einen Account. Danach kannst du dich hier anmelden und mitmachen.'
+    explain: >
+      Mit der Angabe eines Passworts, dass den Vorgaben entspricht, und dem Betätigen des Buttons
+      bekommst du einen Account. Danach kannst du dich hier anmelden und mitmachen.
   update:
     title: Dein Account
     submitbutton: Ändern
   delete:
     title: 'Löschen deines Accounts'
     deletebutton: 'Ja, ich bin sicher, dass ich meinen Account löschen will!'
-    confirm_text: 'Schade, dass du gehst! Aber bedenke: Etwas von dir wird bleiben! Vor deinem Abschied bedenke nämlich, dass einige deiner Beiträge hier bleiben, selbst wenn du weg bist. Erinnere dich diesbezüglich an die Nutzungsbedingungen, denen du zugestimmt hast.<br><br>Bist du sicher, dass du deinen Account löschen willst? Das Löschen ist unwiderruflich und passiert unmittelbar!'
+    confirm_text: >
+      Schade, dass du gehst! Aber bedenke: Etwas von dir wird bleiben! Vor deinem Abschied bedenke nämlich,
+      dass einige deiner Beiträge hier bleiben, selbst wenn du weg bist.
+      Erinnere dich diesbezüglich an die Nutzungsbedingungen, denen du zugestimmt hast.<br><br>
+      Bist du sicher, dass du deinen Account löschen willst? Das Löschen ist unwiderruflich und passiert unmittelbar!
   label:
     name: Dein Name
     email: Deine E-Mail-Adresse
@@ -94,12 +100,20 @@ grid:
     submitbutton: Inhalt einfügen
     create:
       title: 'Inhalte für »{name}« einfügen'
-      manual: 'Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).<br>In der ersten Zeile werden Spaltenüberschriften erwartet.<br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.<br>Zu den Optionen: <ul><li>Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert. Es zählt die Zeilennummer! Fügst du nach Umsortierung der Quelldaten ein, kann das unerwünschte Folgen haben.<li>Wenn du das Einfügen neuer Felder erlaubst, werden Felder angelegt, deren Namen nicht vorhanden sind. Vergisst du das Einfügen der Überschriften, kann das Einfügen crashen!<li>Ohne die Optionen zu gleichnamigen Feldern bricht das gesamte Einfügen ab, falls gleichnamige Felder vorhanden sind</ul>'
+      manual: >
+        Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).
+        <br>In der ersten Zeile werden Spaltenüberschriften erwartet, die zu Merkmalsnamen werden.
+        <br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.
+        <br>Zu den Optionen: <ul><li>Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert.
+        Es zählt die Zeilennummer! Fügst du nach Umsortierung der Quelldaten ein, kann das unerwünschte Folgen haben.
+        <li>Wenn du das Einfügen neuer Merkmale erlaubst, werden Merkmale angelegt, deren Namen nicht vorhanden sind.
+        Vergisst du das Einfügen der Überschriften, kann das Einfügen crashen!<li>Ohne die Optionen zu gleichnamigen
+        Merkmalen bricht das gesamte Einfügen ab, falls gleichnamige Merkmale vorhanden sind</ul>
       option:
         update: Aktualisieren
-        allow_new_columns: Einfügen neuer Felder erlauben
-        skip_same_name_columns: Gleichnamige Felder überspringen
-        concat_same_name_columns: Werte gleichnamiger Felder verknüpfen
+        allow_new_columns: Einfügen neuer Merkmale erlauben
+        skip_same_name_columns: Gleichnamige Merkmale überspringen
+        concat_same_name_columns: Werte gleichnamiger Merkmale verknüpfen
       separator:
         tab: Tab
         comma: Komma (,)
@@ -137,21 +151,27 @@ grid:
       key: Schlüssel
       description: Beschreibung
   col:
-    scopes_manual: 'Du kannst (musst aber nicht) neue Felder mit Scopes verknüpfen'
+    scopes_manual: 'Du kannst (musst aber nicht) neue Merkmale mit Scopes verknüpfen:'
     list:
-      title: Felder-Verzeichnis
+      title: Merkmalsverzeichnis
+    placeholder:
+      names: 'Eingabe mehrerer Namen möglich. Erlaubte Trenner: Pipe, Semikolon, Zeilenumbruch, Tab'
     label:
       update: Ändern
-      names: Feldnamen
-      name: Feld
+      names: Merkmale
+      name: Merkmal
       link_to_scope: Mit einem Scope verknüpfen
       scopes: Scopes
     create:
-      title: Felder
-      submitbutton: Neue Felder erstellen
+      title: Merkmale
+      submitbutton: Neue Merkmale erstellen
     update:
-      title: Feld ändern
+      title: Merkmal ändern
       submitbutton: Änderung speichern
+    finder:
+      title: Finden/Filtern
+      placeholder: Suchbegriff
+      submitbutton: Finden/Filtern
   table:
     list:
       title: Tabellen
@@ -181,24 +201,38 @@ grid:
       done: Fertig
     create:
       title: Tabelle erstellen
-menu:
-  Admin: Admin
-  Candidates: Kandidaten
-  Users: Benutzer
-  Home: Home
-  'Grid Hub': 'Grid'
-  'Grid Col': 'Felder'
-  'Grid Table': 'Tabellen'
-  'Grid Scope': 'Scopes'
-  'My Plan': Mein Arbeitsplan
-  'Our Plan': Einsatzplan
-  Login: Anmelden
-  You: Dein Account
-  Logout: Abmelden
-  Impressum: Impressum
-  Privacy: Datenschutz
-  Contact: Kontakt
-optional: optional
+  setting_type:
+    label:
+      sortindex: Sortier-Reihenfolge *
+      required: Pflichtangabe
+      type_text: 'Typ: Einzeiliger Text (Standard)'
+      type_textarea: 'Typ: Text'
+      type_filename: 'Typ: Dateiname'
+      type_ean_list: 'Typ: EAN-Liste'
+      unit: Einheit *
+      description: Beschreibung
+      groupname: Gruppenname *
+      required_in_group: Pflichtangabe innerhalb einer Gruppe
+      textlength_min: 'Minimale Länge (Zeichen) *'
+      textlength_max: 'Maximale Zeichenanzahl *'
+      imagewidth_min: 'Bild: Mindestbreite (Pixel) *'
+      imagewidth_max: 'Bild: Maximalbreite (Pixel) *'
+      imageheight_min: 'Bild: Mindesthöhe (Pixel) *'
+      imageheight_max: 'Bild: Maximalhöhe (Pixel) *'
+      filesize_max: 'Maximale Dateigröße (KB) *'
+  setting:
+    list:
+      title: 'Einstellungen für Scope »{scope}«'
+    create:
+      title: 'Neue Einstellung für Scope »{scope}«'
+      submitbutton: Hinzufügen
+    label:
+      update: Ändern
+      colname: Merkmal
+      type: Einstellung
+      columns: Geltend für Merkmale
+      parameter: Wert (* wenn erforderlich)
+      edit: Einstellungen
 roles:
   admin: 'Super-Admin'
   gridadmin: 'Grid-Admin'
@@ -208,7 +242,11 @@ contact:
   title: Deine Botschaft
   subtitle: Nutze diese Stelle, um mit den Betreibern dieser Webseite Kontakt aufzunehmen.
   submitbutton: Sende deine Botschaft
-  privacy_hint: 'Normalerweise wird deine Botschaft verarbeitet, ohne dass deine Identität preisgegeben wird &ndash; <b>auch wenn du angemeldet bist</b>. Wenn du deine <u>E-Mail-Adresse</u> angibst (freiwillig), gibst du damit natürlich auch deine Identität preis.<br>Wenn du Rückmeldung von uns erwartest, müsstest du deine <u>E-Mail-Adresse</u> angeben, sonst wissen wir nicht, an wen wir uns wenden sollen.'
+  privacy_hint: >
+    Normalerweise wird deine Botschaft verarbeitet, ohne dass deine Identität preisgegeben wird &ndash;
+    <b>auch wenn du angemeldet bist</b>. Wenn du deine <u>E-Mail-Adresse</u> angibst (freiwillig),
+    gibst du damit natürlich auch deine Identität preis.<br>Wenn du Rückmeldung von uns erwartest,
+    müsstest du deine <u>E-Mail-Adresse</u> angeben, sonst wissen wir nicht, an wen wir uns wenden sollen.
   label:
     about: Betrifft
     message: Deine Botschaft
@@ -244,3 +282,24 @@ modal:
     submitbutton: 'Ja, Löschen!'
 close_view: 'Abbrechen'
 save: Speichern
+menu:
+  Admin: Admin
+  Candidates: Kandidaten
+  Users: Benutzer
+  Home: Home
+  'Grid Hub': 'Grid'
+  'Grid Col': 'Merkmale'
+  'Grid Table': 'Tabellen'
+  'Grid Scope': 'Scopes'
+  'Grid Setting': Einstellungen
+  'Grid Row Update': Zeile
+  'Grid Content': Inhalt
+  'My Plan': Mein Arbeitsplan
+  'Our Plan': Einsatzplan
+  Login: Anmelden
+  You: Dein Account
+  Logout: Abmelden
+  Impressum: Impressum
+  Privacy: Datenschutz
+  Contact: Kontakt
+optional: optional

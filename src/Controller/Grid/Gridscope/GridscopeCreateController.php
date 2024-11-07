@@ -9,6 +9,7 @@ use App\Form\Grid\GridscopeFormType;
 use App\Repository\GridscopeRepository;
 use App\Trait\FlashMessageTrait;
 use App\Trait\FormStringValueTrait;
+use App\Trait\GridscopeKeyTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -50,7 +51,6 @@ final readonly class GridscopeCreateController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $scope->setScopeKey(strtoupper($this->formStringValue($form, 'scopeKey')));
             $this->entityManager->persist($scope);
             $this->entityManager->flush();
             $this->addFlash($request, 'success', 'flash.success.create');

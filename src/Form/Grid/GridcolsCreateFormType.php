@@ -29,6 +29,7 @@ class GridcolsCreateFormType extends AbstractType
                 'label' => 'grid.col.label.names',
                 'attr' => [
                     'focus' => true,
+                    'placeholder' => 'grid.col.placeholder.names',
                 ],
             ])
             ->add('scopes', ChoiceType::class, [

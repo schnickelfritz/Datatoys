@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Grid\Gridcol;
 
 use App\Form\Grid\GridcolsCreateFormType;
-use App\Repository\GridcolRepository;
 use App\Service\Grid\CreateGridcols;
 use App\Service\Grid\CreateGridscopeCols;
+use App\Service\Grid\GetFilteredGridcols;
 use App\Trait\FlashMessageTrait;
 use App\Trait\FormStringValueTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -38,7 +38,7 @@ final readonly class GridcolCreateController
         private CreateGridscopeCols $createGridscopeCols,
         private FormFactoryInterface $formFactory,
         private UrlGeneratorInterface $urlGenerator,
-        private GridcolRepository $colRepository,
+        private GetFilteredGridcols $filteredGridcols,
         private Environment $twig,
     ) {
     }
@@ -51,16 +51,18 @@ final readonly class GridcolCreateController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->createGridcols->createMultiple($this->formStringValue($form, 'names'));
             $this->linkNewColsToScope($form);
+
             $this->addFlash($request, 'success', 'flash.success.create');
 
             return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));
         }
 
-        $columns = $this->colRepository->allColumnsFiltered();
+        list($columns, $filter) = $this->filteredGridcols->getColsAndFilter();
 
         return new Response($this->twig->render('grid/col/gridcol_create.html.twig', [
             'form_cols' => $form->createView(),
             'columns' => $columns,
+            'columns_filter' => $filter,
         ]));
     }
 

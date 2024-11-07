@@ -54,7 +54,6 @@ final readonly class GridscopeUpdateController
                 ])
             );
         }
-        $scope->setScopeKey(strtoupper($this->formStringValue($form, 'scopeKey')));
         $this->entityManager->persist($scope);
         $this->entityManager->flush();
 

@@ -7,8 +7,11 @@
     <twig:Box>
         <div class="row">
             <div class="col-12 col-lg-8">
-                <form {{ stimulus_controller('submitform') }} action="{{ path('app_grid_row_update', {id: row_selected.id}) }}"
-                      method="post">
+                <form
+                        {{ stimulus_controller('submitform') }}
+                        action="{{ path('app_grid_row_update', {id: row_selected.id}) }}"
+                        method="post"
+                >
                     <twig:Row rowClass="mb-4">
                         <h1 class="h3">
                             <twig:Icon name="ui-checks-grid"/>
@@ -21,8 +24,10 @@
             </div>
             <div class="col-12 col-lg-4">
                 <div>
-                    <a href="{{ path('app_grid_tablecontent_create', {id:table_selected.id}) }}" class="btn btn-primary">
-                        <twig:Icon name="arrow-left-circle-fill"/>{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}
+                    <a href="{{ path('app_grid_tablecontent_create', {id:table_selected.id}) }}"
+                       class="btn btn-primary">
+                        <twig:Icon
+                                name="arrow-left-circle-fill"/>{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}
                     </a>
                 </div>
                 <div class="mt-3">

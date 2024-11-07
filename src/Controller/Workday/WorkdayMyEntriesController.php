@@ -6,7 +6,7 @@ namespace App\Controller\Workday;
 
 use App\Entity\User;
 use App\Repository\WorkdayRepository;
-use App\Service\Datetime\MakeDaylist;
+use App\Service\Datetime\CreateDaylist;
 use App\Service\User\Me;
 use DateTime;
 use DateTimeInterface;
@@ -25,11 +25,11 @@ use Twig\Environment;
 final readonly class WorkdayMyEntriesController
 {
     public function __construct(
-        private WorkdayRepository $workdayRepository,
+        private WorkdayRepository     $workdayRepository,
         private UrlGeneratorInterface $urlGenerator,
-        private MakeDaylist $makeDaylist,
-        private Me $me,
-        private Environment $twig,
+        private CreateDaylist         $makeDaylist,
+        private Me                    $me,
+        private Environment           $twig,
     ) {
     }
 

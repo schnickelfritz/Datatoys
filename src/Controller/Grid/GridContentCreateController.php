@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Controller\Grid;
 
 use App\Entity\Gridtable;
+use App\Enum\UserSettingEnum;
 use App\Form\Grid\GridContentCreateFormType;
 use App\Repository\GridrowRepository;
 use App\Repository\GridtableRepository;
 use App\Service\Grid\CreateGridContent;
 use App\Service\Grid\MapGridrowsContent;
+use App\Service\UserSetting\SetUserSetting;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,6 +36,7 @@ final readonly class GridContentCreateController
         private UrlGeneratorInterface $urlGenerator,
         private GridtableRepository $tableRepository,
         private MapGridrowsContent $mapGridrowsContent,
+        private SetUserSetting $setUserSetting,
         private CreateGridContent $createGridContent,
         private Environment $twig,
     ) {
@@ -41,6 +44,7 @@ final readonly class GridContentCreateController
 
     public function __invoke(Request $request, Gridtable $table): Response
     {
+        $this->setUserSetting->setSetting(UserSettingEnum::GRIDTABLE_ID, $table->getId());
         $form = $this->formFactory->create(GridContentCreateFormType::class);
         $form->handleRequest($request);
 

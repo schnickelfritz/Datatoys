@@ -162,3 +162,7 @@ u {
 .app-item-active {
     background-color: var(--cc-2-darker-1)
 }
+.app-textarea-small {
+    max-height:30px;
+    min-width: 300px;
+}

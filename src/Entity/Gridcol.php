@@ -33,10 +33,17 @@ class Gridcol
     #[ORM\OneToMany(targetEntity: GridscopeCol::class, mappedBy: 'col', orphanRemoval: true)]
     private Collection $gridscopeCols;
 
+    /**
+     * @var Collection<int, Gridsetting>
+     */
+    #[ORM\OneToMany(targetEntity: Gridsetting::class, mappedBy: 'gridcol')]
+    private Collection $gridsettings;
+
     public function __construct()
     {
         $this->gridcells = new ArrayCollection();
         $this->gridscopeCols = new ArrayCollection();
+        $this->gridsettings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,6 +87,36 @@ class Gridcol
         $serializedValues = serialize($allValues);
 
         return md5($serializedValues);
+    }
+
+    /**
+     * @return Collection<int, Gridsetting>
+     */
+    public function getGridsettings(): Collection
+    {
+        return $this->gridsettings;
+    }
+
+    public function addGridsetting(Gridsetting $gridsetting): static
+    {
+        if (!$this->gridsettings->contains($gridsetting)) {
+            $this->gridsettings->add($gridsetting);
+            $gridsetting->setGridcol($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGridsetting(Gridsetting $gridsetting): static
+    {
+        if ($this->gridsettings->removeElement($gridsetting)) {
+            // set the owning side to null (unless already changed)
+            if ($gridsetting->getGridcol() === $this) {
+                $gridsetting->setGridcol(null);
+            }
+        }
+
+        return $this;
     }
 
 }

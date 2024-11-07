@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserSettingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserSettingRepository::class)]
@@ -22,7 +23,7 @@ class UserSetting
     #[ORM\Column(length: 50)]
     private ?string $settingKey = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $settingValue = null;
 
     public function getId(): ?int

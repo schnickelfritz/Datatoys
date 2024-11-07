@@ -43,10 +43,17 @@ class Gridscope
     #[ORM\OneToMany(targetEntity: GridscopeCol::class, mappedBy: 'scope', orphanRemoval: true)]
     private Collection $gridscopeCols;
 
+    /**
+     * @var Collection<int, Gridsetting>
+     */
+    #[ORM\OneToMany(targetEntity: Gridsetting::class, mappedBy: 'scope')]
+    private Collection $gridsettings;
+
     public function __construct()
     {
         $this->gridtables = new ArrayCollection();
         $this->gridscopeCols = new ArrayCollection();
+        $this->gridsettings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +163,36 @@ class Gridscope
             // set the owning side to null (unless already changed)
             if ($gridscopeCol->getScope() === $this) {
                 $gridscopeCol->setScope(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gridsetting>
+     */
+    public function getGridsettings(): Collection
+    {
+        return $this->gridsettings;
+    }
+
+    public function addGridsetting(Gridsetting $gridsetting): static
+    {
+        if (!$this->gridsettings->contains($gridsetting)) {
+            $this->gridsettings->add($gridsetting);
+            $gridsetting->setScope($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGridsetting(Gridsetting $gridsetting): static
+    {
+        if ($this->gridsettings->removeElement($gridsetting)) {
+            // set the owning side to null (unless already changed)
+            if ($gridsetting->getScope() === $this) {
+                $gridsetting->setScope(null);
             }
         }
 

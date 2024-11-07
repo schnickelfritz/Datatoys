@@ -1,0 +1,27 @@
+<twig:Table headers="{{ [
+    'grid.setting.label.colname',
+    'grid.setting.label.type',
+    'grid.setting.label.parameter',
+] }}" small :stripes="false">
+    {% set colname_shown = '' %}
+    {% set odd = false %}
+    {% for setting_col in settings %}
+        {% set class = odd ? 'app-bg-stripe-1' : 'app-bg-stripe-2' %}
+        {% if setting_col.attrs %}
+            {% for attr in setting_col.attrs %}
+                <tr>
+                    <td class="{{ class }}">{{ loop.index == 1 ? setting_col.col_name : '' }}</td>
+                    <td class="{{ class }}">{{ attr.type.label|trans }}</td>
+                    <td class="{{ class }}">{{ attr.setting.parameter }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td class="{{ class }}">{{ setting_col.col_name }}</td>
+                <td class="{{ class }}"></td>
+                <td class="{{ class }}"></td>
+            </tr>
+        {% endif %}
+        {% set odd = odd == false %}
+    {% endfor %}
+</twig:Table>

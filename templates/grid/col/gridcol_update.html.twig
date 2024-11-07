@@ -29,9 +29,5 @@
             {{ 'grid.col.delete.confirm_text'|trans({'%name%': col_selected.name}, 'messages')|raw }}
         </twig:ModalDeleteFormContainer>
     </twig:Box>
-    <twig:Box>
-        <twig:Row label="grid.col.list.title">
-            {{ include('grid/col/_col_list.html.twig') }}
-        </twig:Row>
-    </twig:Box>
+    {{ include('grid/col/_col_list_action_box.html.twig') }}
 {% endblock %}

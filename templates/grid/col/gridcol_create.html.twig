@@ -19,9 +19,5 @@
         />
         {{ form_end(form_cols) }}
     </twig:Box>
-    <twig:Box>
-        <twig:Row label="grid.col.list.title">
-            {{ include('grid/col/_col_list.html.twig') }}
-        </twig:Row>
-    </twig:Box>
+    {{ include('grid/col/_col_list_action_box.html.twig') }}
 {% endblock %}

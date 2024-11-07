@@ -19,16 +19,7 @@
                 />
             {% endif %}
             {% if is_granted('ROLE_WORKTIME_PLANNER') %}
-                <twig:NavItem
-                        route="app_planner_all_entries"
-                        label="Our Plan"
-                        icon="calendar2-range"
-                />
-                <twig:NavItem
-                        route="app_planner_my_entries"
-                        label="My Plan"
-                        icon="calendar3"
-                />
+                <twig:NavItem route="app_planner_all_entries" routePrefix="app_planner" label="Our Plan" icon="calendar2-range" />
             {% endif %}
             {% if is_granted('ROLE_USERMANAGER') %}
                 <twig:NavItem

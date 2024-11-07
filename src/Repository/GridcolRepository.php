@@ -26,6 +26,7 @@ class GridcolRepository extends ServiceEntityRepository
      */
     public function allColumnsFiltered(): array
     {
+
         $columns = $this->createQueryBuilder('c')
             ->leftJoin('c.gridscopeCols', 'scopes')
             ->addSelect('scopes')

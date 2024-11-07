@@ -29,7 +29,7 @@ final readonly class CreateGridcols
         $existingNames = $this->colRepository->allNames();
         $newCols = [];
 
-        $names = $this->explode($multipleNames, [',', ';', "\r", "\n", "\t"]);
+        $names = $this->explode($multipleNames, ['|', ';', "\r", "\n", "\t"]);
         foreach ($names as $name) {
             $nameSanitized = trim(strtolower($name));
             if (in_array($nameSanitized, $existingNames)) {

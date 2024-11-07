@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.setting.create.title'|trans({'scope': selected_scope.name}) }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    {% if columns %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap,gear-fill" />{{ 'grid.setting.create.title'|trans({'scope': selected_scope.name}) }}</h1>
+        </twig:Row>
+        <twig:FormStart form="{{ form_setting }}"/>
+        <twig:FormRow rowClass="mb-5" field="{{ form_setting.columns }}" toggle />
+        <twig:FormRow field="{{ form_setting.type }}" toggle translate />
+        <twig:FormRow field="{{ form_setting.parameter }}"/>
+        <twig:ButtonsRow
+                rowClass="pt-3"
+                icon="plus-circle"
+                field="{{ form_setting.submit }}"
+        />
+        {{ form_end(form_setting) }}
+    </twig:Box>
+    {% endif %}
+    {{ include('grid/setting/_setting_list_action_box.html.twig') }}
+{% endblock %}

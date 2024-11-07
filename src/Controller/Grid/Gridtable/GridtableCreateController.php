@@ -24,11 +24,6 @@ use Twig\Environment;
 #[Route('/grid/table/create', name: 'app_grid_table_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class GridtableCreateController
 {
-    /*
-     * A Gridtable is a collection of GridRows.
-     * Each GridRow is a collection of GridCells.
-     * Each GridCell is linked to a GridRow and a GridCol.
-     */
 
     use FlashMessageTrait;
 

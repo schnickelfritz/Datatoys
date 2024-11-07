@@ -3,12 +3,15 @@
     'grid.scope.label.name',
     'grid.scope.label.key',
     'grid.scope.label.description',
-] }}">
+] }}" small>
     {% for scope in scopes %}
         <tr
             class="{% if scope_selected|default() and scope_selected.id == scope.id %}table-active{% endif %}"
         >
             <td>
+                <a href="{{ path('app_grid_setting_create', {'id': scope.id}) }}" class="btn btn-primary">
+                    <twig:Icon name="grid-3x3-gap,gear-fill" label="{{ 'grid.setting.label.edit'|trans }}"/>
+                </a>
                 <a href="{{ path('app_grid_scope_update', {'id': scope.id}) }}" class="btn btn-primary">
                     <span class="bi-pencil"></span>
                 </a>

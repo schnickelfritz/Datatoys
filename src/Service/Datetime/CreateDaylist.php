@@ -8,7 +8,7 @@ use DateTime;
 
 use function sprintf;
 
-final readonly class MakeDaylist
+final readonly class CreateDaylist
 {
     private const WEEKDAY_INDEX_MONDAY = 1;
 

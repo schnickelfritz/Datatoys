@@ -1,22 +1,12 @@
 <div class="sticky-top app-topnav-box">
     <nav>
         <ul class="nav nav-pills justify-content-center">
-            <twig:NavItem
-                    route="app_grid_scope_create"
-                    routePrefix="app_grid_scope"
-                    label="Grid Scope"
-            />
-            <twig:NavItem
-                    route="app_grid_table_create"
-                    routePrefix="app_grid_table"
-                    label="Grid Table"
-            />
-            <twig:NavItem
-                    route="app_grid_col_create"
-                    routePrefix="app_grid_col"
-                    label="Grid Col"
-            />
-
+            <twig:NavItem route="app_grid_scope_create" routePrefix="app_grid_scope" label="Grid Scope"/>
+            <twig:NavItem route="app_grid_setting_create" label="Grid Setting" settingkey="GRIDSCOPE_ID"/>
+            <twig:NavItem route="app_grid_table_create" label="Grid Table"/>
+            <twig:NavItem route="app_grid_tablecontent_create" label="Grid Content" settingkey="GRIDTABLE_ID"/>
+            <twig:NavItem route="app_grid_row_update" label="Grid Row Update" settingkey="GRIDROW_ID"/>
+            <twig:NavItem route="app_grid_col_create" routePrefix="app_grid_col" label="Grid Col"/>
         </ul>
     </nav>
 </div>

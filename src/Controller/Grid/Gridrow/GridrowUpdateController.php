@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Controller\Grid\Gridrow;
 
 use App\Entity\Gridrow;
+use App\Enum\UserSettingEnum;
 use App\Repository\GridcellRepository;
 use App\Repository\GridtableRepository;
 use App\Service\Grid\MapGridrowsContent;
 use App\Service\Grid\UpdateGridrow;
+use App\Service\UserSetting\SetUserSetting;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -35,6 +37,7 @@ final readonly class GridrowUpdateController
         private GridcellRepository $cellRepository,
         private MapGridrowsContent $mapGridrowsContent,
         private UpdateGridrow $updateGridrow,
+        private SetUserSetting $setUserSetting,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private Environment $twig,
@@ -43,6 +46,7 @@ final readonly class GridrowUpdateController
 
     public function __invoke(Request $request, Gridrow $row): Response
     {
+        $this->setUserSetting->setSetting(UserSettingEnum::GRIDROW_ID, $row->getId());
         $table = $row->getGridtable();
         $mappedRows = $this->mapGridrowsContent->mapRows($table);
         $cells = $this->cellRepository->findBy(['gridrow'=>$row]);

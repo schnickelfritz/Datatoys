@@ -29,11 +29,6 @@ use function Symfony\Component\Clock\now;
 #[Route('/admin/user/create-candidate', name: 'app_admin_user_candidate_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class AdminUserCandidateCreateController
 {
-    /*
-     * User Candidates are like Users without a password. They cannot login, but can receive an invitation for
-     * confirmation. If they set a valid password, they become a "real" User, who are able to login: the only way
-     * a real User can be created.
-     */
 
     use FlashMessageTrait;
 
