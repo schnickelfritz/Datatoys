@@ -1,8 +1,11 @@
 <twig:Table headers="{{ [
     'grid.col.label.update',
+    '',
     'grid.col.label.name',
     'grid.col.label.scopes',
 ] }}" small>
+    {% import 'grid/col/col_tableform.twig' as tableform %}
+
     {% for column in columns %}
         <tr
             class="{% if col_selected|default() and col_selected.id == column.id %}table-active{% endif %}"
@@ -12,6 +15,7 @@
                     <span class="bi-pencil"></span>
                 </a>
             </td>
+            <td>{{ tableform.select_checkbox(column.id) }}</td>
             <th scope="row">{{ column.name }}</th>
             <td>
                 {% for gridcol in column.gridscopeCols %}

@@ -38,4 +38,17 @@ class GridrowRepository extends ServiceEntityRepository
         return is_array($rows) ? $rows : [];
     }
 
+    public function maxLinenumber(Gridtable $table): int
+    {
+        $max = 0;
+        foreach ($this->allByTable($table) as $row) {
+            $linenumber = $row->getLineNumber();
+            if ($linenumber > $max) {
+                $max = $linenumber;
+            }
+        }
+
+        return $max;
+    }
+
 }

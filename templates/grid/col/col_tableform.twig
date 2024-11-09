@@ -1,0 +1,10 @@
+{% macro select_checkbox(col_id) %}
+    <input
+            type="checkbox"
+            id="setting_col[{{ col_id }}]"
+            name="table_col[{{ col_id }}]"
+            class="form-check-input"
+            value="{{ col_id }}"
+    >
+    <label class="d-none" for="setting_col[{{ col_id }}]">Setting</label>
+{% endmacro %}

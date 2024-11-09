@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Grid;
+namespace App\Controller\Grid\GridContent;
 
 use App\Entity\Gridtable;
 use App\Enum\UserSettingEnum;
 use App\Form\Grid\GridContentCreateFormType;
-use App\Repository\GridrowRepository;
 use App\Repository\GridtableRepository;
 use App\Service\Grid\CreateGridContent;
 use App\Service\Grid\MapGridrowsContent;

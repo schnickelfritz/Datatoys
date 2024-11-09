@@ -1,0 +1,10 @@
+{% for column in columns %}
+    <twig:Row label="{{ column.name }}" labelId="cell_{{ column.id }}">
+            <textarea
+                    {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                    id="cell_{{ column.id }}"
+                    name="cellvalue[{{ column.id }}]"
+                    class="form-control"
+            ></textarea>
+    </twig:Row>
+{% endfor %}

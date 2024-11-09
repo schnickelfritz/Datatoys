@@ -99,7 +99,7 @@ grid:
   content:
     submitbutton: Inhalt einfügen
     create:
-      title: 'Inhalte für »{name}« einfügen'
+      title: 'Inhalte für »{name}«'
       manual: >
         Füg Inhalte ein, die du aus Excel kopiert hast (Trenner = Tab).
         <br>In der ersten Zeile werden Spaltenüberschriften erwartet, die zu Merkmalsnamen werden.
@@ -130,6 +130,8 @@ grid:
     list:
       title: Zeilen
     linenumber: 'Zeile {number}'
+    create:
+      title: 'Neue Zeile für {table_name}'
     update:
       title: 'Bearbeite Zeile {linenumber} aus Tabelle {table_name}'
   scope:
@@ -157,6 +159,7 @@ grid:
     placeholder:
       names: 'Eingabe mehrerer Namen möglich. Erlaubte Trenner: Pipe, Semikolon, Zeilenumbruch, Tab'
     label:
+      multiupdate_scope: Scopes für Ausgewähltes
       update: Ändern
       names: Merkmale
       name: Merkmal
@@ -209,9 +212,10 @@ grid:
     label:
       sortindex: Reihenfolge *
       required: Pflichtangabe
-      type_text: 'Typ: Einzeiliger Text (Standard)'
-      type_textarea: 'Typ: Text'
+      type_text: 'Typ: Einzeiliger Text'
+      type_multivalue: 'Typ: Mehrwertig'
       type_filename: 'Typ: Dateiname'
+      predifined_values: 'Vorgabewerte (Pipe-Trenner) *'
       type_ean_list: 'Typ: EAN-Liste'
       unit: Einheit *
       description: Beschreibung

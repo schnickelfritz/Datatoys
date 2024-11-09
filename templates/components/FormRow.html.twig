@@ -30,7 +30,7 @@
                             {% endif %}
                     >
                     <label class="btn btn-outline-info" for="{{ choice.vars.id }}">
-                        {% if translate %}{{ choice.vars.label|trans }}{% else %}{{ choice.vars.label }}{% endif %}
+                        {% if translate %}{{- choice.vars.label|trans -}}{% else %}{{- choice.vars.label -}}{% endif %}
                     </label>
                 {% endfor %}
             </div>

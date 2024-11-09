@@ -6,10 +6,11 @@ namespace App\Controller\Grid\Gridcol;
 
 use App\Entity\Gridcol;
 use App\Form\Grid\GridcolUpdateFormType;
-use App\Repository\GridcolRepository;
 use App\Repository\GridscopeColRepository;
+use App\Repository\GridscopeRepository;
 use App\Service\Grid\CreateGridscopeCols;
 use App\Service\Grid\DeleteGridscopeCols;
+use App\Service\Grid\GetFilteredGridcols;
 use App\Trait\FlashMessageTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -31,8 +32,9 @@ final readonly class GridcolUpdateController
 
     public function __construct(
         private EntityManagerInterface $entityManager,
+        private GridscopeRepository $gridscopeRepository,
         private GridscopeColRepository $gridscopeColRepository,
-        private GridcolRepository $colRepository,
+        private GetFilteredGridcols $filteredGridcols,
         private DeleteGridscopeCols $deleteGridscopeCols,
         private CreateGridscopeCols $createGridscopeCols,
         private FormFactoryInterface $formFactory,
@@ -48,13 +50,16 @@ final readonly class GridcolUpdateController
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            $cols = $this->colRepository->allColumnsFiltered();
+            list($columns, $filter) = $this->filteredGridcols->getColsAndFilter();
+            $allScopes = $this->gridscopeRepository->findAll();
 
             return new Response(
                 $this->twig->render('grid/col/gridcol_update.html.twig', [
                     'form_col' => $form->createView(),
-                    'columns' => $cols,
+                    'columns' => $columns,
+                    'columns_filter' => $filter,
                     'col_selected' => $col,
+                    'scopes' => $allScopes,
                 ])
             );
         }

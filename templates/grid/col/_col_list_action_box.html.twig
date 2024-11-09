@@ -1,10 +1,10 @@
 <twig:Box>
-    <form
-            {{ stimulus_controller('submitform') }}
-            method="post"
-            action="{{ path('app_grid_col_filter') }}"
-    >
-        {% if columns_filter is defined %}
+    {% if columns_filter is defined %}
+        <form
+                {{ stimulus_controller('submitform') }}
+                method="post"
+                action="{{ path('app_grid_col_filter') }}"
+        >
             <twig:Row rowClass="mb-3" label="{{ 'grid.col.finder.title'|trans }}" labelId="columns_filter">
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
@@ -29,12 +29,31 @@
                     </div>
                 </div>
             </twig:Row>
-            <twig:ModalContainer id="col_filter_manual" title="grid.col.finder.manual.title" close="{{ 'modal.close'|trans }}">
-                {{ 'grid.col.finder.manual.text' }}
+            <twig:ModalContainer id="col_filter_manual" title="{{ 'grid.col.finder.manual.title'|trans }}"
+                                 close="{{ 'modal.close'|trans }}">
+                {{ 'grid.col.finder.manual.text'|trans|raw }}
             </twig:ModalContainer>
-        {% endif %}
+        </form>
+    {% endif %}
+    <form method="post" action="{{ path('app_grid_col_multiupdate') }}">
         <twig:Row label="grid.col.list.title">
             {{ include('grid/col/_col_list.html.twig') }}
+        </twig:Row>
+        <twig:Row label="grid.col.label.multiupdate_scope">
+            {% for scope in scopes %}
+                {% set scopeid = scope.id %}
+                <input type="checkbox" id="scopeselect[{{ scopeid }}]" name="scopeselect[{{ scopeid }}]" class="btn-check" value="{{ scopeid }}">
+                <label class="btn btn-outline-info" for="scopeselect[{{ scopeid }}]">{{- scope.name -}}</label>
+            {% endfor %}
+        </twig:Row>
+        <twig:Row>
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit" name="go">
+                        <span class="bi-floppy pe-2"></span>{{ 'grid.col.update.submitbutton'|trans }}
+                    </button>
+                </div>
+            </div>
         </twig:Row>
     </form>
 </twig:Box>

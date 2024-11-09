@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Controller\Grid\Gridcol;
 
 use App\Form\Grid\GridcolsCreateFormType;
+use App\Repository\GridscopeRepository;
 use App\Service\Grid\CreateGridcols;
 use App\Service\Grid\CreateGridscopeCols;
 use App\Service\Grid\GetFilteredGridcols;
 use App\Trait\FlashMessageTrait;
 use App\Trait\FormStringValueTrait;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,21 +20,20 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
+use Webmozart\Assert\Assert;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
 #[Route('/grid/col/create', name: 'app_grid_col_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
 final readonly class GridcolCreateController
 {
-    /*
-     * A GridCol is like a column in a matrix or like a property (name).
-     */
 
     use FlashMessageTrait;
     use FormStringValueTrait;
 
     public function __construct(
         private CreateGridcols $createGridcols,
+        private GridscopeRepository $gridscopeRepository,
         private CreateGridscopeCols $createGridscopeCols,
         private FormFactoryInterface $formFactory,
         private UrlGeneratorInterface $urlGenerator,
@@ -48,29 +47,30 @@ final readonly class GridcolCreateController
         $form = $this->formFactory->create(GridcolsCreateFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->createGridcols->createMultiple($this->formStringValue($form, 'names'));
-            $this->linkNewColsToScope($form);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            list($columns, $filter) = $this->filteredGridcols->getColsAndFilter();
+            $allScopes = $this->gridscopeRepository->findAll();
 
-            $this->addFlash($request, 'success', 'flash.success.create');
-
-            return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));
+            return new Response($this->twig->render('grid/col/gridcol_create.html.twig', [
+                'form_cols' => $form->createView(),
+                'columns' => $columns,
+                'columns_filter' => $filter,
+                'scopes' => $allScopes,
+            ]));
         }
 
-        list($columns, $filter) = $this->filteredGridcols->getColsAndFilter();
+        $names = $this->formStringValue($form, 'names');
+        Assert::string($names);
+        $this->createGridcols->createMultiple($names);
 
-        return new Response($this->twig->render('grid/col/gridcol_create.html.twig', [
-            'form_cols' => $form->createView(),
-            'columns' => $columns,
-            'columns_filter' => $filter,
-        ]));
-    }
-
-    private function linkNewColsToScope(FormInterface $form): void
-    {
         $scopes = $form->get('scopes')->getData();
         if (is_array($scopes)) {
-            $this->createGridscopeCols->createMultiple($this->formStringValue($form, 'names'), $scopes);
+            $this->createGridscopeCols->createMultiple($names, $scopes);
         }
+
+        $this->addFlash($request, 'success', 'flash.success.create');
+
+        return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));
     }
+
 }
