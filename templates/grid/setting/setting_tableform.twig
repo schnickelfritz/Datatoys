@@ -1,0 +1,20 @@
+{% macro select_checkbox(setting_id) %}
+    <input
+            type="checkbox"
+            id="setting_checked[{{ setting_id }}]"
+            name="table_setting[{{ setting_id }}]"
+            class="form-check-input"
+            value="1"
+    >
+    <label class="d-none" for="setting_checked[{{ setting_id }}]">Setting</label>
+{% endmacro %}
+{% macro parameter_input(setting_id, value) %}
+    <input
+            type="text"
+            id="setting_parameter[{{ setting_id }}]"
+            name="setting_parameter[{{ setting_id }}]"
+            class="form-control"
+            value="{{ value }}"
+    >
+    <label class="d-none" for="setting_parameter[{{ setting_id }}]">Setting</label>
+{% endmacro %}

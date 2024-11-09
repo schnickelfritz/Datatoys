@@ -1,27 +1,56 @@
 <twig:Table headers="{{ [
+    '',
     'grid.setting.label.colname',
     'grid.setting.label.type',
     'grid.setting.label.parameter',
 ] }}" small :stripes="false">
+
+    {% import 'grid/setting/setting_tableform.twig' as tableform %}
     {% set colname_shown = '' %}
     {% set odd = false %}
     {% for setting_col in settings %}
+        {% set show_cols_without_setting = columns_filter starts with '::' ? false : true %}
         {% set class = odd ? 'app-bg-stripe-1' : 'app-bg-stripe-2' %}
         {% if setting_col.attrs %}
+            {% set shown = false %}
+            {% set first = true %}
             {% for attr in setting_col.attrs %}
-                <tr>
-                    <td class="{{ class }}">{{ loop.index == 1 ? setting_col.col_name : '' }}</td>
-                    <td class="{{ class }}">{{ attr.type.label|trans }}</td>
-                    <td class="{{ class }}">{{ attr.setting.parameter }}</td>
-                </tr>
+                {% set show = true %}
+                {% if columns_filter starts with '::' %}
+                    {% set label_trans = attr.type.label|trans|lower %}
+                    {% set find = columns_filter[2:]|trim %}
+                    {% set show = find in label_trans %}
+                {% endif %}
+                {% if show %}
+                    {% set shown = true %}
+                    <tr>
+                        <td class="{{ class }}">{{ tableform.select_checkbox(attr.setting.id) }}</td>
+                        <td class="{{ class }}">
+                            <div class="{{ first ? '' : 'd-none' }}">
+                                {{ setting_col.col_name }}
+                            </div>
+                        </td>
+                        <td class="{{ class }}">{{ attr.type.label|trans }}</td>
+                        <td class="{{ class }}">
+                            {% if attr.type.argumentType != 'none' %}
+                                {{ tableform.parameter_input(attr.setting.id, attr.setting.parameter) }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% set first = false %}
+                {% endif %}
             {% endfor %}
-        {% else %}
+            {% if shown %}
+                {% set odd = odd == false %}
+            {% endif %}
+        {% elseif show_cols_without_setting %}
             <tr>
+                <td class="{{ class }}"></td>
                 <td class="{{ class }}">{{ setting_col.col_name }}</td>
                 <td class="{{ class }}"></td>
                 <td class="{{ class }}"></td>
             </tr>
+            {% set odd = odd == false %}
         {% endif %}
-        {% set odd = odd == false %}
     {% endfor %}
 </twig:Table>

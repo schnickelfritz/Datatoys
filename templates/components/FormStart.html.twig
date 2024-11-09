@@ -1,6 +1,5 @@
 {% set contentWidth = 12-labelWidth %}
 {{ form_start(form,  { 'attr': stimulus_controller('submitform').toArray() }) }}
-{% dump(form) %}
 {% if form.vars.errors is not empty %}
     <div class="row {{ rowClass }}">
         <div class="col-12 col-{{ gridThreshold }}-{{ labelWidth }} text-start text-lg-end">

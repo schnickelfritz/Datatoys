@@ -58,6 +58,9 @@ final readonly class GetFilteredGridcols
     private function isFilterMatch(string $name, string $filter, array $names): bool
     {
         if (count($names) < 2) {
+            if (str_starts_with($filter,'::')) {
+                return true;
+            }
             return (str_contains($name, $filter));
         }
 

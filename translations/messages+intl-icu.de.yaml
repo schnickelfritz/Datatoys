@@ -172,6 +172,10 @@ grid:
       title: Finden/Filtern
       placeholder: Suchbegriff
       submitbutton: Finden/Filtern
+      manual:
+        title: Bedienungsanleitung
+        text: >
+          <ul><li>:: Suchbegriff = Filtert nach Einstellung (nur unter Einstellungen wirksam)</ul>
   table:
     list:
       title: Tabellen
@@ -203,7 +207,7 @@ grid:
       title: Tabelle erstellen
   setting_type:
     label:
-      sortindex: Sortier-Reihenfolge *
+      sortindex: Reihenfolge *
       required: Pflichtangabe
       type_text: 'Typ: Einzeiliger Text (Standard)'
       type_textarea: 'Typ: Text'
@@ -226,6 +230,8 @@ grid:
     create:
       title: 'Neue Einstellung für Scope »{scope}«'
       submitbutton: Hinzufügen
+    update:
+      submitbutton: Änderungen speichern
     label:
       update: Ändern
       colname: Merkmal
