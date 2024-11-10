@@ -13,7 +13,7 @@ trait StringExplodeTrait
      *
      * @return string[]
      */
-    protected function explode(?string $stringOfItems, array $delimiters = [' ', ',', ';', "\r", "\n", "\t"]): array
+    protected function explode(?string $stringOfItems, array $delimiters = ['|', ';', "\r", "\n", "\t"]): array
     {
         $items = [];
         if ($stringOfItems === null) {

@@ -59,7 +59,9 @@ final readonly class GridContentCreateController
             if ($errorMessage === null) {
                 $this->addFlash($request, 'success', 'flash.success.done');
 
-                return new RedirectResponse($this->urlGenerator->generate('app_grid_tablecontent_create', ['id' => $table->getId()]));
+                return new RedirectResponse(
+                    $this->urlGenerator->generate('app_grid_tablecontent_create', ['id' => $table->getId()])
+                );
             }
 
             $this->addFlash($request, 'fail', $errorMessage);

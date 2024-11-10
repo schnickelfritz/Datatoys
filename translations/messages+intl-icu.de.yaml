@@ -246,6 +246,17 @@ grid:
     error:
       no_column_found: Kein Merkmal gefunden
       no_type_found: Keine Einstellung gefunden
+geoguessr:
+  title: Streaks Helper
+  submitbutton: Eingaben speichern
+  label:
+    wildcard: Gesammelte Infos (wildcard)
+    colnames: Alle Merkmale
+    values_by_cols: Ausprägungen
+    hits: Treffer
+  manual:
+    title: How-To
+    text: Wie geht das ...
 roles:
   admin: 'Super-Admin'
   gridadmin: 'Grid-Admin'
@@ -300,6 +311,7 @@ menu:
   Candidates: Kandidaten
   Users: Benutzer
   Home: Home
+  Geoguessr: Geoguessr
   'Grid Hub': 'Grid'
   'Grid Col': 'Merkmale'
   'Grid Table': 'Tabellen'

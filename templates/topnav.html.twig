@@ -29,6 +29,13 @@
                         icon="gear-wide-connected"
                 />
             {% endif %}
+            {% if is_granted('ROLE_GEOGUESSR') %}
+                <twig:NavItem
+                        route="app_geoguessr"
+                        label="Geoguessr"
+                        icon="globe-americas"
+                />
+            {% endif %}
             {% if app.user %}
                 <twig:NavItem route="app_me_update" label="You" icon="person-vcard" />
                 <twig:NavItem route="app_logout" label="Logout" icon="power" />

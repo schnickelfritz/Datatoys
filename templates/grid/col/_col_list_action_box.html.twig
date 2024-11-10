@@ -42,7 +42,13 @@
         <twig:Row label="grid.col.label.multiupdate_scope">
             {% for scope in scopes %}
                 {% set scopeid = scope.id %}
-                <input type="checkbox" id="scopeselect[{{ scopeid }}]" name="scopeselect[{{ scopeid }}]" class="btn-check" value="{{ scopeid }}">
+                <input
+                        type="checkbox"
+                        id="scopeselect[{{ scopeid }}]"
+                        name="scopeselect[{{ scopeid }}]"
+                        class="btn-check"
+                        value="{{ scopeid }}"
+                >
                 <label class="btn btn-outline-info" for="scopeselect[{{ scopeid }}]">{{- scope.name -}}</label>
             {% endfor %}
         </twig:Row>

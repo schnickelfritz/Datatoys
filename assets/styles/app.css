@@ -143,6 +143,9 @@ u {
 .app-bg-stripe-2 {
     background-color:var(--cc-black) !important;
 }
+.app-highlight-1 {
+    color:var(--cc-1-lighter-2) !important;
+}
 .app-bg-highlight-2 {
     background-color:var(--cc-1-darker-1) !important;
 }

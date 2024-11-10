@@ -10,4 +10,5 @@ enum UserSettingEnum: string
     case GRIDSCOPE_ID = 'GRIDSCOPE_ID';
     case GRIDTABLE_ID = 'GRIDTABLE_ID';
     case GRIDROW_ID = 'GRIDROW_ID';
+    case GEOGUESSR_WILDCARD = 'GEOGUESSR_WILDCARD';
 }

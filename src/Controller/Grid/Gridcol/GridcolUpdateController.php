@@ -64,6 +64,8 @@ final readonly class GridcolUpdateController
                 ])
             );
         }
+
+        $col->setName(trim(strtolower($col->getName())));
         $this->entityManager->persist($col);
         $this->entityManager->flush();
 
