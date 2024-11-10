@@ -18,7 +18,7 @@ final readonly class GetSettingsCols
 
     /**
      * @param Gridcol[] $cols
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function getSettingsCols(Gridscope $scope, array $cols): array
     {

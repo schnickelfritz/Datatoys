@@ -147,28 +147,6 @@ class Gridscope
         return $this->gridscopeCols;
     }
 
-    public function addGridscopeCol(GridscopeCol $gridscopeCol): static
-    {
-        if (!$this->gridscopeCols->contains($gridscopeCol)) {
-            $this->gridscopeCols->add($gridscopeCol);
-            $gridscopeCol->setScope($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridscopeCol(GridscopeCol $gridscopeCol): static
-    {
-        if ($this->gridscopeCols->removeElement($gridscopeCol)) {
-            // set the owning side to null (unless already changed)
-            if ($gridscopeCol->getScope() === $this) {
-                $gridscopeCol->setScope(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Gridsetting>
      */
@@ -177,25 +155,4 @@ class Gridscope
         return $this->gridsettings;
     }
 
-    public function addGridsetting(Gridsetting $gridsetting): static
-    {
-        if (!$this->gridsettings->contains($gridsetting)) {
-            $this->gridsettings->add($gridsetting);
-            $gridsetting->setScope($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridsetting(Gridsetting $gridsetting): static
-    {
-        if ($this->gridsettings->removeElement($gridsetting)) {
-            // set the owning side to null (unless already changed)
-            if ($gridsetting->getScope() === $this) {
-                $gridsetting->setScope(null);
-            }
-        }
-
-        return $this;
-    }
 }

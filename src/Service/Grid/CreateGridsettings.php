@@ -9,6 +9,7 @@ use App\Model\GridsettingType;
 use App\Repository\GridsettingRepository;
 use App\Repository\GridsettingTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final readonly class CreateGridsettings
 {
@@ -17,6 +18,7 @@ final readonly class CreateGridsettings
         private EntityManagerInterface $entityManager,
         private GridsettingTypeRepository $gridsettingTypeRepository,
         private GridsettingRepository $gridsettingRepository,
+        private TranslatorInterface $translator,
     )
     {
     }
@@ -26,27 +28,36 @@ final readonly class CreateGridsettings
      */
     public function createSettings(Gridscope $scope, mixed $columns, mixed $settingKey, mixed $parameter): ?array
     {
-        $errors = [];
         $columns = $this->getColumns($columns);
-        if ($columns === null) {
-            $errors[] = 'grid.settings.error.no_column_found';
-        }
         $type = $this->getSettingType($settingKey);
-        if (!$type instanceof GridsettingType) {
-            $errors[] = 'grid.settings.error.no_type_found';
-        }
-        if (!empty($errors)) {
-            return $errors;
-        }
-
         $parameter = $this->getParameter($parameter);
 
+        if ($columns === null || $type === null) {
+            return $this->errors($columns, $type);
+        }
         foreach ($columns as $col) {
             $this->createByColumn($scope, $col, $type, $parameter);
         }
         $this->entityManager->flush();
 
         return null;
+    }
+
+    /**
+     * @param Gridcol[] $columns
+     * @param GridsettingType|null $type
+     * @return string[]
+     */
+    private function errors(?array $columns, ?GridsettingType $type): array
+    {
+        $errors = [];
+        if ($columns === null) {
+            $errors[] = $this->translator->trans('grid.setting.error.no_column_found');
+        }
+        if (!$type instanceof GridsettingType) {
+            $errors[] = $this->translator->trans('grid.setting.error.no_type_found');
+        }
+        return $errors;
     }
 
     private function createByColumn(Gridscope $scope, Gridcol $col, GridsettingType $type, ?string $parameter): void

@@ -18,7 +18,7 @@ class GridscopeCol
 
     #[ORM\ManyToOne(inversedBy: 'gridscopeCols')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridscope $scope = null;
+    private Gridscope $scope;
 
     #[ORM\ManyToOne(inversedBy: 'gridscopeCols')]
     #[ORM\JoinColumn(nullable: false)]
@@ -29,12 +29,12 @@ class GridscopeCol
         return $this->id;
     }
 
-    public function getScope(): ?Gridscope
+    public function getScope(): Gridscope
     {
         return $this->scope;
     }
 
-    public function setScope(?Gridscope $scope): static
+    public function setScope(Gridscope $scope): static
     {
         $this->scope = $scope;
 

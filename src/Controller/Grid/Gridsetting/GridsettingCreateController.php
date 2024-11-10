@@ -42,7 +42,8 @@ final readonly class GridsettingCreateController
     public function __invoke(Request $request, Gridscope $scope): Response
     {
         $this->setUserSetting->setSetting(UserSettingEnum::GRIDSCOPE_ID, $scope->getId());
-        list($columns, $filter) = $this->filteredGridcols->getColsAndFilter($scope);
+        $columns = $this->filteredGridcols->getCols($scope);
+        $filter = $this->filteredGridcols->getFilter();
 
         $columnsChoices = array_combine(array_map(fn(Gridcol $col) => $col->getName(), $columns), $columns);
         $form = $this->formFactory->create(type:GridsettingFormType::class, options:['columns' => $columnsChoices]);

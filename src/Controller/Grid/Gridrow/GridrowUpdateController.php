@@ -32,8 +32,6 @@ final readonly class GridrowUpdateController
     use FlashMessageTrait;
 
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private GridtableRepository $tableRepository,
         private GridcellRepository $cellRepository,
         private MapGridrowsContent $mapGridrowsContent,
         private UpdateGridrow $updateGridrow,

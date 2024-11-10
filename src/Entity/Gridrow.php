@@ -23,7 +23,7 @@ class Gridrow
 
     #[ORM\ManyToOne(inversedBy: 'gridrows')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Gridtable $gridtable = null;
+    private Gridtable $gridtable;
 
     /**
      * @var Collection<int, Gridcell>
@@ -41,12 +41,12 @@ class Gridrow
         return $this->id;
     }
 
-    public function getGridtable(): ?Gridtable
+    public function getGridtable(): Gridtable
     {
         return $this->gridtable;
     }
 
-    public function setGridtable(?Gridtable $table): static
+    public function setGridtable(Gridtable $table): static
     {
         $this->gridtable = $table;
 

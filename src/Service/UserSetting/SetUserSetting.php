@@ -23,7 +23,7 @@ final readonly class SetUserSetting
     {
     }
 
-    public function setSetting(UserSettingEnum $key, string|int $value): void
+    public function setSetting(UserSettingEnum $key, string|int|null $value): void
     {
         $user = $this->me->user();
         if ($user === null) {

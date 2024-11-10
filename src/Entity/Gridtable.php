@@ -124,28 +124,6 @@ class Gridtable
         return $this->gridrows;
     }
 
-    public function addGridrow(Gridrow $gridrow): static
-    {
-        if (!$this->gridrows->contains($gridrow)) {
-            $this->gridrows->add($gridrow);
-            $gridrow->setGridtable($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridrow(Gridrow $gridrow): static
-    {
-        if ($this->gridrows->removeElement($gridrow)) {
-            // set the owning side to null (unless already changed)
-            if ($gridrow->getGridtable() === $this) {
-                $gridrow->setGridtable(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;

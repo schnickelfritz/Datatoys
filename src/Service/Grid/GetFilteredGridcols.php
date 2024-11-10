@@ -22,20 +22,28 @@ final readonly class GetFilteredGridcols
     {
     }
 
+    public function getFilter(): string
+    {
+        $filter = $this->getUserSetting->getSetting(UserSettingEnum::GRIDCOL_FILTER);
+        return $filter === null ? '' : $filter;
+    }
+
     /**
-     * @return array<int, array<int, Gridcol>|string>
+     * @return Gridcol[]
      */
-    public function getColsAndFilter(?Gridscope $scope = null): array
+    public function getCols(?Gridscope $scope = null): array
     {
         $allColumns = $this->gridcolRepository->findAll();
 
-        $filter = $this->getUserSetting->getSetting(UserSettingEnum::GRIDCOL_FILTER);
+        $filter = $this->getFilter();
         $filterSanitized = strtolower(trim($filter));
 
         if ($filterSanitized === '') {
             $columnsByScope = $this->columnsByScope($scope);
-            $returnColumns = $columnsByScope === null ? $this->gridcolRepository->allColumnsFiltered() : $columnsByScope;
-            return [$returnColumns, $filter];
+
+            return $columnsByScope === null
+                ? $this->gridcolRepository->findAll()
+                : $columnsByScope;
         }
 
         $names = $this->explode($filter, ['|', ';', "\r", "\n", "\t"]);
@@ -49,7 +57,7 @@ final readonly class GetFilteredGridcols
             }
         }
 
-        return [$columns, $filter];
+        return $columns;
     }
 
     /**
@@ -68,7 +76,7 @@ final readonly class GetFilteredGridcols
     }
 
     /**
-     * @return Gridscope[]|null
+     * @return Gridcol[]|null
      */
     private function columnsByScope(?Gridscope $scope): ?array
     {

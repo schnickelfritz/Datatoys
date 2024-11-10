@@ -28,7 +28,9 @@ final readonly class GridcolMultiUpdateController
     {
         $selectedColIds = $request->get('table_col');
         $selectedScopeIds = $request->get('scopeselect');
-        $this->createGridscopeColsByIds->createMultipleByIds($selectedColIds, $selectedScopeIds);
+        if (is_array($selectedColIds) && is_array($selectedScopeIds)) {
+            $this->createGridscopeColsByIds->createMultipleByIds($selectedColIds, $selectedScopeIds);
+        }
 
         return new RedirectResponse($this->urlGenerator->generate('app_grid_col_create'));
     }

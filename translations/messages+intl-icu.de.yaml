@@ -243,6 +243,9 @@ grid:
       columns: Geltend für Merkmale
       parameter: Wert (* wenn erforderlich)
       edit: Einstellungen
+    error:
+      no_column_found: Kein Merkmal gefunden
+      no_type_found: Keine Einstellung gefunden
 roles:
   admin: 'Super-Admin'
   gridadmin: 'Grid-Admin'

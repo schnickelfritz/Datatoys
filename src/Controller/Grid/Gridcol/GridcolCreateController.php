@@ -48,7 +48,8 @@ final readonly class GridcolCreateController
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            list($columns, $filter) = $this->filteredGridcols->getColsAndFilter();
+            $columns = $this->filteredGridcols->getCols();
+            $filter = $this->filteredGridcols->getFilter();
             $allScopes = $this->gridscopeRepository->findAll();
 
             return new Response($this->twig->render('grid/col/gridcol_create.html.twig', [

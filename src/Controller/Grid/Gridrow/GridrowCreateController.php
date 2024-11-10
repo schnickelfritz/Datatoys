@@ -39,7 +39,7 @@ final readonly class GridrowCreateController
     public function __invoke(Request $request, Gridtable $table): Response
     {
         $scope = $table->getScope();
-        $cols = $this->gridscopeColRepository->allColsInScope($scope);
+        $cols = $scope === null ? [] : $this->gridscopeColRepository->allColsInScope($scope);
         $mappedRows = $this->mapGridrowsContent->mapRows($table);
         if (!$request->isMethod('POST')) {
             return new Response(

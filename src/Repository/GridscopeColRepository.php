@@ -51,7 +51,7 @@ class GridscopeColRepository extends ServiceEntityRepository
 
     /**
      * @param Gridcol $col
-     * @return array<int, Gridscope>
+     * @return Gridscope[]
      */
     public function scopesByCol(Gridcol $col): array
     {

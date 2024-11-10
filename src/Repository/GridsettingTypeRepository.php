@@ -35,6 +35,9 @@ class GridsettingTypeRepository
     }
 
 
+    /**
+     * @return array<string, string>
+     */
     public function choices(): array
     {
         $types = [];
@@ -45,6 +48,9 @@ class GridsettingTypeRepository
         return $types;
     }
 
+    /**
+     * @return array<string, GridsettingType>
+     */
     public function allByName(): array
     {
         $types = [];

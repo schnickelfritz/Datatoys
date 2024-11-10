@@ -19,7 +19,7 @@ class GridscopeRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array<string, Gridscope>
+     * @return array<string, Gridscope|null>
      */
     public function choices(): array
     {

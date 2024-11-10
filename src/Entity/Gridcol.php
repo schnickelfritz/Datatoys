@@ -97,26 +97,4 @@ class Gridcol
         return $this->gridsettings;
     }
 
-    public function addGridsetting(Gridsetting $gridsetting): static
-    {
-        if (!$this->gridsettings->contains($gridsetting)) {
-            $this->gridsettings->add($gridsetting);
-            $gridsetting->setGridcol($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGridsetting(Gridsetting $gridsetting): static
-    {
-        if ($this->gridsettings->removeElement($gridsetting)) {
-            // set the owning side to null (unless already changed)
-            if ($gridsetting->getGridcol() === $this) {
-                $gridsetting->setGridcol(null);
-            }
-        }
-
-        return $this;
-    }
-
 }
