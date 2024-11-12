@@ -9,7 +9,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent]
 class Box
 {
-    public string $class = 'app-box';
+    public string $class = '';
     public string $content;
     public bool $stickyTop = false;
 }

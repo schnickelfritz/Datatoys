@@ -14,7 +14,6 @@ use App\Repository\GridrowRepository;
 use App\Repository\GridscopeColRepository;
 use App\Repository\GridscopeRepository;
 use App\Repository\GridtableRepository;
-use App\Service\UserSetting\GetUserSetting;
 use App\Trait\StringExplodeTrait;
 
 final readonly class GetGeoguessrData
@@ -33,7 +32,6 @@ final readonly class GetGeoguessrData
         private GridrowRepository $gridrowRepository,
         private GridcolRepository $gridcolRepository,
         private GridcellRepository $gridcellRepository,
-        private GetUserSetting $getUserSetting,
     )
     {
     }
@@ -195,7 +193,13 @@ final readonly class GetGeoguessrData
 
     public function getWildcard(): ?string
     {
-        return $this->getUserSetting->getSetting(UserSettingEnum::GEOGUESSR_WILDCARD);
+        $row = $this->getEmptyCountryRow();
+        if ($row === null) {
+            return null;
+        }
+        $cell = $this->getCell($row, $this->getWildcardCol());
+
+        return $cell?->getValue();
     }
 
     public function getCountryCol(): ?Gridcol

@@ -90,6 +90,9 @@ u {
 .app-readable-width {
     max-width: var(--readable);
 }
+.app-narrow {
+    max-width:500px;
+}
 .app-primarybox {
     max-width: var(--readable);
     margin: 0 auto 0 auto;

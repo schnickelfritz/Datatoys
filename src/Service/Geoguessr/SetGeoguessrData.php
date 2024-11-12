@@ -8,7 +8,6 @@ use App\Entity\Gridrow;
 use App\Entity\Gridtable;
 use App\Enum\UserSettingEnum;
 use App\Repository\GridcellRepository;
-use App\Service\UserSetting\SetUserSetting;
 use App\Trait\StringExplodeTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\UnicodeString;
@@ -23,7 +22,6 @@ final readonly class SetGeoguessrData
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GetGeoguessrData $getGeoguessrData,
-        private SetUserSetting $setUserSetting,
         private GridcellRepository $gridcellRepository,
     )
     {
@@ -117,7 +115,6 @@ final readonly class SetGeoguessrData
 
     public function setWildcard(string $wildcard): void
     {
-        $this->setUserSetting->setSetting(UserSettingEnum::GEOGUESSR_WILDCARD, $wildcard);
         $row = $this->getGeoguessrData->getEmptyCountryRow();
         if ($row === null) {
             $row = $this->newRow();
