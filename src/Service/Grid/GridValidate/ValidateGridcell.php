@@ -18,14 +18,17 @@ final readonly class ValidateGridcell
      * @param Gridsetting[] $settings
      * @return string[]
      */
-    public function validateCell(Gridcell $gridcell, array $settings): array
+    public function val(Gridcell $gridcell, array $settings): array
     {
         $fails = [];
 
         $value = $gridcell->getValue();
 
         foreach ($settings as $setting) {
-            $valueFails = $this->validateValue->validateValue($value, $setting);
+            $valueFail = $this->validateValue->validateValue($value, $setting);
+            if ($valueFail !== null) {
+                $fails[] = $valueFail;
+            }
         }
 
         return $fails;

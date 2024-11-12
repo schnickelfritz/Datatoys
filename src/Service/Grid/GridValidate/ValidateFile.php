@@ -38,7 +38,7 @@ final readonly class ValidateFile
         if (!in_array($filetype, $allowedTypes, true)) {
             return 'gridvalidate.fail.type_not_allowed';
         }
-        
+
         return null;
     }
 

@@ -18,8 +18,8 @@ final readonly class ValidateValue
         $value = $value === null ? '' : $value;
 
         return match ($key) {
-            'REQUIRED' => $value != '' ? null : 'gridvalidate.fail.required',
-            'TYPE_SINGLELINE' => str_contains($value, "\n") ? 'gridvalidate.fail.multiline' : null,
+            'REQUIRED' => $value != '' ? null : 'required',
+            'TYPE_SINGLELINE' => str_contains($value, "\n") ? 'multiline' : null,
             default => null,
         };
 

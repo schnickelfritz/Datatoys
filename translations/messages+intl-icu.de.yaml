@@ -228,7 +228,7 @@ grid:
     label:
       sortindex: Reihenfolge *
       required: Pflichtangabe
-      type_text: 'Typ: Einzeiliger Text'
+      type_singleline: 'Typ: Einzeiliger Text'
       type_multivalue: 'Typ: Mehrwertig'
       type_filename: 'Typ: Dateiname'
       predifined_values: 'Vorgabewerte (Pipe-Trenner) *'

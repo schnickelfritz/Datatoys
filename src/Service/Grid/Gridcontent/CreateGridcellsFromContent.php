@@ -48,7 +48,7 @@ final readonly class CreateGridcellsFromContent
      * @param array<int, string>               $matrixRow
      * @param array<int, Gridrow>              $rows
      * @param array<int, Gridcol>              $cols
-     * @param Gridcell $existingCells
+     * @param array<int, array<int, Gridcell>> $existingCells
      */
     private function gridCellCreateOrUpdate(
         int $lineNumber,
@@ -80,7 +80,7 @@ final readonly class CreateGridcellsFromContent
     /**
      * @param array<int, Gridrow> $rows
      *
-     * @return Gridcell
+     * @return array<int, array<int, Gridcell>>
      */
     private function existingCellsByRowAndColIds(array $rows): array
     {

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.validate.title'|trans }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row rowClass="mb-4">
+            <h1 class="h3"><twig:Icon name="grid-3x3-gap-fill" />{{ 'grid.validate.title'|trans }}</h1>
+        </twig:Row>
+        <twig:Row>
+            <twig:Table headers="{{ [
+                'grid.validate.label.row',
+                'grid.validate.label.col',
+                'grid.validate.label.fail',
+            ] }}">
+                {% for val_row_id, val_row in validate_results %}
+                    {% for val_col_id, val_fails in val_row %}
+                    <tr>
+                        <td>{{ val_row_id }}</td>
+                        <td>{{ val_col_id }}</td>
+                        <td>
+                            {% for fail in val_fails %}
+                                {{ fail }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+            </twig:Table>
+
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

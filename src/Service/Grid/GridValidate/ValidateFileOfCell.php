@@ -3,7 +3,6 @@
 namespace App\Service\Grid\GridValidate;
 
 use App\Entity\Gridcell;
-use App\Entity\Gridfile;
 use App\Entity\Gridsetting;
 
 final readonly class ValidateFileOfCell
@@ -19,7 +18,7 @@ final readonly class ValidateFileOfCell
      * @param Gridsetting[] $settings
      * @return string[]
      */
-    public function validateCell(Gridcell $gridcell, array $settings): array
+    public function val(Gridcell $gridcell, array $settings): array
     {
         $fails = [];
 
@@ -28,9 +27,9 @@ final readonly class ValidateFileOfCell
         $isFileRelated = false;
         foreach ($settings as $setting) {
             $key = $setting->getSettingKey();
-            if ($key === 'FILENAME') {
-                if (!$gridfile instanceof Gridfile) {
-                    $fails[] = 'validate.fail.no_file_mapped';
+            if ($key === 'TYPE_FILENAME') {
+                if ($gridfile === null) {
+                    $fails[] = 'no_file_mapped';
                     return $fails;
                 }
                 $isFileRelated = true;
@@ -38,12 +37,15 @@ final readonly class ValidateFileOfCell
             }
         }
 
-        if (!$isFileRelated) {
+        if (!$isFileRelated || $gridfile === null) {
             return $fails;
         }
 
         foreach ($settings as $setting) {
-            $valueFails = $this->validateFile->validateFile($gridfile, $setting);
+            $fileFail = $this->validateFile->validateFile($gridfile, $setting);
+            if ($fileFail !== null) {
+                $fails[] = $fileFail;
+            }
         }
 
         return $fails;

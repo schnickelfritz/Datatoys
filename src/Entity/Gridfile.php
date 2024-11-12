@@ -20,7 +20,7 @@ class Gridfile
     private ?string $originalName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $storedName = null;
+    private string $storedName;
 
     #[ORM\Column(length: 255)]
     private ?string $type = null;
@@ -66,7 +66,7 @@ class Gridfile
         return $this;
     }
 
-    public function getStoredName(): ?string
+    public function getStoredName(): string
     {
         return $this->storedName;
     }

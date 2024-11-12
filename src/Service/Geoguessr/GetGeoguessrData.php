@@ -7,7 +7,6 @@ use App\Entity\Gridcol;
 use App\Entity\Gridrow;
 use App\Entity\Gridscope;
 use App\Entity\Gridtable;
-use App\Enum\UserSettingEnum;
 use App\Repository\GridcellRepository;
 use App\Repository\GridcolRepository;
 use App\Repository\GridrowRepository;
@@ -241,8 +240,11 @@ final readonly class GetGeoguessrData
         return $this->gridrowRepository->maxLinenumber($table);
     }
 
-    public function getCell(Gridrow $row, Gridcol $col): ?Gridcell
+    public function getCell(Gridrow $row, ?Gridcol $col): ?Gridcell
     {
+        if (!$col instanceof Gridcol) {
+            return null;
+        }
         return $this->gridcellRepository->findOneBy(['gridrow' => $row, 'gridcol' => $col]);
     }
 }

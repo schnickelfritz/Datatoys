@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
@@ -28,8 +29,8 @@ final readonly class GridfileUploadController
         if ($user === null) {
             return new Response('Denied', Response::HTTP_UNAUTHORIZED);
         }
-        /** @var UploadedFile $file */
         $uploadedFile = $request->files->get('file');
+        Assert::isInstanceOf($uploadedFile, UploadedFile::class);
         $allowReplace = $request->request->getBoolean('allowReplace');
         $tableId = $request->request->getInt('tableId');
         $error = $this->uploadGridfile->upload($uploadedFile, $tableId, $allowReplace);
