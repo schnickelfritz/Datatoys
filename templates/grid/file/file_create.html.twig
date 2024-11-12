@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'grid.file.create.title'|trans({name:table_selected.name}) }}{% endblock %}
+{% block topsubnav %}{{ include('grid/_gridnav.html.twig') }}{% endblock %}
+{% block body %}
+    <twig:Box>
+        <twig:Row>
+            <h1 class="h3">
+                <twig:Icon name="ui-checks-grid" />{{ 'grid.file.create.title'|trans({name:table_selected.name}) }}
+            </h1>
+        </twig:Row>
+    </twig:Box>
+    <twig:Box>
+        <div {{ stimulus_controller('fileupload', {'tableId':table_selected.id}) }}>
+            <div {{ stimulus_target('fileupload', 'input') }}>
+                <twig:Row label="{{ 'grid.file.label.filepicker' }}" labelId="files" labelClass="app-label">
+                    <input
+                            type="file"
+                            name="files[]"
+                            autocomplete="off"
+                            multiple=""
+                            id="file"
+                            {{ stimulus_target('fileupload', 'files') }}
+                    >
+                </twig:Row>
+                <twig:Row>
+                    <input
+                            type="checkbox"
+                            class="btn-check"
+                            id="allowreplace"
+                            autocomplete="off"
+                            {{ stimulus_target('fileupload', 'allowreplace') }}
+                    >
+                    <label class="btn btn-outline-info" for="allowreplace">
+                        <span class="bi bi-check pe-2"></span>{{ 'grid.file.label.option_allowreplace'|trans }}
+                    </label>
+                    <button class="btn btn-primary" {{ stimulus_action('fileupload', 'click') }}>
+                        <span class="bi bi-play-circle-fill pe-2"></span>{{ 'grid.file.create.submitbutton'|trans }}
+                    </button>
+                </twig:Row>
+            </div>
+            <div class="row px-5 py-2 d-none" {{ stimulus_target('fileupload', 'progresscontainer') }}>
+                <div
+                        class="progress"
+                        role="progressbar"
+                        aria-label="Upload Fortschritt"
+                        aria-valuenow="0"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        {{ stimulus_target('fileupload', 'progress') }}
+                >
+                    <div
+                            class="progress-bar"
+                            style="width: 0"
+                            {{ stimulus_target('fileupload', 'bar') }}
+                    >
+                        -
+                    </div>
+                </div>
+            </div>
+            <div class="row px-5 py-2" {{ stimulus_target('fileupload', 'filefeedback') }}>
+            </div>
+            <div class="d-none" {{ stimulus_target('fileupload', 'finished') }}>
+                <a href="{{ app.request.pathInfo }}?show=images" class="btn btn-primary">Upload fertig!</a>
+            </div>
+        </div>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.file.list.title">
+            {{ include('grid/file/_file_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+    <twig:Box>
+        <twig:Row label="grid.table.list.title">
+            {{ include('grid/table/_table_list.html.twig') }}
+        </twig:Row>
+    </twig:Box>
+{% endblock %}

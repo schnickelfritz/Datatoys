@@ -35,20 +35,17 @@ class Gridfile
     private ?int $filesize = null;
 
     /**
-     * @var Collection<int, Gridtable>
-     */
-    #[ORM\ManyToMany(targetEntity: Gridtable::class, inversedBy: 'gridfiles')]
-    private Collection $gridtable;
-
-    /**
      * @var Collection<int, Gridcell>
      */
     #[ORM\OneToMany(targetEntity: Gridcell::class, mappedBy: 'gridfile')]
     private Collection $gridcells;
 
+    #[ORM\ManyToOne(inversedBy: 'gridfiles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Gridtable $gridtable = null;
+
     public function __construct()
     {
-        $this->gridtable = new ArrayCollection();
         $this->gridcells = new ArrayCollection();
     }
 
@@ -117,30 +114,6 @@ class Gridfile
         return $this;
     }
 
-    /**
-     * @return Collection<int, Gridtable>
-     */
-    public function getGridtable(): Collection
-    {
-        return $this->gridtable;
-    }
-
-    public function addGridtable(Gridtable $gridtable): static
-    {
-        if (!$this->gridtable->contains($gridtable)) {
-            $this->gridtable->add($gridtable);
-        }
-
-        return $this;
-    }
-
-    public function removeGridtable(Gridtable $gridtable): static
-    {
-        $this->gridtable->removeElement($gridtable);
-
-        return $this;
-    }
-
     public function getFilesize(): ?int
     {
         return $this->filesize;
@@ -179,6 +152,18 @@ class Gridfile
                 $gridcell->setGridfile(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGridtable(): ?Gridtable
+    {
+        return $this->gridtable;
+    }
+
+    public function setGridtable(?Gridtable $gridtable): static
+    {
+        $this->gridtable = $gridtable;
 
         return $this;
     }

@@ -31,12 +31,12 @@ final readonly class GridContentCreateController
     use FlashMessageTrait;
 
     public function __construct(
+        private CreateGridContent $createGridContent,
         private FormFactoryInterface $formFactory,
-        private UrlGeneratorInterface $urlGenerator,
         private GridtableRepository $tableRepository,
         private MapGridrowsContent $mapGridrowsContent,
         private SetUserSetting $setUserSetting,
-        private CreateGridContent $createGridContent,
+        private UrlGeneratorInterface $urlGenerator,
         private Environment $twig,
     ) {
     }

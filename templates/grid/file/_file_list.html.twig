@@ -1,0 +1,25 @@
+<twig:Table headers="{{ [
+    'grid.file.label.update',
+    'grid.file.label.name',
+    'grid.file.label.type',
+    'grid.file.label.size',
+    'grid.file.label.width',
+    'grid.file.label.height',
+] }}">
+    {% for file in files %}
+        <tr
+            class="{% if file_selected|default() and file_selected.id == file.id %}table-active{% endif %}"
+        >
+            <td>
+                <a href="{{ path('app_grid_table_update', {'id': file.id}) }}" class="btn btn-primary">
+                    <span class="bi-pencil"></span>
+                </a>
+            </td>
+            <th scope="row">{{ file.originalName }}</th>
+            <td>{{ file.type }}</td>
+            <td>{{ file.filesize }}</td>
+            <td>{{ file.width }}</td>
+            <td>{{ file.height }}</td>
+        </tr>
+    {% endfor %}
+</twig:Table>

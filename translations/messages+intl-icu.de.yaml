@@ -120,6 +120,7 @@ grid:
         semicolon: Semikolon (;)
         pipe: Pipe (|)
     label:
+      addrow: Zeile hinzufügen
       addrows: 'Zeilen hinzufügen/ändern'
       addimages: 'Dateien hochladen/ändern'
       content: Inhalt
@@ -179,6 +180,13 @@ grid:
         title: Bedienungsanleitung
         text: >
           <ul><li>:: Suchbegriff = Filtert nach Einstellung (nur unter Einstellungen wirksam)</ul>
+  file:
+    label:
+      filepicker: Wähl Dateien zum Hochladen
+      option_allowreplace: Erlaube Ersetzen
+    create:
+      title: 'Dateien für {name}'
+      submitbutton: 'Hochladen starten'
   table:
     list:
       title: Tabellen

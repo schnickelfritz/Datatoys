@@ -55,7 +55,7 @@ class Gridtable
     /**
      * @var Collection<int, Gridfile>
      */
-    #[ORM\ManyToMany(targetEntity: Gridfile::class, mappedBy: 'gridtable')]
+    #[ORM\OneToMany(targetEntity: Gridfile::class, mappedBy: 'gridtable', orphanRemoval: true)]
     private Collection $gridfiles;
 
     public function __construct()
@@ -196,7 +196,7 @@ class Gridtable
     {
         if (!$this->gridfiles->contains($gridfile)) {
             $this->gridfiles->add($gridfile);
-            $gridfile->addGridtable($this);
+            $gridfile->setGridtable($this);
         }
 
         return $this;
@@ -205,9 +205,13 @@ class Gridtable
     public function removeGridfile(Gridfile $gridfile): static
     {
         if ($this->gridfiles->removeElement($gridfile)) {
-            $gridfile->removeGridtable($this);
+            // set the owning side to null (unless already changed)
+            if ($gridfile->getGridtable() === $this) {
+                $gridfile->setGridtable(null);
+            }
         }
 
         return $this;
     }
+
 }

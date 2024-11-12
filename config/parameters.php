@@ -12,5 +12,6 @@ return static function (ContainerConfigurator $container): void {
         ->set('app.database_container_name', 'mysql_container_datatoys')
         ->set('app.env', '%env(APP_ENV)%')
         ->set('app.backups_folder_path', '%kernel.project_dir%/var/data-backups')
+        ->set('app.gridfiles_folder_path', '%kernel.project_dir%/public/gridfiles')
     ;
 };
