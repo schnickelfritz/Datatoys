@@ -50,7 +50,7 @@ final readonly class UploadGridfile
         $storeName = $this->gridfileStoreName->createStoreName($uploadedFile, $table);
         try {
             $this->createGridfile->create($table, $gridfile, $uploadedFile, $storeName);
-            //$uploadedFile->move($this->gridfilesFolderPath, $storeName);
+            $uploadedFile->move($this->gridfilesFolderPath, $storeName);
             $message = null;
         } catch (FileException $fileException) {
             $message = 'grid.file.error.upload_fail';

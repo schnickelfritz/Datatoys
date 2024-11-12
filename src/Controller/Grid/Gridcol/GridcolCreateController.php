@@ -6,9 +6,9 @@ namespace App\Controller\Grid\Gridcol;
 
 use App\Form\Grid\GridcolsCreateFormType;
 use App\Repository\GridscopeRepository;
-use App\Service\Grid\CreateGridcols;
-use App\Service\Grid\CreateGridscopeCols;
-use App\Service\Grid\GetFilteredGridcols;
+use App\Service\Grid\Gridcol\CreateGridcols;
+use App\Service\Grid\Gridcol\GetFilteredGridcols;
+use App\Service\Grid\GridscopeCols\CreateGridscopeCols;
 use App\Trait\FlashMessageTrait;
 use App\Trait\FormStringValueTrait;
 use Symfony\Component\Form\FormFactoryInterface;

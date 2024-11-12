@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridsettings;
 
 use App\Repository\GridsettingRepository;
 use Doctrine\ORM\EntityManagerInterface;

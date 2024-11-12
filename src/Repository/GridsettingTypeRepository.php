@@ -15,7 +15,7 @@ class GridsettingTypeRepository
         return [
             new GridsettingType('SORTINDEX', 'grid.setting_type.label.sortindex', 'float'),
             new GridsettingType('REQUIRED', 'grid.setting_type.label.required', 'none'),
-            new GridsettingType('TYPE_TEXT', 'grid.setting_type.label.type_text', 'none'),
+            new GridsettingType('TYPE_SINGLELINE', 'grid.setting_type.label.type_singleline', 'none'),
             new GridsettingType('TYPE_MULTIVALUE', 'grid.setting_type.label.type_multivalue', 'none'),
             new GridsettingType('TYPE_FILENAME', 'grid.setting_type.label.type_filename', 'none'),
             new GridsettingType('TYPE_EAN_LIST', 'grid.setting_type.label.type_ean_list', 'none'),
@@ -31,6 +31,7 @@ class GridsettingTypeRepository
             new GridsettingType('IMAGEHEIGHT_MIN', 'grid.setting_type.label.imageheight_min', 'int'),
             new GridsettingType('IMAGEHEIGHT_MAX', 'grid.setting_type.label.imageheight_max', 'int'),
             new GridsettingType('FILESIZE_MAX', 'grid.setting_type.label.filesize_max', 'int'),
+            new GridsettingType('FILETYPES', 'grid.setting_type.label.filetypes', 'string'),
         ];
     }
 

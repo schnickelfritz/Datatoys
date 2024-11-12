@@ -24,8 +24,8 @@ trait StringExplodeTrait
         $item = '';
         foreach ($characters as $character) {
             if (in_array($character, $delimiters)) {
-                if ($item !== '') {
-                    $items[] = $item;
+                if (trim($item) !== '') {
+                    $items[] = trim($item);
                 }
                 $item = '';
             } else {
@@ -33,8 +33,8 @@ trait StringExplodeTrait
             }
         }
 
-        if ($item !== '') {
-            $items[] = $item;
+        if (trim($item) !== '') {
+            $items[] = trim($item);
         }
 
         return $items;

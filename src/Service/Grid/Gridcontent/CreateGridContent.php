@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcontent;
 
 use App\Entity\Gridtable;
 use App\Service\Convert\ConvertCsvStringToMatrixArray;
 use Webmozart\Assert\Assert;
-
 use function count;
 use function in_array;
 

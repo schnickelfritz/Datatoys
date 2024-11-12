@@ -5,7 +5,7 @@
     'grid.table.label.scope',
     'grid.table.label.status',
     'grid.table.label.rows',
-    'grid.table.label.images',
+    'grid.table.label.filecount',
     'grid.table.label.category',
     'grid.table.label.sources',
     'grid.table.label.expense',
@@ -22,20 +22,23 @@
             </td>
             <td>
                 <a href="{{ path('app_grid_tablecontent_create', {'id': table.id}) }}" class="btn btn-primary">
-                    <twig:Icon name="ui-checks-grid,plus-circle-fill" label="{{ 'grid.content.label.addrows'|trans }}" inline title />
+                    <twig:Icon name="ui-checks-grid" label="{{ 'grid.content.label.addrows'|trans }}" inline title />
                 </a>
                 <a href="{{ path('app_grid_row_create', {'id': table.id}) }}" class="btn btn-primary">
-                    <twig:Icon name="card-checklist,plus-circle-fill" label="{{ 'grid.content.label.addrow'|trans }}" inline title />
+                    <twig:Icon name="card-checklist" label="{{ 'grid.content.label.addrow'|trans }}" inline title />
                 </a>
                 <a href="{{ path('app_grid_file_create', {'id': table.id}) }}" class="btn btn-primary">
-                    <twig:Icon name="image,plus-circle-fill" label="{{ 'grid.content.label.addimages'|trans }}" inline title />
+                    <twig:Icon name="image" label="{{ 'grid.content.label.addimages'|trans }}" inline title />
+                </a>
+                <a href="{{ path('app_grid_validate_table', {'id': table.id}) }}" class="btn btn-primary">
+                    <twig:Icon name="check-circle,check-circle-fill" label="{{ 'grid.content.label.validate'|trans }}" inline title />
                 </a>
             </td>
             <th scope="row">{{ table.name }}</th>
             <td>{% if table.scope %}{{ table.scope.name }}{% endif %}</td>
             <td>{{ table.status }}</td>
             <td>{{ table.gridrows.count }}</td>
-            <td>tbd</td>
+            <td>{{ table.gridfiles.count }}</td>
             <td>{{ table.category }}</td>
             <td>{{ table.numberOfSources }}</td>
             <td>{{ table.additionalExpense }}</td>

@@ -2,39 +2,37 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\GridscopeCols;
 
 use App\Entity\Gridcol;
 use App\Entity\Gridscope;
 use App\Entity\GridscopeCol;
 use App\Repository\GridcolRepository;
 use App\Repository\GridscopeColRepository;
-use App\Repository\GridscopeRepository;
 use App\Trait\StringExplodeTrait;
 use Doctrine\ORM\EntityManagerInterface;
-
 use function in_array;
 
-final readonly class CreateGridscopeColsByIds
+final readonly class CreateGridscopeCols
 {
     use StringExplodeTrait;
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private GridscopeRepository $scopeRepository,
         private GridscopeColRepository $gridscopeColRepository,
         private GridcolRepository $colRepository,
     ) {
     }
 
     /**
-     * @param int[] $colIds
-     * @param int[] $scopeIds
+     * @param string $multipleNames
+     * @param array<int, Gridscope> $scopes
+     * @return void
      */
-    public function createMultipleByIds(array $colIds, array $scopeIds): void
+    public function createMultiple(string $multipleNames, array $scopes): void
     {
-        $cols = $this->colRepository->findBy(['id' => $colIds]);
-        $scopes = $this->scopeRepository->findBy(['id' => $scopeIds]);
+        $names = $this->explode($multipleNames, ['|', ';', "\r", "\n", "\t"]);
+        $cols = $this->colRepository->findBy(['name' => $names]);
         foreach ($scopes as $scope) {
             if (!$scope instanceof Gridscope) {
                 continue;

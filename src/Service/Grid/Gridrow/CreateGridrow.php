@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridrow;
 
 use App\Entity\Gridcell;
 use App\Entity\Gridrow;

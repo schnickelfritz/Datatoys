@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Grid\Gridsetting;
 
 use App\Entity\Gridscope;
-use App\Service\Grid\UpdateGridsettingParameters;
+use App\Service\Grid\Gridsettings\UpdateGridsettingParameters;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

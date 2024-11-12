@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcontent;
 
 use App\Entity\Gridcell;
 use App\Entity\Gridcol;
 use App\Entity\Gridrow;
 use App\Repository\GridcellRepository;
 use Doctrine\ORM\EntityManagerInterface;
-
 use function in_array;
 
 final readonly class CreateGridcellsFromContent
@@ -49,7 +48,7 @@ final readonly class CreateGridcellsFromContent
      * @param array<int, string>               $matrixRow
      * @param array<int, Gridrow>              $rows
      * @param array<int, Gridcol>              $cols
-     * @param array<int, array<int, Gridcell>> $existingCells
+     * @param Gridcell $existingCells
      */
     private function gridCellCreateOrUpdate(
         int $lineNumber,
@@ -81,7 +80,7 @@ final readonly class CreateGridcellsFromContent
     /**
      * @param array<int, Gridrow> $rows
      *
-     * @return array<int, array<int, Gridcell>>
+     * @return Gridcell
      */
     private function existingCellsByRowAndColIds(array $rows): array
     {

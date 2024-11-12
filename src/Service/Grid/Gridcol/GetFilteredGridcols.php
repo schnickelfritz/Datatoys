@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcol;
 
 use App\Entity\Gridcol;
 use App\Entity\Gridscope;

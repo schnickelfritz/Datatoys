@@ -181,8 +181,16 @@ grid:
         text: >
           <ul><li>:: Suchbegriff = Filtert nach Einstellung (nur unter Einstellungen wirksam)</ul>
   file:
+    list:
+      title: Dateien
     label:
       filepicker: Wähl Dateien zum Hochladen
+      update: Ändern
+      name: Dateiname
+      type: Dateityp
+      size: Größe (Byte)
+      width: Breite (Px)
+      height: Höhe (Px)
       option_allowreplace: Erlaube Ersetzen
     create:
       title: 'Dateien für {name}'
@@ -209,7 +217,7 @@ grid:
       expense: Zusatzaufwand
       notes: Anmerkungen
       rows: Anzahl Zeilen
-      images: Anzahl Bilder
+      filecount: Anzahl Dateien
     status:
       new: Neu
       in_progress: In Bearbeitung
@@ -236,6 +244,7 @@ grid:
       imageheight_min: 'Bild: Mindesthöhe (Pixel) *'
       imageheight_max: 'Bild: Maximalhöhe (Pixel) *'
       filesize_max: 'Maximale Dateigröße (KB) *'
+      filetypes: 'Erlaubte Dateitypen (|) *'
   setting:
     list:
       title: 'Einstellungen für Scope »{scope}«'

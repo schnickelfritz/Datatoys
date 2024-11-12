@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcol;
 
 use App\Entity\Gridcol;
 use App\Repository\GridcolRepository;
 use App\Trait\StringExplodeTrait;
 use Doctrine\ORM\EntityManagerInterface;
-
 use function in_array;
 
 final readonly class CreateGridcols

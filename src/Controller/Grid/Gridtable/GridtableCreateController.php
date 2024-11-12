@@ -7,7 +7,7 @@ namespace App\Controller\Grid\Gridtable;
 use App\Entity\Gridtable;
 use App\Form\Grid\GridtableFormType;
 use App\Repository\GridtableRepository;
-use App\Service\Grid\CreateGridtable;
+use App\Service\Grid\Gridtable\CreateGridtable;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

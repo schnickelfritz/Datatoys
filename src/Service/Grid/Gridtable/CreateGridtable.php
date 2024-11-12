@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridtable;
 
 use App\Entity\Gridtable;
 use Doctrine\ORM\EntityManagerInterface;
-
 use function Symfony\Component\Clock\now;
 
 final readonly class CreateGridtable

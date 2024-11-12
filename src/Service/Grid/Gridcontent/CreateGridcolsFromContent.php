@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcontent;
 
 use App\Entity\Gridcol;
 use App\Repository\GridcolRepository;
 use Doctrine\ORM\EntityManagerInterface;
-
 use function in_array;
 
 final readonly class CreateGridcolsFromContent

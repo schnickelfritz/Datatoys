@@ -2,7 +2,7 @@
 
 namespace App\Controller\Grid\Gridcol;
 
-use App\Service\Grid\CreateGridscopeColsByIds;
+use App\Service\Grid\GridscopeCols\CreateGridscopeColsByIds;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

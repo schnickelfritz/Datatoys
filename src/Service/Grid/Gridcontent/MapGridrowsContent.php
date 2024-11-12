@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\Gridcontent;
 
 use App\Entity\Gridtable;
 use App\Repository\GridcolRepository;

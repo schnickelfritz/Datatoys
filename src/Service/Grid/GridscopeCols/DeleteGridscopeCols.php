@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Grid;
+namespace App\Service\Grid\GridscopeCols;
 
 use App\Repository\GridcolRepository;
 use App\Repository\GridscopeColRepository;
