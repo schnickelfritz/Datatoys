@@ -30,8 +30,10 @@ final readonly class GeoguessrStreakHelperController
 
     public function __invoke(Request $request): Response
     {
+        $isReady = $this->getGeoguessrData->isReady();
         if (!$request->isMethod(Request::METHOD_POST)) {
             return new Response($this->twig->render('geoguessr/streakhelper.html.twig', [
+                'ready' => $isReady,
                 'wildcard' => $this->getGeoguessrData->getWildcard(),
                 'colnames' => $this->getGeoguessrData->getAllColnames(),
                 'all_values_by_cols' => $this->getGeoguessrData->getAllValuesByCols(),
@@ -39,9 +41,12 @@ final readonly class GeoguessrStreakHelperController
                 'hits' => $this->getGeoguessrData->getHits(),
             ]));
         }
-        $this->setGeoguessrData->setFromRowValues($request->get('rowvalue'));
-        $wildcard = $this->setGeoguessrData->spreadWildcard($request->get('wildcard'));
-        $this->setGeoguessrData->setWildcard($wildcard);
+
+        if ($isReady) {
+            $this->setGeoguessrData->setFromRowValues($request->get('rowvalue'));
+            $wildcard = $this->setGeoguessrData->spreadWildcard($request->get('wildcard'));
+            $this->setGeoguessrData->setWildcard($wildcard);
+        }
 
         return new RedirectResponse($this->urlGenerator->generate('app_geoguessr'));
     }

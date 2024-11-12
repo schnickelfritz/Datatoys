@@ -35,6 +35,24 @@ final readonly class GetGeoguessrData
     {
     }
 
+    public function isReady(): bool
+    {
+        $table = $this->getTable();
+        if (!$table instanceof Gridtable) {
+            return false;
+        }
+        if (!$this->getCountryCol() instanceof Gridcol) {
+            return false;
+        }
+        if (!$this->getAreaCol() instanceof Gridcol) {
+            return false;
+        }
+        if (!$this->getWildcardCol() instanceof Gridcol) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return array<string, array<int|string, array<int, string>>>
      */

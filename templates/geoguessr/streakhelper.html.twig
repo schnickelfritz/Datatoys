@@ -1,109 +1,127 @@
 {% extends 'geoguessr/base_geoguessr.html.twig' %}
 {% block title %}{{ parent() }} :: {{ 'geoguessr.title'|trans }}{% endblock %}
 {% block body %}
-    <twig:Box class="app-narrow">
-        <div class="row">
-            <div class="col">
-                <h1 class="h3">
-                    <twig:Icon name="globe-americas"/>{{ 'geoguessr.title'|trans }}
-                </h1>
+    {% if ready != true %}
+        <twig:Box class="app-narrow">
+            <div class="row">
+                <div class="col">
+                    <h1 class="h3">
+                        <twig:Icon name="globe-americas"/>{{ 'geoguessr.title'|trans }}
+                    </h1>
+                    {{ 'grid is not ready for this (table with scope "geoguessr" required, scopecols "land", "weltgebiet" and "wildcard" required)' }}
+                </div>
+                <div class="col text-end">
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">
+                        <span class="bi-x-circle-fill pe-2"></span>
+                        {{- 'modal.close'|trans -}}
+                    </a>
+                </div>
             </div>
-            <div class="col text-end">
-                <twig:ModalButton
-                        icon="question-circle-fill"
-                        id="geoguessr_manual"
-                        label="{{ 'geoguessr.manual.title'|trans }}"
-                />
-                <a href="{{ path('app_home') }}" class="btn btn-primary">
-                    <span class="bi-x-circle-fill pe-2"></span>
-                    {{- 'modal.close'|trans -}}
-                </a>
+        </twig:Box>
+    {% else %}
+        <twig:Box class="app-narrow">
+            <div class="row">
+                <div class="col">
+                    <h1 class="h3">
+                        <twig:Icon name="globe-americas"/>{{ 'geoguessr.title'|trans }}
+                    </h1>
+                </div>
+                <div class="col text-end">
+                    <twig:ModalButton
+                            icon="question-circle-fill"
+                            id="geoguessr_manual"
+                            label="{{ 'geoguessr.manual.title'|trans }}"
+                    />
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">
+                        <span class="bi-x-circle-fill pe-2"></span>
+                        {{- 'modal.close'|trans -}}
+                    </a>
+                </div>
             </div>
-        </div>
-        <form
-                {{ stimulus_controller('submitform') }}
-                method="post"
-                action="{{ path('app_geoguessr') }}"
-        >
-            <div>
-                <label for="wildcard" class="label">{{ 'geoguessr.label.wildcard'|trans }}</label>
-                <textarea
+            <form
+                    {{ stimulus_controller('submitform') }}
+                    method="post"
+                    action="{{ path('app_geoguessr') }}"
+            >
+                <div>
+                    <label for="wildcard" class="label">{{ 'geoguessr.label.wildcard'|trans }}</label>
+                    <textarea
                     {{ stimulus_controller('textarea_autosize') }}
-                    {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                            {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
                     id="wildcard"
                     name="wildcard"
                     class="form-control"
                     autofocus
-                >{{- wildcard -}}</textarea>
-            </div>
-            <div>
-                {% for colid, row_values in set_values %}
-                    <div class="row mt-1">
-                        <div class="col-3 text-end overflow-hidden">
-                            <label for="rowvalue[{{ colid }}]" class="label">{{ colnames[colid] }}</label>
-                        </div>
-                        <div class="col">
-                            {% set row_value = row_values|join('|')  %}
-                            <input
-                                    {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
-                                    type="text"
-                                    id="rowvalue[{{ colid }}]"
-                                    name="rowvalue[{{ colid }}]"
-                                    class="form-control"
-                                    value="{{- row_value -}}"
-                            >
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="mt-4">
-                <button class="btn btn-primary" type="submit" name="go">
-                    <span class="bi-floppy pe-2"></span>{{ 'geoguessr.submitbutton'|trans }}
-                </button>
-            </div>
-            <div class="mt-1">
-                <div class="label">{{ 'geoguessr.label.hits'|trans }}</div>
+                    >{{- wildcard -}}</textarea>
+                </div>
                 <div>
-                    <ul>
-                        {% for country,hit in hits %}
-                            {% for col_id,values in hit %}
-                                <li class="small">
-                                    <span class="app-highlight-1">{{ country }}</span>
-                                    <span class="app-less-important">{{ colnames[col_id] }}</span>
-                                    <span class="small">{{ values|join('|') }}</span>
+                    {% for colid, row_values in set_values %}
+                        <div class="row mt-1">
+                            <div class="col-3 text-end overflow-hidden">
+                                <label for="rowvalue[{{ colid }}]" class="label">{{ colnames[colid] }}</label>
+                            </div>
+                            <div class="col">
+                                {% set row_value = row_values|join('|')  %}
+                                <input
+                                        {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                                        type="text"
+                                        id="rowvalue[{{ colid }}]"
+                                        name="rowvalue[{{ colid }}]"
+                                        class="form-control"
+                                        value="{{- row_value -}}"
+                                >
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-primary" type="submit" name="go">
+                        <span class="bi-floppy pe-2"></span>{{ 'geoguessr.submitbutton'|trans }}
+                    </button>
+                </div>
+                <div class="mt-1">
+                    <div class="label">{{ 'geoguessr.label.hits'|trans }}</div>
+                    <div>
+                        <ul>
+                            {% for country,hit in hits %}
+                                {% for col_id,values in hit %}
+                                    <li class="small">
+                                        <span class="app-highlight-1">{{ country }}</span>
+                                        <span class="app-less-important">{{ colnames[col_id] }}</span>
+                                        <span class="small">{{ values|join('|') }}</span>
+                                    </li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="label">{{ 'geoguessr.label.values_by_cols'|trans }}</div>
+                    <div class="small">
+                        <ul>
+                            {% for colid,colvals in all_values_by_cols %}
+                                <li>
+                                    {{ colnames[colid] }}
+                                    <ul>
+                                        {% for colval in colvals %}
+                                            <li>{{ colval }}</li>
+                                        {% endfor %}
+                                    </ul>
                                 </li>
                             {% endfor %}
-                        {% endfor %}
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-1">
-                <div class="label">{{ 'geoguessr.label.values_by_cols'|trans }}</div>
-                <div class="small">
-                    <ul>
-                    {% for colid,colvals in all_values_by_cols %}
-                        <li>
-                            {{ colnames[colid] }}
-                            <ul>
-                                {% for colval in colvals %}
-                                    <li>{{ colval }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                    </ul>
+                <div class="mt-1">
+                    <div class="label">{{ 'geoguessr.label.colnames'|trans }}</div>
+                    <div class="small">{{ colnames|join(', ') }}</div>
                 </div>
-            </div>
-            <div class="mt-1">
-                <div class="label">{{ 'geoguessr.label.colnames'|trans }}</div>
-                <div class="small">{{ colnames|join(', ') }}</div>
-            </div>
-        </form>
+            </form>
 
-        <twig:ModalContainer id="geoguessr_manual" title="{{ 'geoguessr.manual.title'|trans }}"
-                             close="{{ 'modal.close'|trans }}">
-            {{ 'geoguessr.manual.text'|trans|raw }}
-        </twig:ModalContainer>
-    </twig:Box>
-
+            <twig:ModalContainer id="geoguessr_manual" title="{{ 'geoguessr.manual.title'|trans }}"
+                                 close="{{ 'modal.close'|trans }}">
+                {{ 'geoguessr.manual.text'|trans|raw }}
+            </twig:ModalContainer>
+        </twig:Box>
+    {% endif %}
 {% endblock %}
