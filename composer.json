@@ -40,6 +40,7 @@
         "twig/cssinliner-extra": "^3.13",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/inky-extra": "^3.13",
+        "twig/string-extra": "^3.13",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {

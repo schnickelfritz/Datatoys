@@ -14,10 +14,10 @@
             <div class="row flex-nowrap">
                 <div>
                     {% block titlebar %}
-                        {{ include('titlebar.html.twig') }}
+                        {{ include('base/titlebar.html.twig') }}
                     {% endblock %}
                     {% block topnav %}
-                        {{ include('topnav.html.twig') }}
+                        {{ include('base/topnav.html.twig') }}
                     {% endblock %}
                     {% block topsubnav %}
 
@@ -26,11 +26,11 @@
                         {% block body %}{% endblock %}
                     </main>
                     {% block footer %}
-                        {{ include('footer.html.twig') }}
+                        {{ include('base/footer.html.twig') }}
                     {% endblock %}
                 </div>
             </div>
-            {{ include('flash.html.twig') }}
+            {{ include('base/flash.html.twig') }}
         </div>
     </body>
 </html>

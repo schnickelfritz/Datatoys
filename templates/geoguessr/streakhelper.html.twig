@@ -98,18 +98,16 @@
                 <div class="mt-1">
                     <div class="label">{{ 'geoguessr.label.values_by_cols'|trans }}</div>
                     <div class="small">
-                        <ul>
-                            {% for colid,colvals in all_values_by_cols %}
-                                <li>
+                        {% for colid,colvals in all_values_by_cols %}
+                            <div class="">
+                            <span class="fw-bold">
                                     {{ colnames[colid] }}
-                                    <ul>
-                                        {% for colval in colvals %}
-                                            <li>{{ colval }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                </span>
+                                {% for colval in colvals %}
+                                    <span>{{ colval }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="mt-1">

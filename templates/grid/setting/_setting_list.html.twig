@@ -24,7 +24,9 @@
                 {% if show %}
                     {% set shown = true %}
                     <tr>
-                        <td class="{{ class }}">{{ tableform.select_checkbox(attr.setting.id) }}</td>
+                        <td class="{{ class }}">
+                            {{ tableform.select_checkbox(attr.setting.id) }}
+                        </td>
                         <td class="{{ class }}">
                             <div class="{{ first ? '' : 'd-none' }}">
                                 {{ setting_col.col_name }}

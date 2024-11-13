@@ -1,9 +1,10 @@
+{% import 'grid/row/linelabel.twig' as linelabel %}
 {% for mapped_row in mapped_rows %}
     <div
             class="row app-item {{ row_selected|default() and row_selected.id == mapped_row.row.id ? 'app-item-active' : '' }}"
     >
         {% if show_details == true %}
-            <div class="col-sm-1">
+            <div class="col-sm-1 pt-2 text-end">
                 <a href="{{ path('app_grid_row_update', {'id': mapped_row.row.id}) }}" class="btn btn-primary">
                     <span class="bi-pencil"></span>
                 </a>
@@ -12,17 +13,19 @@
                 <twig:AccordionSingle
                         flush
                         id="rowcontent_{{ mapped_row.row.id }}"
-                        button="{{ 'grid.row.linenumber'|trans({number: mapped_row.row.lineNumber}, 'messages') }}"
+                        button="{{ linelabel.linelabel(mapped_row.row.lineNumber, mapped_row.cells, 40, 300) }}"
                 >
                     {% for col_name,value in mapped_row.cells %}
+                        {% if value != '' and value is not null %}
                         <div class="">
                             <div class="row {{ loop.index % 2 == 0 ? 'app-bg-stripe-1' : '' }}">
                                 <div class="col-12 col-lg-2 text-start text-lg-end label">
-                                    {{ col_name }}
+                                    {{- col_name -}}
                                 </div>
-                                <div class="col-12 col-lg-10 app-readable-width">{{ value }}</div>
+                                <div class="col-12 col-lg-10 app-readable-width">{{- value -}}</div>
                             </div>
                         </div>
+                        {% endif %}
                     {% endfor %}
                 </twig:AccordionSingle>
             </div>
@@ -33,8 +36,8 @@
                         <span class="bi-pencil"></span>
                     </a>
                 </div>
-                <div class="ps-2">
-                    {{ 'grid.row.linenumber'|trans({number: mapped_row.row.lineNumber}, 'messages') }}
+                <div class="ps-2 small app-text-pre">
+                    {{- linelabel.linelabel(mapped_row.row.lineNumber, mapped_row.cells, 30, 150) -}}
                 </div>
             </div>
         {% endif %}

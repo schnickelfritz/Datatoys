@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
+use Webmozart\Assert\Assert;
 
 #[AsController]
 #[IsGranted('ROLE_GRIDADMIN')]
@@ -63,16 +64,19 @@ final readonly class GridsettingCreateController
             );
         }
 
+        $doOverrideParam = $form->get('override_param')->getData();
+        Assert::boolean($doOverrideParam);
         $errorMessage = $this->createGridsettings->createSettings(
             $scope,
             $form->get('columns')->getData(),
             $form->get('type')->getData(),
-            $form->get('parameter')->getData()
+            $form->get('parameter')->getData(),
+            $doOverrideParam,
         );
         if ($errorMessage !== null) {
             $this->addFlash($request, 'fail', $errorMessage);
         } else {
-            $this->addFlash($request, 'success', 'flash.success.create');
+            $this->addFlash($request, 'success', 'flash.success.done');
         }
 
 

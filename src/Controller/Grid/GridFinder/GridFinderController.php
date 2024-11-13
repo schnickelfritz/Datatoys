@@ -23,7 +23,7 @@ final readonly class GridFinderController
 
     public function __invoke(Request $request): Response
     {
-        return new Response($this->twig->render('grid/gridfinder.html.twig', [
+        return new Response($this->twig->render('grid/finder/gridfinder.html.twig', [
         ]));
     }
 }

@@ -13,6 +13,7 @@ use function in_array;
 final readonly class CreateGridContent
 {
     public function __construct(
+        private CreateGridrowsByCellValueFromContent $createGridrowsByCellValueFromContent,
         private CreateGridcolsFromContent $createGridcolsFromContent,
         private CreateGridrowsFromContent $createGridrowsFromContent,
         private CreateGridcellsFromContent $createGridcellsFromContent,
@@ -22,7 +23,7 @@ final readonly class CreateGridContent
     /**
      * @param list<string> $options
      */
-    public function processInputs(Gridtable $table, string $content, string $separator, array $options): ?string
+    public function processInputs(Gridtable $table, string $content, string $separator, array $options, string $updateKey): ?string
     {
         $converter = new ConvertCsvStringToMatrixArray();
         $matrix = $converter->toMatrix($content, $separator);
@@ -45,9 +46,17 @@ final readonly class CreateGridContent
             return 'grid.content.error.contains_new_cols';
         }
 
-        $lineNumberMax = max(array_keys($matrix));
-        $indexedGridrows = $this->createGridrowsFromContent->gridrowsCreateOrUpdate($table, $lineNumberMax, $options);
-        $this->createGridcellsFromContent->gridcellsCreateOrUpdate($matrix, $indexedGridrows, $indexedGridColumns, $options);
+        if ($updateKey !== '') {
+            $linenumberedGridrows = $this->createGridrowsByCellValueFromContent->gridrowsCreateOrUpdate($table, $updateKey, $matrix);
+        } else {
+            $lineNumberMax = max(array_keys($matrix));
+            $linenumberedGridrows = $this->createGridrowsFromContent->gridrowsCreateOrUpdate($table, $lineNumberMax, $options);
+        }
+
+        $isSuccess = $this->createGridcellsFromContent->gridcellsCreateOrUpdate($matrix, $linenumberedGridrows, $indexedGridColumns, $options);
+        if (!$isSuccess) {
+            return 'grid.content.error.row_not_found';
+        }
 
         return null;
     }

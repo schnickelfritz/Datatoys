@@ -9,7 +9,6 @@
         >
             {% if icon|default('') != '' %}
                 {% set iconlabel = label == '' ? field_label(field) : label %}
-                {% set iconlabel = field is defined ? iconlabel|trans : iconlabel %}
                 {% if field2 is null and icon2|default('') != '' %}
                     <twig:Icon name="{{ icon }},{{ icon2 }}" label="{{ iconlabel }}"/>
                 {% else %}

@@ -163,7 +163,9 @@ u {
     padding:0 5px 0 5px;
 }
 .app-item {
-    padding:3px;
+    padding:4px 3px;
+    background-color:var(--cc-black);
+    margin-bottom: 2px;
 }
 .app-item-active {
     background-color: var(--cc-2-darker-1)
@@ -171,4 +173,8 @@ u {
 .app-textarea-small {
     max-height:30px;
     min-width: 300px;
+}
+.app-text-pre {
+    white-space: nowrap;
+    overflow-x: hidden;
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Gridscope;
+use App\Entity\Gridtable;
 use App\Entity\User;
 use App\Entity\UserCandidate;
 use App\Entity\Workday;
@@ -135,6 +137,16 @@ class AppFixtures extends Fixture
         ;
         $manager->persist($workday02);
 
+        $scope1 = new Gridscope();
+        $scope1->setName('Rich Content')->setScopeKey('RICHCONTENT');
+        $manager->persist($scope1);
+        $table1 = new Gridtable();
+        $table1->setName('COWO-49283 (Test)')->setCreatedAt(now())->setScope($scope1);
+        $manager->persist($table1);
+
         $manager->flush();
+
+
+
     }
 }

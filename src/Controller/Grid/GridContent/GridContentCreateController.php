@@ -54,8 +54,10 @@ final readonly class GridContentCreateController
             Assert::string($separator);
             $options = $form->get('options')->getData();
             Assert::isArray($options);
+            $updateKey = $form->get('update_key')->getData();
+            Assert::string($updateKey);
 
-            $errorMessage = $this->createGridContent->processInputs($table, $content, $separator, $options);
+            $errorMessage = $this->createGridContent->processInputs($table, $content, $separator, $options, $updateKey);
             if ($errorMessage === null) {
                 $this->addFlash($request, 'success', 'flash.success.done');
 
@@ -71,7 +73,7 @@ final readonly class GridContentCreateController
         $mappedRows = $this->mapGridrowsContent->mapRows($table);
 
         return new Response(
-            $this->twig->render('grid/gridcontent_create.html.twig', [
+            $this->twig->render('grid/content/gridcontent_create.html.twig', [
                 'form_content' => $form->createView(),
                 'tables' => $tables,
                 'mapped_rows' => $mappedRows,

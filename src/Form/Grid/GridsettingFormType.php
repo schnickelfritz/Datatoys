@@ -8,6 +8,7 @@ use App\Repository\GridcolRepository;
 use App\Repository\GridscopeRepository;
 use App\Repository\GridsettingTypeRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,6 +51,10 @@ class GridsettingFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                 ],
+            ])
+            ->add('override_param', CheckboxType::class, [
+                'label' => 'grid.setting.label.override_param',
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'grid.setting.create.submitbutton',

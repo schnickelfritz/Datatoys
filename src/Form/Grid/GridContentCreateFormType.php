@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -59,6 +60,13 @@ class GridContentCreateFormType extends AbstractType
                 'placeholder' => false,
                 'attr' => [
                 ],
+            ])
+            ->add('update_key', TextType::class, [
+                'label' => 'grid.content.label.update_key',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'grid.content.placeholder.update_key'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'grid.content.submitbutton',

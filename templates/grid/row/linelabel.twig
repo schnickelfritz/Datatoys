@@ -1,0 +1,14 @@
+{% macro linelabel(line_number, mapped_cells, max_cell_length, max_label_length) %}
+    {% set prefix = 'grid.row.linenumber'|trans({number: line_number}) %}
+    {% set rowcontent = '' %}
+    {% for cell_col_name,cell_value in mapped_cells %}
+        {% if cell_value != '' and cell_value is not null %}
+                {% if rowcontent|length < max_label_length %}
+                {% set cellcontent = cell_value|u.truncate(max_cell_length, '...') %}
+                {% set rowcontent = rowcontent == '' ? rowcontent~cellcontent : rowcontent~' | '~cellcontent %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% set combined = (prefix ~ ': ' ~ rowcontent)|u.truncate(max_label_length) %}
+    {{ combined }}
+{% endmacro %}

@@ -24,24 +24,28 @@ final readonly class CreateGridcellsFromContent
 
     /**
      * @param array<int, array<int, string>> $matrix
-     * @param array<int, Gridrow>            $rows
+     * @param array<int, Gridrow>            $linenumberedRows
      * @param array<int, Gridcol>            $cols
      * @param array<int, string>             $options
      */
-    public function gridcellsCreateOrUpdate(array $matrix, array $rows, array $cols, array $options): void
+    public function gridcellsCreateOrUpdate(array $matrix, array $linenumberedRows, array $cols, array $options): bool
     {
         $existingCells = [];
         if (in_array('UPDATE', $options)) {
-            $existingCells = $this->existingCellsByRowAndColIds($rows);
+            $existingCells = $this->existingCellsByRowAndColIds($linenumberedRows);
         }
 
         for ($lineNumber = 1; $lineNumber <= max(array_keys($matrix)); ++$lineNumber) {
             $matrixRow = $matrix[$lineNumber];
             for ($colNumber = 0; $colNumber <= max(array_keys($matrixRow)); ++$colNumber) {
-                $this->gridCellCreateOrUpdate($lineNumber, $colNumber, $matrixRow, $rows, $cols, $existingCells);
+                $isCreateSuccess = $this->gridCellCreateOrUpdate($lineNumber, $colNumber, $matrixRow, $linenumberedRows, $cols, $existingCells);
+                if (!$isCreateSuccess) {
+                    return false;
+                }
             }
         }
         $this->entityManager->flush();
+        return true;
     }
 
     /**
@@ -57,8 +61,11 @@ final readonly class CreateGridcellsFromContent
         array $rows,
         array $cols,
         array $existingCells
-    ): void {
+    ): bool {
         $value = $matrixRow[$colNumber];
+        if (!isset($rows[$lineNumber])) {
+            return false;
+        }
         $row = $rows[$lineNumber];
         $rowId = $row->getId();
         $col = $cols[$colNumber];
@@ -66,7 +73,7 @@ final readonly class CreateGridcellsFromContent
         if (isset($existingCells[$rowId][$colId])) {
             $existingCells[$rowId][$colId]->setValue($value);
 
-            return;
+            return true;
         }
         $cell = new Gridcell();
         $cell
@@ -75,6 +82,8 @@ final readonly class CreateGridcellsFromContent
             ->setValue($value)
         ;
         $this->entityManager->persist($cell);
+
+        return true;
     }
 
     /**

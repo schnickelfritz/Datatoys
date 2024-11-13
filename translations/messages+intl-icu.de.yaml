@@ -105,7 +105,10 @@ grid:
         <br>In der ersten Zeile werden Spaltenüberschriften erwartet, die zu Merkmalsnamen werden.
         <br>Alternativ kannst du auch Inhalte eintippen; der Trenner sollte dann nicht Tab sein.
         <br>Zu den Optionen: <ul><li>Aktualisieren: Wenn bereits Inhalte vorhanden sind, werden diese aktualisiert.
-        Es zählt die Zeilennummer! Fügst du nach Umsortierung der Quelldaten ein, kann das unerwünschte Folgen haben.
+        Es zählt die zunächst die Zeilennummer!
+        Fügst du nach Umsortierung der Quelldaten ein, kann das unerwünschte Folgen haben.
+        Wenn du ein Merkmal als Schlüssel angibst, werden nur Aktualisierungen vorgenommen. Wird der Schlüssel nicht
+        gefunden, bricht die Aktualisierung ab.
         <li>Wenn du das Einfügen neuer Merkmale erlaubst, werden Merkmale angelegt, deren Namen nicht vorhanden sind.
         Vergisst du das Einfügen der Überschriften, kann das Einfügen crashen!<li>Ohne die Optionen zu gleichnamigen
         Merkmalen bricht das gesamte Einfügen ab, falls gleichnamige Merkmale vorhanden sind</ul>
@@ -127,6 +130,9 @@ grid:
       options: Optionen
       manual: Bedienungsanleitung
       separator: Trenner
+      update_key: Merkmal als Schlüssel bei Aktualisieren
+    placeholder:
+      update_key: wenn leer, dann Zeilennummer
   row:
     list:
       title: Zeilen
@@ -250,14 +256,15 @@ grid:
       title: 'Einstellungen für Scope »{scope}«'
     create:
       title: 'Neue Einstellung für Scope »{scope}«'
-      submitbutton: Hinzufügen
+      submitbutton: 'Hinzufügen/Überschreiben'
     update:
       submitbutton: Änderungen speichern
     label:
       update: Ändern
       colname: Merkmal
       type: Einstellung
-      columns: Geltend für Merkmale
+      columns: Geltend für Merkmale (keins = alle Gelisteten)
+      override_param: Wert überschreiben wenn vorhanden
       parameter: Wert (* wenn erforderlich)
       edit: Einstellungen
     error:
