@@ -2,7 +2,7 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_ALLOWED_TO_SWITCH, ROLE_USERMANAGER, ROLE_GRIDADMIN, ROLE_WORKTIME_PLANNER, ROLE_GEOGUESSR]
+        ROLE_ADMIN: [ROLE_ALLOWED_TO_SWITCH, ROLE_USERMANAGER, ROLE_GRIDADMIN, ROLE_WORKTIME_PLANNER, ROLE_COCO_ADMIN, ROLE_COCO_USER, ROLE_GEOGUESSR]
     providers:
         app_user_provider:
             entity:

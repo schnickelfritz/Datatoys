@@ -38,8 +38,8 @@ final readonly class GridscopeCreateController
     public function __construct(
         private EntityManagerInterface $entityManager,
         private FormFactoryInterface $formFactory,
-        private UrlGeneratorInterface $urlGenerator,
         private GridscopeRepository $scopeRepository,
+        private UrlGeneratorInterface $urlGenerator,
         private Environment $twig,
     ) {
     }

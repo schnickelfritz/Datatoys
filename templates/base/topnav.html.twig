@@ -10,6 +10,13 @@
                 />
             {% endif %}
             <twig:NavItem route="app_home" label="Home"/>
+            {% if is_granted('ROLE_COCO_ADMIN') %}
+                <twig:NavItem
+                        route="app_coco_item_list"
+                        label="Coco Items"
+                        icon="cash-coin"
+                />
+            {% endif %}
             {% if is_granted('ROLE_GRIDADMIN') %}
                 <twig:NavItem
                         route="app_grid_finder"

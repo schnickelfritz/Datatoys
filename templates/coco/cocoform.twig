@@ -1,0 +1,10 @@
+{% macro coco_input(item_id, name, value = '') %}
+    <input
+            type="text"
+            id="item_{{ name }}_{{ item_id }}"
+            name="item[{{ item_id }}][{{ name }}]"
+            class="form-control"
+            value="{{ value }}"
+    >
+    <label class="d-none" for="item_{{ name }}_{{ item_id }}">{{ name }}</label>
+{% endmacro %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} :: {{ 'coco.item.list.title'|trans }}{% endblock %}
+{% block body %}
+<twig:Box>
+    <form
+            {{ stimulus_controller('submitform') }}
+            method="post"
+            action="{{ path('app_coco_item_crud') }}"
+    >
+        <twig:Row label="{{ 'coco.item.list.title' }}" labelClass="label">
+            <twig:Table headers="{{ [
+                'coco.item.label.cocoid',
+                'coco.item.label.label',
+                'coco.item.label.price',
+                'coco.item.label.status',
+                'coco.item.label.description',
+            ] }}" small>
+                {% import 'coco/cocoform.twig' as frm %}
+                {% for item in coco_items %}
+                    <tr>
+                        <td>{{ frm.coco_input(item.id, 'cocoId', item.cocoId) }}</td>
+                    </tr>
+                {% endfor %}
+            </twig:Table>
+        </twig:Row>
+        <twig:Row label="{{ 'coco.item.create.title' }}" labelClass="label">
+            <twig:Table headers="{{ [
+                'coco.item.label.cocoid',
+                'coco.item.label.label',
+                'coco.item.label.price',
+                'coco.item.label.status',
+                'coco.item.label.description',
+            ] }}" small>
+                {% import 'coco/cocoform.twig' as frm %}
+                {% for new_id in [-1,-2,-3,-4,-5] %}
+                    <tr>
+                        <td>{{ frm.coco_input(new_id, 'cocoId') }}</td>
+                        <td>{{ frm.coco_input(new_id, 'label') }}</td>
+                        <td>{{ frm.coco_input(new_id, 'price') }}</td>
+                        <td>tbd.</td>
+                        <td>{{ frm.coco_input(new_id, 'description') }}</td>
+                    </tr>
+                {% endfor %}
+            </twig:Table>
+        </twig:Row>
+        <twig:Row>
+            <button class="btn btn-primary" type="submit" name="go">
+                <span class="bi-floppy pe-2"></span>{{ 'submitbutton.update'|trans }}
+            </button>
+        </twig:Row>
+    </form>
+</twig:Box>
+{% endblock %}

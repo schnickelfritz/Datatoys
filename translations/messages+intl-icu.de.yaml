@@ -280,7 +280,24 @@ geoguessr:
     hits: Treffer
   manual:
     title: How-To
-    text: Wie geht das ...
+    text: >
+      Vornehmlich schreibst du deine Beobachtungen ins Feld Wildcard.<br>
+      Als Wildcard-Zeile schreib (pro Zeile) <ul>
+      <li>zum Übertragen auf Merkmale: merkmal#ausprägung<br>z.B. verkehrsseite#links<br>
+      (Merkmal kann gekürzt sein, z.B. ssei für Verkehrsseite)
+      </ul>
+coco:
+  item:
+    create:
+      title: Neue Coco-Items
+    list:
+      title: Coco-Items
+    label:
+      cocoid: Coco-ID
+      label: Label
+      price: Preis
+      status: Status
+      description: Beschreibung
 roles:
   admin: 'Super-Admin'
   gridadmin: 'Grid-Admin'
@@ -330,11 +347,14 @@ modal:
     submitbutton: 'Ja, Löschen!'
 close_view: 'Abbrechen'
 save: Speichern
+submitbutton:
+  update: Änderungen speichern
 menu:
   Admin: Admin
   Candidates: Kandidaten
   Users: Benutzer
   Home: Home
+  'Coco Items': Coco-Items (Admin)
   Geoguessr: Geoguessr
   'Grid Hub': 'Grid'
   'Grid Col': 'Merkmale'
