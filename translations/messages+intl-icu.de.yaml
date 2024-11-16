@@ -201,6 +201,14 @@ grid:
     create:
       title: 'Dateien für {name}'
       submitbutton: 'Hochladen starten'
+    rename:
+      label:
+        filename_part: Teil Dateiname
+        filename_replace: Ersetze durch ...
+        option_append: Teil voranstellen
+        option_prepend: Teil anhängen
+        option_replace: Ersetzen
+      submitbutton: Umbenennen
   table:
     list:
       title: Tabellen

@@ -1,0 +1,20 @@
+{% macro select_checkbox(file_id) %}
+    <input
+            type="checkbox"
+            id="file_checked[{{ file_id }}]"
+            name="table_setting[{{ file_id }}]"
+            class="form-check-input"
+            value="1"
+    >
+    <label class="d-none" for="file_checked[{{ file_id }}]">File</label>
+{% endmacro %}
+{% macro name_input(file_id, value) %}
+    <input
+            type="text"
+            id="file_name[{{ file_id }}]"
+            name="file_name[{{ file_id }}]"
+            class="form-control"
+            value="{{ value }}"
+    >
+    <label class="d-none" for="file_name[{{ file_id }}]">Filename</label>
+{% endmacro %}

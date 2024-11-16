@@ -55,7 +55,7 @@ final readonly class GridContentCreateController
             $options = $form->get('options')->getData();
             Assert::isArray($options);
             $updateKey = $form->get('update_key')->getData();
-            Assert::string($updateKey);
+            Assert::nullOrString($updateKey);
 
             $errorMessage = $this->createGridContent->processInputs($table, $content, $separator, $options, $updateKey);
             if ($errorMessage === null) {

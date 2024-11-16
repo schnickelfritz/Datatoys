@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Gridfile;
+use App\Entity\Gridtable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,5 +17,17 @@ class GridfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Gridfile::class);
     }
 
+    /**
+     * @return array<string, Gridfile>
+     */
+    public function existingFilesByName(Gridtable $table): array
+    {
+        $files = [];
+        foreach ($this->findBy(['gridtable' => $table]) as $gridfile) {
+            $files[strtolower($gridfile->getOriginalName())] = $gridfile;
+        }
+
+        return $files;
+    }
 
 }

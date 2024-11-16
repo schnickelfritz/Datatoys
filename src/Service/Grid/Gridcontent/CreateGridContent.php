@@ -23,7 +23,7 @@ final readonly class CreateGridContent
     /**
      * @param list<string> $options
      */
-    public function processInputs(Gridtable $table, string $content, string $separator, array $options, string $updateKey): ?string
+    public function processInputs(Gridtable $table, string $content, string $separator, array $options, ?string $updateKey): ?string
     {
         $converter = new ConvertCsvStringToMatrixArray();
         $matrix = $converter->toMatrix($content, $separator);
@@ -46,7 +46,7 @@ final readonly class CreateGridContent
             return 'grid.content.error.contains_new_cols';
         }
 
-        if ($updateKey !== '') {
+        if ($updateKey !== '' && $updateKey !== null) {
             $linenumberedGridrows = $this->createGridrowsByCellValueFromContent->gridrowsCreateOrUpdate($table, $updateKey, $matrix);
         } else {
             $lineNumberMax = max(array_keys($matrix));
