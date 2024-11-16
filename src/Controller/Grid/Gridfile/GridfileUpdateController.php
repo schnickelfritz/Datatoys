@@ -3,6 +3,7 @@
 namespace App\Controller\Grid\Gridfile;
 
 use App\Entity\Gridtable;
+use App\Service\Grid\Gridfile\DeleteGridfiles;
 use App\Service\Grid\Gridfile\RenameGridfiles;
 use App\Trait\FlashMessageTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,6 +24,7 @@ final readonly class GridfileUpdateController
     use FlashMessageTrait;
 
     public function __construct(
+        private DeleteGridfiles $deleteGridfiles,
         private RenameGridfiles $renameGridfiles,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
@@ -31,6 +33,34 @@ final readonly class GridfileUpdateController
     }
 
     public function __invoke(Request $request, Gridtable $table): Response
+    {
+        if ($request->get('rename') !== null) {
+            $this->rename($request);
+        }
+
+        if ($request->get('delete') !== null) {
+            $this->delete($request);
+        }
+
+        return new RedirectResponse(
+            $this->urlGenerator->generate('app_grid_file_create', ['id' => $table->getId()])
+        );
+    }
+
+    private function delete(Request $request): void
+    {
+        $selected = $request->get('file_checked');
+        if ($selected === null) {
+            $this->addFlash($request, 'info', 'flash.info.nothing_selected');
+
+            return;
+        }
+
+        $numberOfDeletedFiles = $this->deleteGridfiles->deleteByFileIds(array_keys($selected));
+        $this->addFlash($request, 'success', $this->translator->trans('grid.file.flash.deleted', ['number' => $numberOfDeletedFiles]));
+    }
+
+    private function rename(Request $request): void
     {
         $filenames = $request->get('file_name');
         $filenamePart = $request->request->getString('filename_part');
@@ -48,9 +78,5 @@ final readonly class GridfileUpdateController
         } else {
             $this->addFlash($request, 'success', $this->translator->trans('flash.success.updates', ['number' => $numberOfRenames]));
         }
-
-        return new RedirectResponse(
-            $this->urlGenerator->generate('app_grid_file_create', ['id' => $table->getId()])
-        );
     }
 }

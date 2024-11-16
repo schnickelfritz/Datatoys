@@ -1,60 +1,20 @@
-<form
-        {{ stimulus_controller('submitform') }}
-        method="post"
-        action="{{ path('app_grid_file_update', {id: table_selected.id}) }}"
->
-    <twig:Table headers="{{ [
-        '',
-        'grid.file.label.name',
-        'grid.file.label.type',
-        'grid.file.label.size',
-        'grid.file.label.width',
-        'grid.file.label.height',
-    ] }}" small>
-        {% import 'grid/file/file_tableform.twig' as tableform %}
-        {% for file in files %}
-            <tr>
-                <td>{{ tableform.select_checkbox(file.id) }}</td>
-                <td>{{ tableform.name_input(file.id, file.originalName) }}</td>
-                <td>{{ file.type }}</td>
-                <td>{{ file.filesize }}</td>
-                <td>{{ file.width }}</td>
-                <td>{{ file.height }}</td>
-            </tr>
-        {% endfor %}
-    </twig:Table>
-    <div class="row mt-2 g-2 align-items-center">
-        <div class="col-auto">
-            <label for="filenamepart" class="d-none">Part of Filename</label>
-            <input type="text" id="filenamepart" name="filename_part"
-                   class="form-control" placeholder="{{ 'grid.file.rename.label.filename_part'|trans }}">
-        </div>
-        <div class="col-auto">
-            <label for="filenamereplace" class="d-none">Ersetzen-Zeichenkette</label>
-            <input type="text" id="filenamereplace" name="replace_part"
-                   class="form-control" placeholder="{{ 'grid.file.rename.label.filename_replace'|trans }}">
-        </div>
-        <div class="col-auto">
-            <input type="checkbox" class="btn-check" id="filename-append" name="option_append" autocomplete="off">
-            <label class="btn btn-outline-info" for="filename-append"
-                   title="{{ 'grid.file.rename.label.option_append'|trans }}">
-                <span class="bi-arrow-bar-left"></span>
-            </label>
-            <input type="checkbox" class="btn-check" id="filename-prepend" name="option_prepend" autocomplete="off">
-            <label class="btn btn-outline-info" for="filename-prepend"
-                   title="{{ 'grid.file.rename.label.option_prepend'|trans }}">
-                <span class="bi-arrow-bar-right"></span>
-            </label>
-            <input type="checkbox" class="btn-check" id="filename-replace" name="option_replace" autocomplete="off">
-            <label class="btn btn-outline-info" for="filename-replace"
-                   title="{{ 'grid.file.rename.label.option_replace'|trans }}">
-                <span class="bi-arrow-repeat"></span>
-            </label>
-        </div>
-        <div class="col-auto">
-            <button class="btn btn-primary" type="submit" name="rename">
-                <span class="bi-input-cursor-text pe-2"></span>{{ 'grid.file.rename.submitbutton'|trans }}
-            </button>
-        </div>
-    </div>
-</form>
+<twig:Table headers="{{ [
+    '',
+    'grid.file.label.name',
+    'grid.file.label.type',
+    'grid.file.label.size',
+    'grid.file.label.width',
+    'grid.file.label.height',
+] }}" small>
+    {% import 'grid/file/file_tableform.twig' as tableform %}
+    {% for file in files %}
+        <tr>
+            <td>{{ tableform.select_checkbox(file.id) }}</td>
+            <td>{{ tableform.name_input(file.id, file.originalName) }}</td>
+            <td>{{ file.type }}</td>
+            <td>{{ file.filesize }}</td>
+            <td>{{ file.width }}</td>
+            <td>{{ file.height }}</td>
+        </tr>
+    {% endfor %}
+</twig:Table>

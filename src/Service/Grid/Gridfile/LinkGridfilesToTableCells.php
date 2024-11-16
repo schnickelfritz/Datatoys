@@ -2,7 +2,6 @@
 
 namespace App\Service\Grid\Gridfile;
 
-use App\Entity\Gridfile;
 use App\Entity\Gridtable;
 use App\Repository\GridfileRepository;
 use App\Repository\GridrowRepository;
@@ -23,7 +22,7 @@ final readonly class LinkGridfilesToTableCells
     {
     }
 
-    public function linkToCells(Gridtable $table): void
+    public function linkToCells(Gridtable $table): array
     {
         $rows = $this->gridrowRepository->allByTable($table);
         $scope = $table->getScope();
@@ -40,10 +39,11 @@ final readonly class LinkGridfilesToTableCells
 
         if (empty($fileColIds)) {
             $this->removeFilelinksFromCells->removeFilelinksFromCells($table);
-            return;
+            return [];
         }
 
         $filesNameKeyed = $this->gridfileRepository->existingFilesByName($table);
+        $linkedFiles = [];
 
         foreach ($rows as $row) {
             foreach ($row->getGridcells() as $cell) {
@@ -54,11 +54,16 @@ final readonly class LinkGridfilesToTableCells
                     continue;
                 }
                 $gridfile = $this->findGridfileByCellvalue->findFileByCellvalue($cellValue, $filesNameKeyed);
+                if ($gridfile !== null) {
+                    $linkedFiles[] = $gridfile->getOriginalName();
+                }
                 $cell->setGridfile($gridfile);
             }
         }
 
         $this->entityManager->flush();
+
+        return array_unique($linkedFiles);
     }
 
 

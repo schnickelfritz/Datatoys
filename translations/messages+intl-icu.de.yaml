@@ -131,6 +131,7 @@ grid:
       manual: Bedienungsanleitung
       separator: Trenner
       update_key: Merkmal als Schlüssel bei Aktualisieren
+      validate: Gültigkeit der Daten
     placeholder:
       update_key: wenn leer, dann Zeilennummer
   row:
@@ -187,6 +188,12 @@ grid:
         text: >
           <ul><li>:: Suchbegriff = Filtert nach Einstellung (nur unter Einstellungen wirksam)</ul>
   file:
+    flash:
+      no_links: Keine Werte der Tabelle sind mit Dateien verknüpft
+      links: 'Anzahl verknüpfter Dateien: {number}'
+      deleted: 'Anzahl gelöschter Dateien: {number}'
+    link:
+      submitbutton: Dateien mit Werten verknüpfen
     list:
       title: Dateien
     label:
@@ -209,6 +216,8 @@ grid:
         option_prepend: Teil anhängen
         option_replace: Ersetzen
       submitbutton: Umbenennen
+    delete:
+      submitbutton: Angehakte Dateien löschen
   table:
     list:
       title: Tabellen
@@ -336,6 +345,7 @@ flash:
   info:
     not_working_yet: 'Diese Funktion funktioniert noch nicht'
     no_changes_found: 'Keine Änderungen gefunden'
+    nothing_selected: 'Nichts ausgewählt'
   fail:
     invalid_inputs: 'Ungültige Eingaben'
     invalid_url: 'Ungültiger Link (URL)'

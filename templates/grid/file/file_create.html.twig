@@ -66,11 +66,7 @@
             </twig:Row>
         </div>
     </twig:Box>
-    <twig:Box>
-        <twig:Row label="grid.file.list.title">
-            {{ include('grid/file/_file_list.html.twig') }}
-        </twig:Row>
-    </twig:Box>
+    {{ include('grid/file/_file_list_action.html.twig') }}
     <twig:Box>
         <twig:Row label="grid.table.list.title">
             {{ include('grid/table/_table_list.html.twig') }}

@@ -1,0 +1,75 @@
+{% if files %}
+    <twig:Box>
+        <form
+                {{ stimulus_controller('submitform') }}
+                method="post"
+                action="{{ path('app_grid_file_update', {id: table_selected.id}) }}"
+        >
+        <twig:Row label="grid.file.list.title">
+            {{ include('grid/file/_file_list.html.twig') }}
+            <div class="row mt-2 g-2 align-items-center">
+                <div class="col-auto">
+                    <label for="filenamepart" class="d-none">Part of Filename</label>
+                    <input type="text" id="filenamepart" name="filename_part"
+                           class="form-control" placeholder="{{ 'grid.file.rename.label.filename_part'|trans }}">
+                </div>
+                <div class="col-auto">
+                    <label for="filenamereplace" class="d-none">Ersetzen-Zeichenkette</label>
+                    <input type="text" id="filenamereplace" name="replace_part"
+                           class="form-control" placeholder="{{ 'grid.file.rename.label.filename_replace'|trans }}">
+                </div>
+                <div class="col-auto">
+                    <input type="checkbox" class="btn-check" id="filename-append" name="option_append"
+                           autocomplete="off">
+                    <label class="btn btn-outline-info" for="filename-append"
+                           title="{{ 'grid.file.rename.label.option_append'|trans }}">
+                        <span class="bi-arrow-bar-left"></span>
+                    </label>
+                    <input type="checkbox" class="btn-check" id="filename-prepend" name="option_prepend"
+                           autocomplete="off">
+                    <label class="btn btn-outline-info" for="filename-prepend"
+                           title="{{ 'grid.file.rename.label.option_prepend'|trans }}">
+                        <span class="bi-arrow-bar-right"></span>
+                    </label>
+                    <input type="checkbox" class="btn-check" id="filename-replace" name="option_replace"
+                           autocomplete="off">
+                    <label class="btn btn-outline-info" for="filename-replace"
+                           title="{{ 'grid.file.rename.label.option_replace'|trans }}">
+                        <span class="bi-arrow-repeat"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit" name="rename">
+                        <span class="bi-input-cursor-text pe-2"></span>{{ 'grid.file.rename.submitbutton'|trans }}
+                    </button>
+                </div>
+            </div>
+        </twig:Row>
+            <twig:Row>
+                <div class="row mt-2 g-2 align-items-center">
+                    <div class="col-auto">
+                        <span class="bi-check-all"></span>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary" type="submit" name="delete">
+                            <twig:Icon name="image,link-45deg" label="{{ 'grid.file.delete.submitbutton'|trans }}" inline></twig:Icon>
+                        </button>
+                    </div>
+                </div>
+            </twig:Row>
+        </form>
+    </twig:Box>
+
+<twig:Box>
+    <form
+            method="post"
+            action="{{ path('app_grid_file_links', {id: table_selected.id}) }}"
+    >
+        <twig:Row>
+            <button class="btn btn-primary" type="submit" name="rename">
+                <twig:Icon name="image,link-45deg" label="{{ 'grid.file.link.submitbutton'|trans }}" inline></twig:Icon>
+            </button>
+        </twig:Row>
+    </form>
+</twig:Box>
+{% endif %}
