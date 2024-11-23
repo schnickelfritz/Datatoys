@@ -54,7 +54,7 @@ user:
     title: 'Account einrichten'
     submitbutton: 'Account einrichten'
     explain: >
-      Mit der Angabe eines Passworts, dass den Vorgaben entspricht, und dem Betätigen des Buttons
+      Mit der Angabe eines Passworts und dem Betätigen des Buttons
       bekommst du einen Account. Danach kannst du dich hier anmelden und mitmachen.
   update:
     title: Dein Account

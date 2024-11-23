@@ -10,7 +10,7 @@
         <twig:FormStart form="{{ form_create }}"/>
         <twig:FormRow field="{{ form_create.password }}" />
         <twig:Row rowClass="my-4">{{ 'user.create.explain'|trans }}</twig:Row>
-        <twig:ButtonsRow rowClass="pt-3" icon="check" field="{{ form_create.submit }}" label="user.create.submitbutton" />
+        <twig:ButtonsRow rowClass="pt-3" icon="check" field="{{ form_create.submit }}" label="{{ 'user.create.submitbutton'|trans }}" />
         {{ form_end(form_create) }}
     </twig:Primarybox>
 {% endblock %}
