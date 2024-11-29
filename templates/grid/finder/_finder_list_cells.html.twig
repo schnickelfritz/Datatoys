@@ -1,0 +1,41 @@
+{% if finder_result_cells %}
+    <twig:Table headers="{{ [
+        '',
+        '',
+        'grid.finder.label.tablename',
+        'grid.finder.label.linenumber',
+        'grid.finder.label.parameter_name',
+        '',
+        'grid.finder.label.value',
+    ] }}" small :stripes="false">
+        {% for finder_result_cell in finder_result_cells %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_grid_table_update', {'id': finder_result_cell.gridrow.gridtable.id}) }}"
+                       class="btn btn-primary">
+                        <span class="bi-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a
+                            href="{{ path('app_grid_tablecontent_create', {'id': finder_result_cell.gridrow.gridtable.id}) }}"
+                            class="btn btn-primary">
+                        <span class="bi-ui-checks-grid"></span>
+                    </a>
+                </td>
+                <td>{{ finder_result_cell.gridrow.gridtable.name }}</td>
+                <td>{{ finder_result_cell.gridrow.lineNumber }}</td>
+                <td>{{ finder_result_cell.gridcol.name }}</td>
+                <td>
+                    <a href="{{ path('app_grid_row_update', {'id': finder_result_cell.gridrow.id}) }}"
+                       class="btn btn-primary">
+                        <span class="bi-pencil"></span>
+                    </a>
+                </td>
+                <td>{{ finder_result_cell.value }}</td>
+            </tr>
+        {% endfor %}
+    </twig:Table>
+{% else %}
+    {{ 'grid.finder.label.no_cells_found'|trans }}
+{% endif %}

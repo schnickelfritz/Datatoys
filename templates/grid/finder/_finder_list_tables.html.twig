@@ -1,0 +1,26 @@
+{% if finder_result_tables %}
+    <twig:Table headers="{{ [
+        '',
+        'grid.finder.label.tablename',
+    ] }}" small :stripes="false">
+        {% for finder_result_table in finder_result_tables %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_grid_table_update', {'id': finder_result_table.id}) }}"
+                       class="btn btn-primary">
+                        <span class="bi-pencil"></span>
+                    </a>
+                    <a
+                            href="{{ path('app_grid_tablecontent_create', {'id': finder_result_table.id}) }}"
+                            class="btn btn-primary">
+                        <span class="bi-ui-checks-grid"></span>
+                    </a>
+
+                </td>
+                <td>{{ finder_result_table.name }}</td>
+            </tr>
+        {% endfor %}
+    </twig:Table>
+{% else %}
+    {{ 'grid.finder.label.no_tables_found'|trans }}
+{% endif %}

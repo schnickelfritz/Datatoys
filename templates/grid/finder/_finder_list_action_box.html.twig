@@ -1,0 +1,31 @@
+<form
+        {{ stimulus_controller('submitform') }}
+        method="post"
+        action="{{ path('app_grid_finder') }}"
+>
+    <twig:Row rowClass="mb-3" label="{{ 'grid.finder.filter.label'|trans }}" labelId="finder_filter">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                    <textarea
+                            {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                            id="finder_filter"
+                            name="finder_filter"
+                            class="form-control app-textarea-small"
+                            placeholder="{{ 'grid.finder.filter.placeholder'|trans }}"
+                    >
+                        {{- finder_filter -}}
+                    </textarea>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit" name="go">
+                    <span class="bi-search pe-2"></span>{{ 'grid.finder.filter.submitbutton'|trans }}
+                </button>
+                <twig:ModalButton icon="question-circle-fill" id="finder_filter_manual"/>
+            </div>
+        </div>
+    </twig:Row>
+    <twig:ModalContainer id="finder_filter_manual" title="{{ 'grid.finder.filter.manual.title'|trans }}"
+                         close="{{ 'modal.close'|trans }}">
+        {{ 'grid.finder.filter.manual.text'|trans|raw }}
+    </twig:ModalContainer>
+</form>

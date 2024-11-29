@@ -23,16 +23,46 @@ class GridtableRepository extends ServiceEntityRepository
     /**
      * @return Gridtable[]
      */
-    public function allTablesFiltered(): array
+    public function allTablesFiltered(string $filter = ''): array
+    {
+        if ($filter === '') {
+            $tables = $this->createQueryBuilder('t')
+                ->leftJoin('t.gridrows', 'rows')
+                ->addSelect('rows')
+                ->orderBy('t.name')
+                ->getQuery()
+                ->getResult()
+            ;
+        } else {
+            $tables = $this->createQueryBuilder('t')
+                ->andWhere('t.name LIKE :filter')
+                ->setParameter('filter', '%' . $filter . '%')
+                ->leftJoin('t.gridrows', 'rows')
+                ->addSelect('rows')
+                ->orderBy('t.name')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+        return is_array($tables) ? $tables : [];
+    }
+
+    /**
+     * @return Gridtable[]
+     * @param string[] $terms
+     */
+    public function findTablesByMultipleTerms(array $terms): array
     {
         $tables = $this->createQueryBuilder('t')
+            ->andWhere('t.name IN (:terms)')
+            ->setParameter('terms', $terms)
             ->leftJoin('t.gridrows', 'rows')
             ->addSelect('rows')
             ->orderBy('t.name')
             ->getQuery()
             ->getResult()
         ;
-
         return is_array($tables) ? $tables : [];
     }
 }

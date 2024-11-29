@@ -5,6 +5,16 @@
     >
         {% if show_details == true %}
             <div class="col-sm-1 pt-2 text-end">
+
+                <input
+                        type="checkbox"
+                        id="row_checked[{{ mapped_row.row.id }}]"
+                        name="row_checked[{{ mapped_row.row.id }}]"
+                        class="form-check-input"
+                        value="1"
+                >
+                <label class="d-none" for="row_checked[{{ mapped_row.row.id }}]">Setting</label>
+
                 <a href="{{ path('app_grid_row_update', {'id': mapped_row.row.id}) }}" class="btn btn-primary">
                     <span class="bi-pencil"></span>
                 </a>

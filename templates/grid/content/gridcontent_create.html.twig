@@ -4,7 +4,9 @@
 {% block body %}
     <twig:Box>
         <twig:Row rowClass="mb-4">
-            <h1 class="h3"><twig:Icon name="ui-checks-grid" />{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}</h1>
+            <h1 class="h3">
+                <twig:Icon name="ui-checks-grid"/>{{ 'grid.content.create.title'|trans({name:table_selected.name}) }}
+            </h1>
         </twig:Row>
         <twig:Row rowClass="mb-3" readableWidth>
             <twig:AccordionSingle flush button="{{ 'grid.content.label.manual'|trans }}">
@@ -14,8 +16,8 @@
             </twig:AccordionSingle>
         </twig:Row>
         <twig:FormStart form="{{ form_content }}"/>
-        <twig:FormRow field="{{ form_content.content }}" plain />
-        <twig:FormRow field="{{ form_content.separator }}" toggle translate />
+        <twig:FormRow field="{{ form_content.content }}" plain/>
+        <twig:FormRow field="{{ form_content.separator }}" toggle translate/>
         <twig:FormRow field="{{ form_content.options }}" toggle translate/>
         <twig:FormRow field="{{ form_content.update_key }}"/>
         <twig:ButtonsRow
@@ -26,11 +28,24 @@
         />
         {{ form_end(form_content) }}
     </twig:Box>
-    <twig:Box>
-        <twig:Row label="grid.row.list.title">
-            {% include('grid/row/_row_list.html.twig') with {'show_details': true} %}
-        </twig:Row>
-    </twig:Box>
+    {% if mapped_rows %}
+    <form
+            {{ stimulus_controller('submitform') }}
+            method="post"
+            action="{{ path('app_grid_row_mulitedit') }}"
+    >
+        <twig:Box>
+            <twig:Row label="grid.row.list.action_title">
+                {{ include('grid/content/_multiaction.html.twig') }}
+            </twig:Row>
+        </twig:Box>
+        <twig:Box>
+            <twig:Row label="grid.row.list.title">
+                {% include('grid/row/_row_list.html.twig') with {'show_details': true} %}
+            </twig:Row>
+        </twig:Box>
+    </form>
+    {% endif %}
     <twig:Box>
         <twig:Row label="grid.table.list.title">
             {{ include('grid/table/_table_list.html.twig') }}

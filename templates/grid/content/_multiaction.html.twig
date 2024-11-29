@@ -1,0 +1,48 @@
+<div class="row align-items-center">
+    <div class="col-auto">
+        <button class="btn btn-primary" type="submit" name="delete" title="{{ 'grid.row.multiple.deletebutton'|trans }}">
+            <span class="bi-check-all"></span><span class="bi-eraser"></span>
+        </button>
+    </div>
+    <div class="col-auto">
+        <input
+                {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                id="multirow_cols"
+                name="multirow_cols"
+                class="form-control"
+                placeholder="{{ 'grid.row.multiple.placeholder.cols'|trans }}"
+        >
+    </div>
+    <div class="col-auto">
+        <input
+                {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                id="multirow_find"
+                name="multirow_find"
+                class="form-control"
+                placeholder="{{ 'grid.row.multiple.placeholder.find'|trans }}"
+        >
+    </div>
+    <div class="col-auto">
+        <input
+                {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                id="multirow_replace"
+                name="multirow_replace"
+                class="form-control"
+                placeholder="{{ 'grid.row.multiple.placeholder.replace'|trans }}"
+        >
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" type="submit" name="replace" title="{{ 'grid.row.multiple.replacebutton'|trans }}">
+            <span class="bi-arrow-repeat be-2"></span>
+        </button>
+        <button class="btn btn-primary" type="submit" name="exchange" title="{{ 'grid.row.multiple.exchangebutton'|trans }}">
+            <span class="bi-shuffle be-2"></span>
+        </button>
+        <button class="btn btn-primary" type="submit" name="prepend" title="{{ 'grid.row.multiple.prependbutton'|trans }}">
+            <span class="bi-three-dots be-2"></span><span class="bi-arrow-bar-left be-2"></span>
+        </button>
+        <button class="btn btn-primary" type="submit" name="append" title="{{ 'grid.row.multiple.appendbutton'|trans }}">
+            <span class="bi-arrow-bar-right be-2"></span><span class="bi-three-dots be-2"></span>
+        </button>
+    </div>
+</div>

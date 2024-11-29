@@ -3,7 +3,11 @@
         <thead>
         <tr>
             {% for th in headers %}
-                <th scope="col">{{ th|trans }}</th>
+                <th scope="col">
+                    {% if th != '' %}
+                        {{- th|trans -}}
+                    {% endif %}
+                </th>
             {% endfor %}
         </tr>
         </thead>

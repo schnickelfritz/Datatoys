@@ -199,4 +199,38 @@ class GridcellRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     * @return Gridcell[]
+     */
+    public function allCellsFiltered(string $filter): array
+    {
+        $cells = $this->createQueryBuilder('c')
+            ->andWhere('c.value LIKE :filter')
+            ->setParameter('filter', '%' . $filter . '%')
+            ->leftJoin('c.gridrow', 'rows')
+            ->addSelect('rows')
+            ->leftJoin('c.gridcol', 'cols')
+            ->addSelect('cols')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return is_array($cells) ? $cells : [];
+    }
+
+    public function findCellsByMultipleTerms(array $terms): array
+    {
+        $tables = $this->createQueryBuilder('c')
+            ->andWhere('c.value IN (:terms)')
+            ->setParameter('terms', $terms)
+            ->leftJoin('c.gridrow', 'rows')
+            ->addSelect('rows')
+            ->leftJoin('c.gridcol', 'cols')
+            ->addSelect('cols')
+            ->getQuery()
+            ->getResult()
+        ;
+        return is_array($tables) ? $tables : [];
+    }
+
 }

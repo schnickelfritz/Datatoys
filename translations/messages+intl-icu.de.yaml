@@ -95,7 +95,24 @@ planner:
     hours: Arbeitsstunden
 grid:
   finder:
+    label:
+      found_tables: Gefundene Tabellen
+      found_cells: Gefundene Inhalte
+      no_tables_found: Keine Tabellen gefunden
+      no_cells_found: Keine Inhalte gefunden
+      linenumber: Zeile
+      parameter_name: Merkmal
+      value: Inhalt
+      tablename: Tabellen-Name
     title: 'Grid-Finder'
+    filter:
+      label: Suchbegriff(e)
+      placeholder: Suchbegriff(e)
+      submitbutton: Finden
+      manual:
+        title: Tabellen oder Inhalte finden
+        text: >
+          Gib in die Suche entweder einen einzelnen Wert oder mehrere Werte ein.
   content:
     submitbutton: Inhalt einfügen
     create:
@@ -135,8 +152,19 @@ grid:
     placeholder:
       update_key: wenn leer, dann Zeilennummer
   row:
+    multiple:
+      deletebutton: Angehakte Zeilen löschen
+      placeholder:
+        cols: auf Merkmale beschränken (oder alle)
+        find: Suchbegriff
+        replace: Ersetzung/Ergänzendes
+      exchangebutton: Inhalt austauschen
+      prependbutton: Ergänzendes voranstellen
+      appendbutton: Ergänzendes anhängen
+      replacebutton: Suchbegriff durch Ersetzung ersetzen
     list:
       title: Zeilen
+      action_title: Zeilen löschen / Werte ändern
     linenumber: 'Zeile {number}'
     create:
       title: 'Neue Zeile für {table_name}'
@@ -374,6 +402,7 @@ menu:
   Home: Home
   'Coco Items': Coco-Items (Admin)
   Geoguessr: Geoguessr
+  'Grid Finder': 'Finder'
   'Grid Hub': 'Grid'
   'Grid Col': 'Merkmale'
   'Grid Table': 'Tabellen'
