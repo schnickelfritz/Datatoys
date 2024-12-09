@@ -1,0 +1,50 @@
+{% set export = '' %}
+{% for setting_col in settings %}
+    {% if setting_col.attrs %}
+        {% for attr in setting_col.attrs %}
+            {% set attr_label = attr.type.name %}
+            {% set export = export ~ setting_col.col_name ~ "\t" ~ attr_label %}
+            {% if attr.type.argumentType != 'none' %}
+                {% set export = export ~ "\t" ~ attr.setting.parameter %}
+            {% endif %}
+            {% set export = export ~ "\r\n" %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+<form
+        {{ stimulus_controller('submitform') }}
+        method="post"
+        action="{{ path('app_grid_setting_import', {id: selected_scope.id}) }}"
+>
+    <div>
+        <label for="importdata" class="label">{{ "grid.setting.import_export.label.importdata"|trans }}</label>
+    </div>
+    <div>
+        <textarea
+                {{ stimulus_action('submitform', 'submit', 'keydown.ctrl+enter') }}
+                id="importdata"
+                name="importdata"
+                class="form-control"
+        >
+            {{- export -}}
+        </textarea>
+    </div>
+    <div class="mt-3">
+        <button class="btn btn-primary" type="submit" name="go">
+            <span class="bi-database-fill-up pe-2"></span>{{ 'grid.setting.import_export.button.import'|trans }}
+        </button>
+    </div>
+    <div class="mt-3">
+        <twig:AccordionSingle flush button="{{ 'grid.setting.import_export.manual.title'|trans }}">
+            <div class="small">
+                {{ 'grid.setting.import_export.manual.text'|trans|raw }}
+                {% for setting_type in setting_types %}
+                    <span class="pe-3">
+                        {{ ('grid.setting_type.label.' ~ setting_type.name|lower)|trans }} = {{ setting_type.name }}
+                    </span>
+                {% endfor %}
+            </div>
+        </twig:AccordionSingle>
+    </div>
+
+</form>

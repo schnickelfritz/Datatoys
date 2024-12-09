@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Gridcol;
 use App\Entity\Gridscope;
+use App\Entity\GridscopeCol;
 use App\Entity\Gridtable;
 use App\Entity\User;
 use App\Entity\UserCandidate;
@@ -140,9 +142,50 @@ class AppFixtures extends Fixture
         $scope1 = new Gridscope();
         $scope1->setName('Rich Content')->setScopeKey('RICHCONTENT');
         $manager->persist($scope1);
+
+        $scope2 = new Gridscope();
+        $scope2->setName('Rich Content Wallpaper')->setScopeKey('RICHCONTENT WALLPAPER');
+        $manager->persist($scope2);
+
+        $scope3 = new Gridscope();
+        $scope3->setName('Map-Monster')->setScopeKey('MAPMONSTER');
+        $manager->persist($scope3);
+
+        $scope4 = new Gridscope();
+        $scope4->setName('Geoguesser')->setScopeKey('GEOGUESSER');
+        $manager->persist($scope4);
+
         $table1 = new Gridtable();
         $table1->setName('COWO-49283 (Test)')->setCreatedAt(now())->setScope($scope1);
         $manager->persist($table1);
+
+        $table2 = new Gridtable();
+        $table2->setName('Geoguesser')->setCreatedAt(now())->setScope($scope4);
+        $manager->persist($table1);
+
+        $col1 = new Gridcol();
+        $col1->setName("Land");
+        $manager->persist($col1);
+
+        $col2 = new Gridcol();
+        $col2->setName("Weltgebiet");
+        $manager->persist($col2);
+
+        $col3 = new Gridcol();
+        $col3->setName("Wildcard");
+        $manager->persist($col3);
+
+        $scopecol1 = new GridscopeCol();
+        $scopecol1->setScope($scope4)->setCol($col1);
+        $manager->persist($scopecol1);
+
+        $scopecol2 = new GridscopeCol();
+        $scopecol2->setScope($scope4)->setCol($col2);
+        $manager->persist($scopecol2);
+
+        $scopecol3 = new GridscopeCol();
+        $scopecol3->setScope($scope4)->setCol($col3);
+        $manager->persist($scopecol3);
 
         $manager->flush();
 

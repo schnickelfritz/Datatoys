@@ -41,6 +41,7 @@ final readonly class GridFinderController
             $this->setUserSetting->setSetting(UserSettingEnum::GRIDFINDER_FILTER, $filter);
         }
 
+        // TODO 2024-11-29 ME: gefundene Tables/Cells in Session speichern (und abrufen, wenn filter unverändert)
         $tablesFound = $this->findGridtables->findTables($filter);
         $cellsFound = $this->findGridcells->findCells($filter);
 

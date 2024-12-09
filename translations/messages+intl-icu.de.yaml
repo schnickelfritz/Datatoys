@@ -299,8 +299,29 @@ grid:
   setting:
     list:
       title: 'Einstellungen für Scope »{scope}«'
+    import_export:
+      button:
+        import_export: Import/Export
+        import: Daten importieren
+      title: Einstellungen importieren/exportieren
+      label:
+        importdata: Füg Importdaten ein
+      manual:
+        title: "Bedienungsanleitung: Wie du Importdaten schreibst"
+        text: >
+          Füg Importdaten in folgender Art für jede Einstellung ein:<br>
+          Merkmal ; Einstellung (interner Schlüssel) ; Einstellungswert.<br>
+          <br>
+          Willst du zum Beispiel für das Merkmal »überschrift« 2 Einstellungen importieren, nämlich minimale Länge 100 und
+          maximale Länge 200, dann gibst du an:<br>
+          überschrift;TEXTLENGTH_MIN;100<br>
+          überschrift;TEXTLENGTH_MAX;200<br>
+          <br>
+          Statt Semikolon kannst du beim Einfügen das Tab-Zeichen als Spaltentrenner verwenden (z.B. bei Copy/Paste aus Excel).<br>
+          <br>
+          Einstellungsschlüssel:<br>
     create:
-      title: 'Neue Einstellung für Scope »{scope}«'
+      title: 'Neue Einstellungen für Scope »{scope}«'
       submitbutton: 'Hinzufügen/Überschreiben'
     update:
       submitbutton: Änderungen speichern

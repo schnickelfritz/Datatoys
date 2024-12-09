@@ -115,7 +115,16 @@ textarea.app-textarea-small {
     margin-bottom: 0;
 }
 .modal {
-    color: var(--cc-black);
+    --bs-modal-border-color: var(--cc-white);
+    --bs-modal-border-width: 3px;
+    --bs-modal-bg: var(--cc-black);
+    --bs-modal-color: var(--cc-white);
+    --bs-modal-header-border-color: var(--cc-black);
+    --bs-modal-footer-border-color: var(--cc-black);
+}
+.btn-close {
+    --bs-btn-close-color: var(--cc-gray);
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23777'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
 }
 .accordion {
     --bs-accordion-color: var(--cc-lgt-gray);

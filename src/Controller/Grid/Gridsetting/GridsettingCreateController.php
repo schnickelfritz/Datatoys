@@ -6,6 +6,7 @@ use App\Entity\Gridcol;
 use App\Entity\Gridscope;
 use App\Enum\UserSettingEnum;
 use App\Form\Grid\GridsettingFormType;
+use App\Repository\GridsettingTypeRepository;
 use App\Service\Grid\Gridcol\GetFilteredGridcols;
 use App\Service\Grid\Gridsettings\CreateGridsettings;
 use App\Service\Grid\Gridsettings\GetSettingsCols;
@@ -30,6 +31,7 @@ final readonly class GridsettingCreateController
     use FlashMessageTrait;
 
     public function __construct(
+        private GridsettingTypeRepository $gridsettingTypeRepository,
         private GetFilteredGridcols $filteredGridcols,
         private FormFactoryInterface $formFactory,
         private CreateGridsettings $createGridsettings,
@@ -60,6 +62,7 @@ final readonly class GridsettingCreateController
                     'columns' => $columns,
                     'columns_filter' => $filter,
                     'selected_scope' => $scope,
+                    'setting_types' => $this->gridsettingTypeRepository->findAll(),
                 ])
             );
         }
